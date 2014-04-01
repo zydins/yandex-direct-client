@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ru.cultserv.adv.util.ApiRequestExecutor;
 import ru.cultserv.adv.yandex.direct.AuthToken;
 import ru.cultserv.adv.yandex.direct.filters.CampaignsFilterParam;
 import ru.cultserv.adv.yandex.direct.methods.Campaigns;
@@ -19,53 +18,45 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 public class CampaignsImpl implements Campaigns {
 	
-	private AuthToken token;
-	private ApiRequestExecutor request_executor = new YandexRequestExecutor();
+	private final YandexDirectMethodCaller caller;
 	
 	public CampaignsImpl(AuthToken token) {
-		this.token = token;
+		this.caller = new YandexDirectMethodCaller(token, new YandexRequestExecutor());
 	}
 
 	@Override
 	public Long create(CampaignInfo campaign) {
-		return new YandexDirectMethodCaller(token)
-				.call(MethodName.CreateOrUpdateCampaign, campaign, Long.class, request_executor);
+		return caller.call(MethodName.CreateOrUpdateCampaign, campaign, Long.class);
 	}
 
 	@Override
 	public void update(CampaignInfo campaign) {
-		new YandexDirectMethodCaller(token)
-			.call(MethodName.CreateOrUpdateCampaign, campaign, Void.class, request_executor);
+		caller.call(MethodName.CreateOrUpdateCampaign, campaign, Void.class);
 	}
 
 	@Override
 	public void stop(Long campaign_id) {
-		new YandexDirectMethodCaller(token)
-			.call(MethodName.StopCampaign, campaign_id, Void.class, request_executor);
+		caller.call(MethodName.StopCampaign, campaign_id, Void.class);
 	}
 
 	@Override
 	public void resume(Long campaign_id) {
-		new YandexDirectMethodCaller(token)
-			.call(MethodName.ResumeCampaign, campaign_id, Void.class, request_executor);
+		caller.call(MethodName.ResumeCampaign, campaign_id, Void.class);
 	}
 
 	@Override
 	public void delete(Long campaign_id) {
-		new YandexDirectMethodCaller(token)
-			.call(MethodName.DeleteCampaign, campaign_id, Void.class, request_executor);
+		caller.call(MethodName.DeleteCampaign, campaign_id, Void.class);
 	}
 
 	@Override
 	public void archive(Long campaign_id) {
-		new YandexDirectMethodCaller(token)
-			.call(MethodName.ArchiveCampaign, campaign_id, Void.class, request_executor);
+		caller.call(MethodName.ArchiveCampaign, campaign_id, Void.class);
 	}
 
 	@Override
 	public void unArchive(Long campaign_id) {
-		new YandexDirectMethodCaller(token)
-			.call(MethodName.UnArchiveCampaign, campaign_id, Void.class, request_executor);
+		caller.call(MethodName.UnArchiveCampaign, campaign_id, Void.class);
 	}
 
 	@Override
@@ -77,16 +68,14 @@ public class CampaignsImpl implements Campaigns {
 	public List<CampaignShortInfo> list(String... logins) {
 		TypeReference<List<CampaignShortInfo>> return_type = new TypeReference<List<CampaignShortInfo>>() {};
 		
-		return new YandexDirectMethodCaller(token)
-				.call(MethodName.GetCampaignsList, logins, return_type, request_executor);
+		return caller.call(MethodName.GetCampaignsList, logins, return_type);
 	}
 
 	@Override
 	public List<CampaignShortInfo> list(CampaignsFilterParam filtering_param) {
 		TypeReference<List<CampaignShortInfo>> return_type = new TypeReference<List<CampaignShortInfo>>() {};
 		
-		return new YandexDirectMethodCaller(token)
-				.call(MethodName.GetCampaignsListFilter, filtering_param, return_type, request_executor);
+		return caller.call(MethodName.GetCampaignsListFilter, filtering_param, return_type);
 	}
 
 	@Override
@@ -104,8 +93,7 @@ public class CampaignsImpl implements Campaigns {
 		
 		TypeReference<List<CampaignInfo>> return_type = new TypeReference<List<CampaignInfo>>() {};
 		
-		return new YandexDirectMethodCaller(token)
-			.call(MethodName.GetCampaignsParams, param, return_type, request_executor);
+		return caller.call(MethodName.GetCampaignsParams, param, return_type);
 	}
 
 }
