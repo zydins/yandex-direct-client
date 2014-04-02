@@ -30,7 +30,7 @@ public class YandexDirectMethodCaller {
 	private ApiRequest buildCommonRequest(MethodName method, Object param) {
 		ApiRequest request =
 			new YandexDirectRequest.Builder(token)
-				.forMethod(method.name())
+				.forMethod(method)
 				.andParam(param)
 				.build();
 		
