@@ -3,5 +3,7 @@ language: java
 jdk:
     - oraclejdk7
 
+script: mvn clean compile test
+
 after_success:
-    - mvn clean test jacoco:report coveralls:jacoco
+    - mvn jacoco:report coveralls:jacoco
