@@ -4,6 +4,7 @@ import ru.cultserv.adv.yandex.direct.AuthToken;
 import ru.cultserv.adv.yandex.direct.YandexDirect;
 import ru.cultserv.adv.yandex.direct.methods.Banners;
 import ru.cultserv.adv.yandex.direct.methods.Campaigns;
+import ru.cultserv.adv.yandex.direct.methods.impl.BannersImpl;
 import ru.cultserv.adv.yandex.direct.methods.impl.CampaignsImpl;
 
 public class YandexDirectImpl implements YandexDirect {
@@ -21,8 +22,7 @@ public class YandexDirectImpl implements YandexDirect {
 
 	@Override
 	public Banners banners() {
-		// TODO Auto-generated method stub
-		return null;
+		return new BannersImpl(token);
 	}
 
 }

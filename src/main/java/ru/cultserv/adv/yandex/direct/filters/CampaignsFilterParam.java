@@ -149,6 +149,10 @@ public class CampaignsFilterParam {
 			return this;
 		}
 		
+		public Builder withLimit(int limit) {
+			return withRange(limit, 0);
+		}
+		
 		public Builder withoutArchived() {
 			filter_param.filter.status_archive = new ExtendedStatus[] {ExtendedStatus.No};
 			return this;

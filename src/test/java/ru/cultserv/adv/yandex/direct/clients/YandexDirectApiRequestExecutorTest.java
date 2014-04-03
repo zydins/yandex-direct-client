@@ -6,22 +6,27 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 
 import ru.cultserv.adv.util.ApiRequest;
+import ru.cultserv.adv.util.ApiRequestExecutor;
 import ru.cultserv.adv.util.ApiResponse;
 import ru.cultserv.adv.yandex.direct.AuthToken;
+import ru.cultserv.adv.yandex.direct.methods.MethodName;
+import ru.cultserv.adv.yandex.direct.util.AuthTokens;
 import ru.cultserv.adv.yandex.direct.util.exceptions.ApiException;
 import ru.cultserv.adv.yandex.direct.util.requests.YandexDirectRequest;
 import ru.cultserv.adv.yandex.direct.util.requests.YandexRequestExecutor;
 
 public class YandexDirectApiRequestExecutorTest {
+	
+	private ApiRequestExecutor executor = new YandexRequestExecutor();
 
 	@Test
 	public void shouldExecuteYandexRequest() {
 		ApiRequest request =
-			new YandexDirectRequest.Builder(new AuthToken("f3e8a7c18f284908aa226b64213c4002"))
-				.forMethod("PingAPI")
+			new YandexDirectRequest.Builder(AuthTokens.fake())
+				.forMethod(MethodName.PingAPI.name())
 				.build();
 		
-		ApiResponse response = new YandexRequestExecutor().execute(request);
+		ApiResponse response = executor.execute(request);
 		int result = response.as(int.class);
 		
 		assertEquals(1, result);
@@ -31,15 +36,19 @@ public class YandexDirectApiRequestExecutorTest {
 	public void shouldExuteRequestWithException() {
 		ApiRequest request =
 			new YandexDirectRequest.Builder(new AuthToken(""))
-				.forMethod("PingAPI")
+				.forMethod(MethodName.PingAPI)
 				.build();
 		
+		ApiException exception = null;
+		
 		try {
-			new YandexRequestExecutor().execute(request);
+			executor.execute(request);
 		} catch(ApiException e) {
-			assertNotNull(e);
-			assertEquals(53, e.errorCode());
+			exception = e;
 		}
+		
+		assertNotNull(exception);
+		assertEquals(53, exception.errorCode());
 		
 	}
 

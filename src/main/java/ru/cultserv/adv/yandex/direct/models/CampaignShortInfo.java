@@ -194,5 +194,9 @@ public class CampaignShortInfo {
 	 */
 	@JsonProperty("DayBudgetEnabled")
 	public StatusBoolean day_budget_enabled;
+	
+	public boolean isArchived() {
+		return status_archive != ExtendedStatus.No;
+	}
 
 }
