@@ -1,9 +1,5 @@
 package ru.cultserv.adv.yandex.direct.methods.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import ru.cultserv.adv.yandex.direct.AuthToken;
 import ru.cultserv.adv.yandex.direct.filters.CampaignsFilterParam;
 import ru.cultserv.adv.yandex.direct.methods.Campaigns;
@@ -12,14 +8,21 @@ import ru.cultserv.adv.yandex.direct.models.CampaignInfo;
 import ru.cultserv.adv.yandex.direct.models.CampaignShortInfo;
 import ru.cultserv.adv.yandex.direct.models.Currency;
 import ru.cultserv.adv.yandex.direct.util.requests.YandexDirectMethodCaller;
-import ru.cultserv.adv.yandex.direct.util.requests.YandexRequestExecutor;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CampaignsImpl implements Campaigns {
 	
 	private final YandexDirectMethodCaller caller;
 	
 	public CampaignsImpl(AuthToken token) {
-		this.caller = new YandexDirectMethodCaller(token, new YandexRequestExecutor());
+		this(YandexDirectMethodCaller.defaultCaller(token));
+	}
+
+	public CampaignsImpl(YandexDirectMethodCaller caller) {
+		this.caller = caller;
 	}
 
 	@Override

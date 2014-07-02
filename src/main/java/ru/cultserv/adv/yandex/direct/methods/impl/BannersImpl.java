@@ -1,9 +1,5 @@
 package ru.cultserv.adv.yandex.direct.methods.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import ru.cultserv.adv.yandex.direct.AuthToken;
 import ru.cultserv.adv.yandex.direct.filters.BannersFilterParam;
 import ru.cultserv.adv.yandex.direct.filters.PhrasesFilterParam;
@@ -12,14 +8,21 @@ import ru.cultserv.adv.yandex.direct.methods.MethodName;
 import ru.cultserv.adv.yandex.direct.models.BannerInfo;
 import ru.cultserv.adv.yandex.direct.models.PhraseInfo;
 import ru.cultserv.adv.yandex.direct.util.requests.YandexDirectMethodCaller;
-import ru.cultserv.adv.yandex.direct.util.requests.YandexRequestExecutor;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BannersImpl implements Banners {
 
 	private final YandexDirectMethodCaller caller;
 	
 	public BannersImpl(AuthToken token) {
-		this.caller = new YandexDirectMethodCaller(token, new YandexRequestExecutor());
+		this(YandexDirectMethodCaller.defaultCaller(token));
+	}
+
+	public BannersImpl(YandexDirectMethodCaller caller) {
+		this.caller = caller;
 	}
 
 	@Override

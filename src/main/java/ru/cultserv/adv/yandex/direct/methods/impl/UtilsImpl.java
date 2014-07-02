@@ -4,7 +4,6 @@ import ru.cultserv.adv.yandex.direct.AuthToken;
 import ru.cultserv.adv.yandex.direct.methods.MethodName;
 import ru.cultserv.adv.yandex.direct.methods.Utils;
 import ru.cultserv.adv.yandex.direct.util.requests.YandexDirectMethodCaller;
-import ru.cultserv.adv.yandex.direct.util.requests.YandexRequestExecutor;
 
 /**
  * @author Alexandr Kolosov
@@ -15,7 +14,11 @@ public class UtilsImpl implements Utils {
 	private final YandexDirectMethodCaller caller;
 
 	public UtilsImpl(AuthToken token) {
-		this.caller = new YandexDirectMethodCaller(token, new YandexRequestExecutor());
+		this(YandexDirectMethodCaller.defaultCaller(token));
+	}
+
+	public UtilsImpl(YandexDirectMethodCaller caller) {
+		this.caller = caller;
 	}
 
 	@Override

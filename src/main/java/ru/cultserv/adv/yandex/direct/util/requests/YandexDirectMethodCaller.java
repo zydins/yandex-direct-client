@@ -42,13 +42,14 @@ public class YandexDirectMethodCaller {
 	}
 	
 	private ApiRequest buildCommonRequest(MethodName method, Object param) {
-		ApiRequest request =
-			new YandexDirectRequest.Builder(token)
-				.forMethod(method)
-				.andParam(param)
-				.build();
-		
-		return request;
+		return new YandexDirectRequest.Builder(token)
+			.forMethod(method)
+			.andParam(param)
+			.build();
+	}
+
+	public static YandexDirectMethodCaller defaultCaller(AuthToken token) {
+		return new YandexDirectMethodCaller(token, new YandexRequestExecutor());
 	}
 
 }
