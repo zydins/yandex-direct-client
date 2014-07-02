@@ -1,7 +1,6 @@
 package ru.cultserv.adv.util;
 
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Request;
@@ -21,12 +20,12 @@ public abstract class AbstractApiRequestExecutor implements ApiRequestExecutor {
 	}
 
 	@Override
-	public Optional<ApiResponse> execute(ApiRequest request) {
+	public ApiResponse execute(ApiRequest request) {
 		Future<ApiResponse> future = asFuture(request);
 		try {
-			return Optional.of(future.get());
+			return future.get();
 		} catch (ExecutionException | InterruptedException e) {
-			return Optional.absent();
+			throw new IllegalStateException(e);
 		}
 	}
 

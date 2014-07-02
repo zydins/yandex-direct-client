@@ -1,6 +1,5 @@
 package ru.cultserv.adv.yandex.direct.clients;
 
-import com.google.common.base.Optional;
 import org.junit.Test;
 import ru.cultserv.adv.util.ApiRequest;
 import ru.cultserv.adv.util.ApiRequestExecutor;
@@ -26,8 +25,8 @@ public class YandexDirectApiRequestExecutorTest {
 				.forMethod(MethodName.PingAPI.name())
 				.build();
 
-		Optional<ApiResponse> response = executor.execute(request);
-		int result = response.get().as(int.class);
+		ApiResponse response = executor.execute(request);
+		int result = response.as(int.class);
 		
 		assertEquals(1, result);
 	}

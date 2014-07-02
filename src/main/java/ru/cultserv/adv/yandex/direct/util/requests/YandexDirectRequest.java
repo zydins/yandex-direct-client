@@ -9,7 +9,7 @@ import ru.cultserv.adv.yandex.direct.util.params.YandexDirectParams;
 public class YandexDirectRequest implements ApiRequest {
 	
 	public static final String PRODUCTION_URL = "https://api.direct.yandex.ru/live/v4/json/";
-	public static final String SANDBOX_URL = "https://api-sandbox.direct.yandex.ru/live/v4/json/";
+	public static final String SANDBOX_URL = "https://213.180.204.225/live/v4/json/";
 	
 	private String http_method = "POST";
 	private String full_url = SANDBOX_URL;
