@@ -15,7 +15,11 @@ public class YandexDirectMethodCaller {
 		this.token = token;
 		this.executor = executor;
 	}
-	
+
+	public <T> T call(MethodName method) {
+		return call(method, new String[] {});
+	}
+
 	@SuppressWarnings("unchecked")
 	public <T> T call(MethodName method, Object param) {
 		ApiRequest request = buildCommonRequest(method, param);

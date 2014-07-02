@@ -1,13 +1,9 @@
 package ru.cultserv.adv.yandex.direct.methods;
 
-import java.util.List;
-
-import ru.cultserv.adv.yandex.direct.models.BannerInfo;
-import ru.cultserv.adv.yandex.direct.models.CampaignInfo;
-import ru.cultserv.adv.yandex.direct.models.CampaignShortInfo;
-import ru.cultserv.adv.yandex.direct.models.PhraseInfo;
-
 import com.fasterxml.jackson.core.type.TypeReference;
+import ru.cultserv.adv.yandex.direct.models.*;
+
+import java.util.List;
 
 public enum MethodName {
 
@@ -38,9 +34,11 @@ public enum MethodName {
 	StopBanners(int.class),
 	UnArchiveBanners(int.class),
 	
+	// Vocabularies
+	GetRegions(new TypeReference<List<RegionInfo>>() {}),
+	GetRubrics(new TypeReference<List<RubricInfo>>() {}),
+
 	// Util methods
-	// ~~~~~
-	
 	PingAPI(int.class);
 	
 	private TypeReference<?> return_type;

@@ -1,37 +1,33 @@
 package ru.cultserv.adv.util;
 
+import com.ning.http.client.*;
+
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
-import com.ning.http.client.AsyncHttpClient;
-import com.ning.http.client.Request;
-import com.ning.http.client.RequestBuilder;
-import com.ning.http.client.Response;
 
 public abstract class AbstractApiRequestExecutor implements ApiRequestExecutor {
 	
 	private static final AsyncHttpClient CLIENT = createHttpClient();
 	
 	private static AsyncHttpClient createHttpClient() {
-		AsyncHttpClient client = new AsyncHttpClient();
-		return client;
+		return new AsyncHttpClient();
 	}
 
 	@Override
 	public ApiResponse execute(ApiRequest request) {
 		Request http_request = convertToHttpRequest(request);
-		Response response = null;
+		Response response;
 		
 		try {
-			response = CLIENT.executeRequest(http_request).get(30, TimeUnit.SECONDS);
+			ListenableFuture<Response> future = CLIENT.executeRequest(http_request);
+			response = future.get(30, TimeUnit.SECONDS);
 		} catch (IOException | InterruptedException | ExecutionException | TimeoutException e) {
 			throw new RuntimeException(e);
 		}
-		
-		ApiResponse result = process(response);
-		return result;
+
+		return process(response);
 	}
 	
 	private Request convertToHttpRequest(ApiRequest request) {
