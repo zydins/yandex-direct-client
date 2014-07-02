@@ -10,20 +10,24 @@ public class YandexDirectRequest implements ApiRequest {
 	
 	public static final String PRODUCTION_URL = "https://api.direct.yandex.ru/live/v4/json/";
 	public static final String SANDBOX_URL = "https://213.180.204.225/live/v4/json/";
-	
-	private String http_method = "POST";
-	private String full_url = SANDBOX_URL;
-	
-	private YandexDirectParams params = new YandexDirectParams();
+
+	private final String url;
+	private final YandexDirectParams params;
+
+	public YandexDirectRequest() {
+		boolean isSandBox = Integer.getInteger("ru.cultserv.adv.yandex.direct.util.requests.mode", 1) == 1;
+		this.url = isSandBox ? SANDBOX_URL : PRODUCTION_URL;
+		this.params = new YandexDirectParams();
+	}
 
 	@Override
 	public String httpMethod() {
-		return http_method;
+		return "POST";
 	}
 
 	@Override
 	public String url() {
-		return full_url;
+		return url;
 	}
 
 	@Override
@@ -57,7 +61,5 @@ public class YandexDirectRequest implements ApiRequest {
 		public ApiRequest build() {
 			return request;
 		}
-
 	}
-
 }
