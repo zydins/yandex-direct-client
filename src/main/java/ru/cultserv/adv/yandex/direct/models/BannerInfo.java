@@ -1,10 +1,10 @@
 package ru.cultserv.adv.yandex.direct.models;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Objects;
 import ru.cultserv.adv.yandex.direct.models.util.StatusBoolean;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 public class BannerInfo {
 
@@ -135,10 +135,12 @@ public class BannerInfo {
 	 */
 	@JsonProperty("AgeLabel")
 	public String age_label;
-	
+
 	@Override
 	public String toString() {
-		return String.format("[%s] %s", banner_id, title);
+		return Objects.toStringHelper(this)
+				.add("banner_id", banner_id)
+				.add("title", title)
+				.toString();
 	}
-
 }

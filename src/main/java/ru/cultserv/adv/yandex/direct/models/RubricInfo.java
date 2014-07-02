@@ -1,6 +1,7 @@
 package ru.cultserv.adv.yandex.direct.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Objects;
 
 /**
  * @author Alexandr Kolosov
@@ -26,4 +27,15 @@ public class RubricInfo {
 	@JsonProperty("Checkable")
 	public String checkable;
 
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this)
+				.add("rubric_id", rubric_id)
+				.add("parent_id", parent_id)
+				.add("url", url)
+				.add("rubric_full_name", rubric_full_name)
+				.add("rubric_name", rubric_name)
+				.add("checkable", checkable)
+				.toString();
+	}
 }

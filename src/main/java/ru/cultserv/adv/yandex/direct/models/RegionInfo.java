@@ -1,6 +1,7 @@
 package ru.cultserv.adv.yandex.direct.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Objects;
 
 /**
  * @author Alexandr Kolosov
@@ -17,4 +18,12 @@ public class RegionInfo {
 	@JsonProperty("RegionName")
 	public String region_name;
 
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this)
+				.add("region_id", region_id)
+				.add("parent_id", parent_id)
+				.add("region_name", region_name)
+				.toString();
+	}
 }
