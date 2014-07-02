@@ -1,10 +1,7 @@
 package ru.cultserv.adv.yandex.direct.clients;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
+import com.google.common.base.Optional;
 import org.junit.Test;
-
 import ru.cultserv.adv.util.ApiRequest;
 import ru.cultserv.adv.util.ApiRequestExecutor;
 import ru.cultserv.adv.util.ApiResponse;
@@ -14,6 +11,9 @@ import ru.cultserv.adv.yandex.direct.util.AuthTokens;
 import ru.cultserv.adv.yandex.direct.util.exceptions.ApiException;
 import ru.cultserv.adv.yandex.direct.util.requests.YandexDirectRequest;
 import ru.cultserv.adv.yandex.direct.util.requests.YandexRequestExecutor;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class YandexDirectApiRequestExecutorTest {
 	
@@ -25,15 +25,15 @@ public class YandexDirectApiRequestExecutorTest {
 			new YandexDirectRequest.Builder(AuthTokens.fake())
 				.forMethod(MethodName.PingAPI.name())
 				.build();
-		
-		ApiResponse response = executor.execute(request);
-		int result = response.as(int.class);
+
+		Optional<ApiResponse> response = executor.execute(request);
+		int result = response.get().as(int.class);
 		
 		assertEquals(1, result);
 	}
 	
 	@Test
-	public void shouldExuteRequestWithException() {
+	public void shouldExecuteRequestWithException() {
 		ApiRequest request =
 			new YandexDirectRequest.Builder(new AuthToken(""))
 				.forMethod(MethodName.PingAPI)

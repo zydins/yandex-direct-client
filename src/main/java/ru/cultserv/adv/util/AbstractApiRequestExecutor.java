@@ -1,11 +1,16 @@
 package ru.cultserv.adv.util;
 
-import com.ning.http.client.*;
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.util.concurrent.Futures;
+import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.Request;
+import com.ning.http.client.RequestBuilder;
+import com.ning.http.client.Response;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.Future;
 
 public abstract class AbstractApiRequestExecutor implements ApiRequestExecutor {
 	
@@ -16,24 +21,33 @@ public abstract class AbstractApiRequestExecutor implements ApiRequestExecutor {
 	}
 
 	@Override
-	public ApiResponse execute(ApiRequest request) {
-		Request http_request = convertToHttpRequest(request);
-		Response response;
-		
+	public Optional<ApiResponse> execute(ApiRequest request) {
+		Future<ApiResponse> future = asFuture(request);
 		try {
-			ListenableFuture<Response> future = CLIENT.executeRequest(http_request);
-			response = future.get(30, TimeUnit.SECONDS);
-		} catch (IOException | InterruptedException | ExecutionException | TimeoutException e) {
-			throw new RuntimeException(e);
+			return Optional.of(future.get());
+		} catch (ExecutionException | InterruptedException e) {
+			return Optional.absent();
 		}
+	}
 
-		return process(response);
+	@Override
+	public Future<ApiResponse> asFuture(ApiRequest request) {
+		Request http_request = convertToHttpRequest(request);
+		try {
+			com.ning.http.client.ListenableFuture<Response> future = CLIENT.executeRequest(http_request);
+			return Futures.lazyTransform(future, new Function<Response, ApiResponse>() {
+				@Override
+				public ApiResponse apply(Response response) {
+					return process(response);
+				}
+			});
+		} catch (IOException e) {
+			return Futures.immediateFailedFuture(new IllegalStateException("illegal request"));
+		}
 	}
 	
 	private Request convertToHttpRequest(ApiRequest request) {
-		RequestBuilder builder = new RequestBuilder();
-		
-		builder
+		RequestBuilder builder = new RequestBuilder()
 			.setMethod(request.httpMethod())
 			.setUrl(request.url());
 		

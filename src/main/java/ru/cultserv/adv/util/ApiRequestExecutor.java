@@ -1,7 +1,13 @@
 package ru.cultserv.adv.util;
 
+import com.google.common.base.Optional;
+
+import java.util.concurrent.Future;
+
 public interface ApiRequestExecutor {
 
-	ApiResponse execute(ApiRequest request);
+	Optional<ApiResponse> execute(ApiRequest request);
+
+	Future<ApiResponse> asFuture(ApiRequest request);
 
 }
