@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import ru.cultserv.adv.yandex.direct.methods.impl.VocabulariesImpl;
 import ru.cultserv.adv.yandex.direct.models.RegionInfo;
+import ru.cultserv.adv.yandex.direct.models.RubricInfo;
 import ru.cultserv.adv.yandex.direct.util.AuthTokens;
 
 import java.util.List;
@@ -20,5 +21,11 @@ public class VocabulariesTest {
 	public void testGetRegions() {
 		List<RegionInfo> regions = vocabularies.getRegions();
 		Assert.assertNotNull(regions);
+	}
+
+	@Test
+	public void testGetRubris() {
+		List<RubricInfo> rubrics = vocabularies.getRubrics();
+		Assert.assertNotNull(rubrics);
 	}
 }
