@@ -21,8 +21,10 @@ public enum MethodName {
 	ArchiveCampaign(int.class),
 	CreateOrUpdateCampaign(Long.class),
 	DeleteCampaign(int.class),
+	GetCampaignParams(new TypeReference<CampaignInfo>() {}, Constants.SINGLE_PARAM_CONVERTER),
 	GetCampaignsParams(new TypeReference<List<CampaignInfo>>() {}),
-	GetCampaignsList(new TypeReference<List<CampaignShortInfo>>() {}),
+	GetCampaignsList(new TypeReference<List<CampaignShortInfo>>() {}, Constants.SINGLE_PARAM_CONVERTER),
+
 	GetCampaignsListFilter(new TypeReference<List<CampaignShortInfo>>() {}),
 	ResumeCampaign(int.class),
 	StopCampaign(int.class),
@@ -58,13 +60,13 @@ public enum MethodName {
 
 	private TypeReference<?> return_type;
 	private Class<?> return_class;
-	private Function<Object, Object[]> converter;
+	private Function<Object[], Object> converter;
 
 	private MethodName(TypeReference<?> type) {
 		this(type, null);
 	}
 
-	private MethodName(TypeReference<?> type, Function<Object, Object[]> converter) {
+	private MethodName(TypeReference<?> type, Function<Object[], Object> converter) {
 		this.return_type = type;
 		this.converter = converter;
 	}
@@ -81,7 +83,7 @@ public enum MethodName {
 		return return_class;
 	}
 
-	public Function<Object, Object[]> getConverter() {
+	public Function<Object[], Object> getConverter() {
 		return converter;
 	}
 }

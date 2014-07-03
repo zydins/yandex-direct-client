@@ -3,6 +3,8 @@ package ru.cultserv.adv.yandex.direct.methods;
 import org.junit.Test;
 import ru.cultserv.adv.yandex.direct.filters.CampaignsFilterParam;
 import ru.cultserv.adv.yandex.direct.impl.YandexDirectImpl;
+import ru.cultserv.adv.yandex.direct.models.campain.CampaignIDInfo;
+import ru.cultserv.adv.yandex.direct.models.campain.CampaignInfo;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignShortInfo;
 import ru.cultserv.adv.yandex.direct.util.AuthTokens;
 
@@ -24,6 +26,9 @@ public class CampaignsTest {
 		CampaignShortInfo campaign = campaignsInfos.get(0);
 		assertNotNull(campaign);
 		assertNotNull(campaign.campaign_id);
+
+		CampaignInfo info = campaigns.params(CampaignIDInfo.of(campaign.campaign_id));
+		assertNotNull(info);
 	}
 	
 	@Test

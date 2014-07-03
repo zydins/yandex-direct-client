@@ -37,9 +37,9 @@ public class ProxyBuilder {
 			}
 
 			MethodName methodName = annotation.value();
-			Function<Object, Object[]> converter = methodName.getConverter();
+			Function<Object[], Object> converter = methodName.getConverter();
 			if (converter != null) {
-				args = converter.apply(args);
+				return caller.call(methodName, converter.apply(args));
 			}
 
 			return caller.call(methodName, args);
