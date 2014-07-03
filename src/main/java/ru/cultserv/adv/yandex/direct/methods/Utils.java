@@ -6,6 +6,7 @@ package ru.cultserv.adv.yandex.direct.methods;
  */
 public interface Utils {
 
-	boolean ping();
+	@DirectMethod(MethodName.PingAPI)
+	int ping();
 
 }

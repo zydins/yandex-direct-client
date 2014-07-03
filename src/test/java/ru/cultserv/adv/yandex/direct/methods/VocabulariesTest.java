@@ -2,7 +2,7 @@ package ru.cultserv.adv.yandex.direct.methods;
 
 import org.junit.Assert;
 import org.junit.Test;
-import ru.cultserv.adv.yandex.direct.methods.impl.VocabulariesImpl;
+import ru.cultserv.adv.yandex.direct.impl.YandexDirectImpl;
 import ru.cultserv.adv.yandex.direct.models.RegionInfo;
 import ru.cultserv.adv.yandex.direct.models.RubricInfo;
 import ru.cultserv.adv.yandex.direct.util.AuthTokens;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class VocabulariesTest {
 
-	private VocabulariesImpl vocabularies = new VocabulariesImpl(AuthTokens.fake());
+	private Vocabularies vocabularies = new YandexDirectImpl(AuthTokens.fake()).vocabularies();
 
 	@Test
 	public void testGetRegions() {

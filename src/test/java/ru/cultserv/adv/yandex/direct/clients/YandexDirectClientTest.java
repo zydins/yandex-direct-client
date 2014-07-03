@@ -1,13 +1,14 @@
 package ru.cultserv.adv.yandex.direct.clients;
 
-import static org.junit.Assert.assertNotNull;
-
+import org.junit.Assert;
 import org.junit.Test;
-
 import ru.cultserv.adv.yandex.direct.YandexDirect;
 import ru.cultserv.adv.yandex.direct.impl.YandexDirectImpl;
 import ru.cultserv.adv.yandex.direct.methods.Campaigns;
+import ru.cultserv.adv.yandex.direct.methods.Utils;
 import ru.cultserv.adv.yandex.direct.util.AuthTokens;
+
+import static org.junit.Assert.assertNotNull;
 
 public class YandexDirectClientTest {
 	
@@ -19,4 +20,9 @@ public class YandexDirectClientTest {
 		assertNotNull(campaigns);
 	}
 
+	@Test
+	public void testPing() {
+		Utils utils = direct.utils();
+		Assert.assertEquals(1, utils.ping());
+	}
 }

@@ -11,8 +11,10 @@ import java.util.List;
  */
 public interface Vocabularies {
 
+	@DirectMethod(MethodName.GetRegions)
 	List<RegionInfo> getRegions();
 
+	@DirectMethod(MethodName.GetRubrics)
 	List<RubricInfo> getRubrics();
 
 }
