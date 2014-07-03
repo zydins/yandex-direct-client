@@ -2,6 +2,8 @@ package ru.cultserv.adv.yandex.direct.methods;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import ru.cultserv.adv.yandex.direct.models.*;
+import ru.cultserv.adv.yandex.direct.models.forecast.Forecast;
+import ru.cultserv.adv.yandex.direct.models.forecast.ForecastStatusInfo;
 
 import java.util.List;
 
@@ -33,7 +35,13 @@ public enum MethodName {
 	ResumeBanners(int.class),
 	StopBanners(int.class),
 	UnArchiveBanners(int.class),
-	
+
+	// Forecast
+	CreateNewForecast(int.class),
+	DeleteForecastReport(int.class),
+	GetForecast(Forecast.class),
+	GetForecastList(new TypeReference<List<ForecastStatusInfo>>() {}),
+
 	// Vocabularies
 	GetRegions(new TypeReference<List<RegionInfo>>() {}),
 	GetRubrics(new TypeReference<List<RubricInfo>>() {}),
