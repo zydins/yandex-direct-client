@@ -45,10 +45,10 @@ public enum MethodName {
 	UnArchiveBanners(int.class),
 
 	// Forecast
-	CreateNewForecast(int.class),
-	DeleteForecastReport(int.class),
-	GetForecast(Forecast.class),
-	GetForecastList(new TypeReference<List<ForecastStatusInfo>>() {}),
+	CreateNewForecast(int.class, Constants.SINGLE_PARAM_CONVERTER),
+	DeleteForecastReport(int.class, Constants.SINGLE_PARAM_CONVERTER),
+	GetForecast(Forecast.class, Constants.SINGLE_PARAM_CONVERTER),
+	GetForecastList(new TypeReference<List<ForecastStatusInfo>>() {}, Constants.SINGLE_PARAM_CONVERTER),
 
 	// Vocabularies
 	GetRegions(new TypeReference<List<RegionInfo>>() {}),
@@ -72,7 +72,12 @@ public enum MethodName {
 	}
 	
 	private MethodName(Class<?> clazz) {
+		this(clazz, null);
+	}
+
+	private MethodName(Class<?> clazz, Function<Object[], Object> converter) {
 		this.return_class = clazz;
+		this.converter = converter;
 	}
 	
 	public TypeReference<?> returnType() {
