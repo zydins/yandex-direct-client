@@ -25,7 +25,7 @@ public enum MethodName {
 	GetCampaignsParams(new TypeReference<List<CampaignInfo>>() {}),
 	GetCampaignsList(new TypeReference<List<CampaignShortInfo>>() {}, Constants.SINGLE_PARAM_CONVERTER),
 
-	GetCampaignsListFilter(new TypeReference<List<CampaignShortInfo>>() {}),
+	GetCampaignsListFilter(new TypeReference<List<CampaignShortInfo>>() {}, Constants.SINGLE_PARAM_CONVERTER),
 	ResumeCampaign(int.class),
 	StopCampaign(int.class),
 	UnArchiveCampaign(int.class),

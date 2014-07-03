@@ -7,20 +7,31 @@ import ru.cultserv.adv.yandex.direct.models.util.StatusBoolean;
 public class CampaignsFilterParam {
 	
 	/**
-	 * <p>
 	 * Массив, содержащий логины клиентов, для которых требуется получить список кампаний.
 	 * Заполняется только рекламными агентствами. Другие пользователи могут не указывать этот параметр.
 	 * 
-	 * <p>
-	 * Требуется
-	 * <br>
-	 * Да для рекламных агентств
+	 * Требуется  для рекламных агентств
 	 */
 	@JsonProperty("Logins")
 	public String[] logins;
 	
 	@JsonProperty("Filter")
 	public CampaignsFilter filter;
+	
+	@JsonProperty("Limit")
+	public int limit;
+	
+	@JsonProperty("Offset")
+	public int offset;
+	
+	/**
+	 * Возвращать денежные значения в валюте кампании — Yes/No.
+	 * При значении No значения конвертируются из валюты кампании в у. е. Значение по умолчанию — No.
+	 * 
+	 * Требуется - нет
+	 */
+	@JsonProperty("CurrencySupported")
+	public StatusBoolean currency_supported = StatusBoolean.No;
 	
 	/**
 	 * Объект, содержащий условия отбора кампаний.
@@ -29,7 +40,6 @@ public class CampaignsFilterParam {
 	public static class CampaignsFilter {
 
 		/**
-		 * <p>
 		 * Отбирать кампании по состоянию модерации:
 		 * 
 		 * <li>Yes — прошедшие модерацию;
@@ -112,6 +122,27 @@ public class CampaignsFilterParam {
 		public Builder withLogins(String... logins) {
 			filter_param.logins = logins;
 			return this;
+		}
+		
+		/**
+		 * Устанавливает флаг для того, чтобы возвращать данные с денежными значениями в валюте кампании, а не в у.е.
+		 * 
+		 * @return текущий инстанс билдера
+		 */
+		public Builder withCampaignCurrency() {
+			filter_param.currency_supported = StatusBoolean.Yes;
+			return this;
+		}
+		
+		public Builder withRange(int limit, int offset) {
+			filter_param.limit = limit;
+			filter_param.offset = offset;
+			
+			return this;
+		}
+		
+		public Builder withLimit(int limit) {
+			return withRange(limit, 0);
 		}
 		
 		public Builder withoutArchived() {

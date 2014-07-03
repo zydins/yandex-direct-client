@@ -45,6 +45,7 @@ public class CampaignsTest {
 		CampaignsFilterParam filtering_param =
 			new CampaignsFilterParam.Builder()
 				.withoutArchived()
+				.withRange(limit, 0)
 				.build();
 		
 		List<CampaignShortInfo> campaignsInfos = campaigns.list(filtering_param);
@@ -65,6 +66,7 @@ public class CampaignsTest {
 		CampaignsFilterParam filtering_param =
 			new CampaignsFilterParam.Builder()
 				.withoutArchived()
+				.withLimit(1)
 				.build();
 		
 		List<CampaignShortInfo> campaignsInfos = campaigns.list(filtering_param);
