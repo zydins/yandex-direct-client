@@ -1,21 +1,18 @@
 package ru.cultserv.adv.yandex.direct.methods;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+import ru.cultserv.adv.yandex.direct.filters.CampaignsFilterParam;
+import ru.cultserv.adv.yandex.direct.impl.YandexDirectImpl;
+import ru.cultserv.adv.yandex.direct.models.campain.CampaignShortInfo;
+import ru.cultserv.adv.yandex.direct.util.AuthTokens;
 
 import java.util.List;
 
-import org.junit.Test;
-
-import ru.cultserv.adv.yandex.direct.filters.CampaignsFilterParam;
-import ru.cultserv.adv.yandex.direct.methods.impl.CampaignsImpl;
-import ru.cultserv.adv.yandex.direct.models.CampaignShortInfo;
-import ru.cultserv.adv.yandex.direct.util.AuthTokens;
+import static org.junit.Assert.*;
 
 public class CampaignsTest {
 
-	private Campaigns campaigns = new CampaignsImpl(AuthTokens.fake());
+	private Campaigns campaigns = new YandexDirectImpl(AuthTokens.fake()).campaigns();
 	
 	@Test
 	public void shouldGetCampaignsList() {
@@ -43,7 +40,6 @@ public class CampaignsTest {
 		CampaignsFilterParam filtering_param =
 			new CampaignsFilterParam.Builder()
 				.withoutArchived()
-				.withRange(limit, 0)
 				.build();
 		
 		List<CampaignShortInfo> campaignsInfos = campaigns.list(filtering_param);
@@ -64,7 +60,6 @@ public class CampaignsTest {
 		CampaignsFilterParam filtering_param =
 			new CampaignsFilterParam.Builder()
 				.withoutArchived()
-				.withLimit(1)
 				.build();
 		
 		List<CampaignShortInfo> campaignsInfos = campaigns.list(filtering_param);

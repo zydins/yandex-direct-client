@@ -1,4 +1,4 @@
-package ru.cultserv.adv.yandex.direct.models;
+package ru.cultserv.adv.yandex.direct.models.campain;
 
 public enum CampaignStrategyName {
 

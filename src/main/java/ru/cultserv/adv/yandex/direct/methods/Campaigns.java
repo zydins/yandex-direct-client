@@ -1,59 +1,51 @@
 package ru.cultserv.adv.yandex.direct.methods;
 
-import java.util.List;
-
 import ru.cultserv.adv.yandex.direct.filters.CampaignsFilterParam;
-import ru.cultserv.adv.yandex.direct.models.CampaignInfo;
-import ru.cultserv.adv.yandex.direct.models.CampaignShortInfo;
-import ru.cultserv.adv.yandex.direct.models.Currency;
+import ru.cultserv.adv.yandex.direct.models.campain.CampaignIDSInfo;
+import ru.cultserv.adv.yandex.direct.models.campain.CampaignInfo;
+import ru.cultserv.adv.yandex.direct.models.campain.CampaignShortInfo;
+
+import java.util.List;
 
 public interface Campaigns {
 
+	@DirectMethod(MethodName.CreateOrUpdateCampaign)
 	Long create(CampaignInfo campaign);
-	
+
+	@DirectMethod(MethodName.CreateOrUpdateCampaign)
 	void update(CampaignInfo campaign);
-	
+
+	@DirectMethod(MethodName.StopCampaign)
 	void stop(Long campaign_id);
-	
+
+	@DirectMethod(MethodName.ResumeCampaign)
 	void resume(Long campaign_id);
-	
+
+	@DirectMethod(MethodName.DeleteCampaign)
 	void delete(Long campaign_id);
-	
+
+	@DirectMethod(MethodName.ArchiveCampaign)
 	void archive(Long campaign_id);
-	
+
+	@DirectMethod(MethodName.UnArchiveCampaign)
 	void unArchive(Long campaign_id);
 	
-	List<CampaignShortInfo> list();
-	
+	@DirectMethod(MethodName.GetCampaignsList)
 	List<CampaignShortInfo> list(String... logins);
 	
 	/**
 	 * Простой фильтр по списку компаний
-	 * 
-	 * @param filtering_param
-	 * @return список кампаний
 	 */
+	@DirectMethod(MethodName.GetCampaignsListFilter)
 	List<CampaignShortInfo> list(CampaignsFilterParam filtering_param);
-	
+
 	/**
-	 * <p>
 	 * Возвращает параметры кампаний.
-	 * 
-	 * <p>
+	 *
 	 * Денежные значения в условных единицах (у. е.).
 	 * Если кампания ведется в реальной валюте, возвращаемые значения конвертируются из валюты кампании в у. е.
-	 *  
-	 * @param campaign_ids список id кампаний, для которых нужно получить параметры
-	 * @return список параметров для кампаний
 	 */
-	List<CampaignInfo> params(List<Long> campaign_ids);
-	
-	/**
-	 * 
-	 * @param campaign_ids
-	 * @param currency
-	 * @return
-	 */
-	List<CampaignInfo> params(List<Long> campaign_ids, Currency currency);
+	@DirectMethod(MethodName.GetCampaignsParams)
+	List<CampaignInfo> params(CampaignIDSInfo info);
 
 }

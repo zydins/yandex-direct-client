@@ -1,12 +1,12 @@
 package ru.cultserv.adv.yandex.direct.util;
 
+import ru.cultserv.adv.yandex.direct.models.BannerInfo;
+import ru.cultserv.adv.yandex.direct.models.PhraseInfo;
+import ru.cultserv.adv.yandex.direct.models.campain.CampaignShortInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import ru.cultserv.adv.yandex.direct.models.BannerInfo;
-import ru.cultserv.adv.yandex.direct.models.CampaignShortInfo;
-import ru.cultserv.adv.yandex.direct.models.PhraseInfo;
 
 public class FakeBannersDataBuilder {
 	

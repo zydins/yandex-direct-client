@@ -1,4 +1,4 @@
-package ru.cultserv.adv.yandex.direct.models;
+package ru.cultserv.adv.yandex.direct.models.campain;
 
 /**
  * Стратегия в Рекламной сети Яндекса. Ниже перечислены возможные значения.

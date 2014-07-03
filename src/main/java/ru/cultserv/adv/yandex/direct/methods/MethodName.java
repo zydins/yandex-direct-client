@@ -1,7 +1,13 @@
 package ru.cultserv.adv.yandex.direct.methods;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import ru.cultserv.adv.yandex.direct.models.*;
+import com.google.common.base.Function;
+import ru.cultserv.adv.yandex.direct.models.BannerInfo;
+import ru.cultserv.adv.yandex.direct.models.PhraseInfo;
+import ru.cultserv.adv.yandex.direct.models.RegionInfo;
+import ru.cultserv.adv.yandex.direct.models.RubricInfo;
+import ru.cultserv.adv.yandex.direct.models.campain.CampaignInfo;
+import ru.cultserv.adv.yandex.direct.models.campain.CampaignShortInfo;
 import ru.cultserv.adv.yandex.direct.models.forecast.Forecast;
 import ru.cultserv.adv.yandex.direct.models.forecast.ForecastStatusInfo;
 
@@ -47,13 +53,20 @@ public enum MethodName {
 	GetRubrics(new TypeReference<List<RubricInfo>>() {}),
 
 	// Util methods
-	PingAPI(int.class);
-	
+	PingAPI(int.class)
+	;
+
 	private TypeReference<?> return_type;
 	private Class<?> return_class;
-	
+	private Function<Object, Object[]> converter;
+
 	private MethodName(TypeReference<?> type) {
+		this(type, null);
+	}
+
+	private MethodName(TypeReference<?> type, Function<Object, Object[]> converter) {
 		this.return_type = type;
+		this.converter = converter;
 	}
 	
 	private MethodName(Class<?> clazz) {
@@ -68,4 +81,7 @@ public enum MethodName {
 		return return_class;
 	}
 
+	public Function<Object, Object[]> getConverter() {
+		return converter;
+	}
 }

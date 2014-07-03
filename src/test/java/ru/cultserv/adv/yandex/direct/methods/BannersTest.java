@@ -1,19 +1,18 @@
 package ru.cultserv.adv.yandex.direct.methods;
 
-import static org.fest.assertions.Assertions.assertThat;
+import org.junit.Test;
+import ru.cultserv.adv.yandex.direct.filters.BannersFilterParam;
+import ru.cultserv.adv.yandex.direct.methods.impl.BannersImpl;
+import ru.cultserv.adv.yandex.direct.models.BannerInfo;
+import ru.cultserv.adv.yandex.direct.models.campain.CampaignShortInfo;
+import ru.cultserv.adv.yandex.direct.util.AuthTokens;
+import ru.cultserv.adv.yandex.direct.util.FakeBannersDataBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Test;
-
-import ru.cultserv.adv.yandex.direct.filters.BannersFilterParam;
-import ru.cultserv.adv.yandex.direct.methods.impl.BannersImpl;
-import ru.cultserv.adv.yandex.direct.models.BannerInfo;
-import ru.cultserv.adv.yandex.direct.models.CampaignShortInfo;
-import ru.cultserv.adv.yandex.direct.util.AuthTokens;
-import ru.cultserv.adv.yandex.direct.util.FakeBannersDataBuilder;
+import static org.fest.assertions.Assertions.assertThat;
 
 public class BannersTest {
 

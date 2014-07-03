@@ -1,9 +1,8 @@
 package ru.cultserv.adv.yandex.direct.filters;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.cultserv.adv.yandex.direct.models.util.ExtendedStatus;
 import ru.cultserv.adv.yandex.direct.models.util.StatusBoolean;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CampaignsFilterParam {
 	
@@ -22,23 +21,6 @@ public class CampaignsFilterParam {
 	
 	@JsonProperty("Filter")
 	public CampaignsFilter filter;
-	
-	@JsonProperty("Limit")
-	public int limit;
-	
-	@JsonProperty("Offset")
-	public int offset;
-	
-	/**
-	 * <p>
-	 * Возвращать денежные значения в валюте кампании — Yes/No.
-	 * При значении No значения конвертируются из валюты кампании в у. е. Значение по умолчанию — No.
-	 * 
-	 * <p>
-	 * Требуется - нет
-	 */
-	@JsonProperty("CurrencySupported")
-	public StatusBoolean currency_supported = StatusBoolean.No;
 	
 	/**
 	 * Объект, содержащий условия отбора кампаний.
@@ -130,27 +112,6 @@ public class CampaignsFilterParam {
 		public Builder withLogins(String... logins) {
 			filter_param.logins = logins;
 			return this;
-		}
-		
-		/**
-		 * Устанавливает флаг для того, чтобы возвращать данные с денежными значениями в валюте кампании, а не в у.е.
-		 * 
-		 * @return текущий инстанс билдера
-		 */
-		public Builder withCampaignCurrency() {
-			filter_param.currency_supported = StatusBoolean.Yes;
-			return this;
-		}
-		
-		public Builder withRange(int limit, int offset) {
-			filter_param.limit = limit;
-			filter_param.offset = offset;
-			
-			return this;
-		}
-		
-		public Builder withLimit(int limit) {
-			return withRange(limit, 0);
 		}
 		
 		public Builder withoutArchived() {

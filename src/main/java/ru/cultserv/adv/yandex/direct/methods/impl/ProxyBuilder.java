@@ -1,5 +1,6 @@
 package ru.cultserv.adv.yandex.direct.methods.impl;
 
+import com.google.common.base.Function;
 import ru.cultserv.adv.yandex.direct.methods.DirectMethod;
 import ru.cultserv.adv.yandex.direct.methods.MethodName;
 import ru.cultserv.adv.yandex.direct.util.requests.YandexDirectMethodCaller;
@@ -36,6 +37,11 @@ public class ProxyBuilder {
 			}
 
 			MethodName methodName = annotation.value();
+			Function<Object, Object[]> converter = methodName.getConverter();
+			if (converter != null) {
+				args = converter.apply(args);
+			}
+
 			return caller.call(methodName, args);
 		}
 	}

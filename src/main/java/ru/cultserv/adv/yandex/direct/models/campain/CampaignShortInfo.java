@@ -1,11 +1,10 @@
-package ru.cultserv.adv.yandex.direct.models;
-
-import org.joda.time.LocalDate;
-
-import ru.cultserv.adv.yandex.direct.models.util.ExtendedStatus;
-import ru.cultserv.adv.yandex.direct.models.util.StatusBoolean;
+package ru.cultserv.adv.yandex.direct.models.campain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.joda.time.LocalDate;
+import ru.cultserv.adv.yandex.direct.models.Currency;
+import ru.cultserv.adv.yandex.direct.models.util.ExtendedStatus;
+import ru.cultserv.adv.yandex.direct.models.util.StatusBoolean;
 
 public class CampaignShortInfo {
 
