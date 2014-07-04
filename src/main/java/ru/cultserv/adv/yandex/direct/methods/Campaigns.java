@@ -1,7 +1,6 @@
 package ru.cultserv.adv.yandex.direct.methods;
 
 import ru.cultserv.adv.yandex.direct.filters.CampaignsFilterParam;
-import ru.cultserv.adv.yandex.direct.models.campain.CampaignIDInfo;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignInfo;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignShortInfo;
 
@@ -46,6 +45,6 @@ public interface Campaigns {
 	 * Если кампания ведется в реальной валюте, возвращаемые значения конвертируются из валюты кампании в у. е.
 	 */
 	@DirectMethod(MethodName.GetCampaignParams)
-	CampaignInfo params(CampaignIDInfo info);
+	CampaignInfo params(long campaign_id);
 
 }

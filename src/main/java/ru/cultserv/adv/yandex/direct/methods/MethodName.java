@@ -2,6 +2,7 @@ package ru.cultserv.adv.yandex.direct.methods;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableMap;
 import ru.cultserv.adv.yandex.direct.models.BannerInfo;
 import ru.cultserv.adv.yandex.direct.models.PhraseInfo;
 import ru.cultserv.adv.yandex.direct.models.RegionInfo;
@@ -21,7 +22,13 @@ public enum MethodName {
 	ArchiveCampaign(int.class),
 	CreateOrUpdateCampaign(Long.class),
 	DeleteCampaign(int.class),
-	GetCampaignParams(new TypeReference<CampaignInfo>() {}, Constants.SINGLE_PARAM_CONVERTER),
+	GetCampaignParams(new TypeReference<CampaignInfo>() {}, new Function<Object[], Object>() {
+        @Override
+        public Object apply(Object[] objects) {
+            return ImmutableMap.of("CampaignID", objects[0]);
+        }
+    }),
+
 	GetCampaignsParams(new TypeReference<List<CampaignInfo>>() {}),
 	GetCampaignsList(new TypeReference<List<CampaignShortInfo>>() {}, Constants.SINGLE_PARAM_CONVERTER),
 
