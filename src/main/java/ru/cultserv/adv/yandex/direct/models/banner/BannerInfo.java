@@ -1,7 +1,10 @@
-package ru.cultserv.adv.yandex.direct.models;
+package ru.cultserv.adv.yandex.direct.models.banner;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
+import ru.cultserv.adv.yandex.direct.models.ContactInfo;
+import ru.cultserv.adv.yandex.direct.models.PhraseInfo;
+import ru.cultserv.adv.yandex.direct.models.SiteLink;
 import ru.cultserv.adv.yandex.direct.models.util.StatusBoolean;
 
 import java.util.List;

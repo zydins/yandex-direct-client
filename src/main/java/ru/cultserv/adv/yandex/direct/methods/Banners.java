@@ -1,11 +1,12 @@
 package ru.cultserv.adv.yandex.direct.methods;
 
-import java.util.List;
-
 import ru.cultserv.adv.yandex.direct.filters.BannersFilterParam;
 import ru.cultserv.adv.yandex.direct.filters.PhrasesFilterParam;
-import ru.cultserv.adv.yandex.direct.models.BannerInfo;
 import ru.cultserv.adv.yandex.direct.models.PhraseInfo;
+import ru.cultserv.adv.yandex.direct.models.banner.BannerInfo;
+import ru.cultserv.adv.yandex.direct.models.banner.CampaignBidsInfo;
+
+import java.util.List;
 
 public interface Banners {
 
@@ -14,9 +15,8 @@ public interface Banners {
 	 * 
 	 * Помещать в архив можно объявления, показ которых остановлен.
 	 * У объявлений в архиве параметр StatusArchive равен «Yes».
-	 * 
-	 * @param banner_ids
 	 */
+    @DirectMethod(MethodName.ArchiveBanners)
 	void archive(List<Long> banner_ids);
 	
 	/**
@@ -26,18 +26,14 @@ public interface Banners {
 	 * Для кампаний в статусе «Черновик» отправить объявление на модерацию можно с помощью метода ModerateBanners.
 	 * 
 	 * При успешном выполнении метод возвращает массив, содержащий идентификаторы созданных баннеров.
-	 * 
-	 * @param banners
-	 * @return
 	 */
+    @DirectMethod(MethodName.CreateOrUpdateBanners)
 	List<Long> create(List<BannerInfo> banners);
 	
 	/**
 	 * Обновляет данные объявлений.
-	 * 
-	 * @param banners
-	 * @return
 	 */
+    @DirectMethod(MethodName.CreateOrUpdateBanners)
 	List<Long> update(List<BannerInfo> banners);
 	
 	/**
@@ -48,9 +44,8 @@ public interface Banners {
 	 * 
 	 * Удалить можно только объявление, которое не было в показе и по которому не накоплена статистика.
 	 * Для других объявлений доступна архивация с помощью метода ArchiveBanners (Live).
-	 * 
-	 * @param banner_ids
 	 */
+    @DirectMethod(MethodName.DeleteBanners)
 	void delete(List<Long> banner_ids);
 	
 	/**
@@ -58,26 +53,22 @@ public interface Banners {
 	 * 
 	 * Метод возвращает параметры групп, объявлений и фраз.
 	 * Параметры фраз возвращаются в сокращенном или в полном виде (см. параметр GetPhrases).
-	 * 
-	 * @param filtering_param
-	 * @return
 	 */
+    @DirectMethod(MethodName.GetBanners)
 	List<BannerInfo> get(BannersFilterParam filtering_param);
 	
 	/**
 	 * Возвращает информацию о фразах.
 	 * 
 	 * @param banner_ids содержит массив идентификаторов объявлений BannerID (не более 1000)
-	 * @return
 	 */
+    @DirectMethod(MethodName.GetBannerPhrases)
 	List<PhraseInfo> phrases(List<Long> banner_ids);
 	
 	/**
 	 * Возвращает информацию о фразах и позволяет ограничить состав возвращаемых данных.
-	 * 
-	 * @param filtering_param
-	 * @return
 	 */
+    @DirectMethod(MethodName.GetBannerPhrasesFilter)
 	List<PhraseInfo> phrases(PhrasesFilterParam filtering_param);
 	
 	/**
@@ -85,24 +76,19 @@ public interface Banners {
 	 * 
 	 * Метод служит для модерации объявлений у вновь созданных кампаний.
 	 * Такие кампании и объявления имеют статус «Черновик».
-	 * 
-	 * Если у кампании есть хотя бы одно объявление, которое активно или отправлено на модерацию,
-	 * другие создаваемые или редактируемые объявления отправляются на модерацию автоматически.
-	 * В этом случае вызов метода ModerateBanners возвращает сообщение об ошибке с кодом 151.
-	 * 
-	 * @param banner_ids
+	 *
+     * Если заданы идентификаторы объявлений:
+	 *      Если у кампании есть хотя бы одно объявление, которое активно или отправлено на модерацию,
+	 *      другие создаваемые или редактируемые объявления отправляются на модерацию автоматически.
+	 *      В этом случае вызов метода ModerateBanners возвращает сообщение об ошибке с кодом 151.
+     *
+     * Если задана кампания:
+     *      Отправляет на модерацию только объявления в статусе «Черновик» из заданной кампании.
+     *      Если такие объявления отсутствуют у кампании, метод возвращает значение 0.
 	 */
-	void moderate(List<Long> banner_ids);
-	
-	/**
-	 * Отправляет на модерацию только объявления в статусе «Черновик» из заданной кампании.
-	 * Если такие объявления отсутствуют у кампании, метод возвращает значение 0.
-	 * 
-	 * @param campaign_id
-	 * @return
-	 */
-	int moderate(Long campaign_id);
-	
+    @DirectMethod(MethodName.ModerateBanners)
+	void moderate(CampaignBidsInfo info);
+
 	/**
 	 * Разрешает показ объявлений.
 	 * 
@@ -110,16 +96,14 @@ public interface Banners {
 	 * Для этого необходимо выполнение и других условий: достаточный баланс средств, кампания
 	 * и объявление проверены модератором, показ на уровне кампании разрешен (метод ResumeCampaign).
 	 * Фактическому показу соответствует значение Yes в параметре IsActive.
-	 * 
-	 * @param banner_ids
 	 */
+    @DirectMethod(MethodName.ResumeBanners)
 	void resume(List<Long> banner_ids);
 	
 	/**
 	 * Останавливает показ объявлений.
-	 * 
-	 * @param banner_ids
 	 */
+    @DirectMethod(MethodName.StopBanners)
 	void stop(List<Long> banner_ids);
 	
 	/**
@@ -127,9 +111,8 @@ public interface Banners {
 	 * 
 	 * У объявлений, извлеченных из архива, параметр StatusArchive имеет значение «No».
 	 * Если параметр StatusArchive объявления имеет значение «CurrencyConverted», метод возвращает ошибку с кодом 155.
-	 * 
-	 * @param banner_ids
 	 */
+    @DirectMethod(MethodName.UnArchiveBanners)
 	void unArchive(List<Long> banner_ids);
 
 }

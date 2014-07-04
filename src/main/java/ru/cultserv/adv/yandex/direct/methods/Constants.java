@@ -1,6 +1,7 @@
 package ru.cultserv.adv.yandex.direct.methods;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableMap;
 
 /**
  * @author Alexandr Kolosov
@@ -8,7 +9,16 @@ import com.google.common.base.Function;
  */
 class Constants {
 
-	public static final Function<Object[], Object> SINGLE_PARAM_CONVERTER = new Function<Object[], Object>() {
+    public static Function<Object[], Object> getFunction(final String fieldName) {
+        return new Function<Object[], Object>() {
+            @Override
+            public Object apply(Object[] objects) {
+                return ImmutableMap.of(fieldName, objects[0]);
+            }
+        };
+    }
+
+    public static final Function<Object[], Object> SINGLE_PARAM_CONVERTER = new Function<Object[], Object>() {
 		@Override
 		public Object apply(Object[] input) {
 			return input.length == 1 ? input[0] : input;

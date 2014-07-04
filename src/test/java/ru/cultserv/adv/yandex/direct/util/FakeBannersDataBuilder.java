@@ -1,7 +1,7 @@
 package ru.cultserv.adv.yandex.direct.util;
 
-import ru.cultserv.adv.yandex.direct.models.BannerInfo;
 import ru.cultserv.adv.yandex.direct.models.PhraseInfo;
+import ru.cultserv.adv.yandex.direct.models.banner.BannerInfo;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignShortInfo;
 
 import java.util.ArrayList;

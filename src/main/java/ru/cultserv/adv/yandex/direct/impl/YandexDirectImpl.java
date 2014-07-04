@@ -3,7 +3,6 @@ package ru.cultserv.adv.yandex.direct.impl;
 import ru.cultserv.adv.yandex.direct.AuthToken;
 import ru.cultserv.adv.yandex.direct.YandexDirect;
 import ru.cultserv.adv.yandex.direct.methods.*;
-import ru.cultserv.adv.yandex.direct.methods.impl.BannersImpl;
 import ru.cultserv.adv.yandex.direct.methods.impl.ProxyBuilder;
 import ru.cultserv.adv.yandex.direct.util.requests.YandexDirectMethodCaller;
 
@@ -22,7 +21,7 @@ public class YandexDirectImpl implements YandexDirect {
 
 	@Override
 	public Banners banners() {
-		return new BannersImpl(caller);
+		return create(Banners.class);
 	}
 
 	@Override

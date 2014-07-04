@@ -2,11 +2,10 @@ package ru.cultserv.adv.yandex.direct.methods;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Function;
-import com.google.common.collect.ImmutableMap;
-import ru.cultserv.adv.yandex.direct.models.BannerInfo;
 import ru.cultserv.adv.yandex.direct.models.PhraseInfo;
 import ru.cultserv.adv.yandex.direct.models.RegionInfo;
 import ru.cultserv.adv.yandex.direct.models.RubricInfo;
+import ru.cultserv.adv.yandex.direct.models.banner.BannerInfo;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignInfo;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignShortInfo;
 import ru.cultserv.adv.yandex.direct.models.forecast.Forecast;
@@ -22,12 +21,7 @@ public enum MethodName {
 	ArchiveCampaign(int.class),
 	CreateOrUpdateCampaign(Long.class),
 	DeleteCampaign(int.class),
-	GetCampaignParams(new TypeReference<CampaignInfo>() {}, new Function<Object[], Object>() {
-        @Override
-        public Object apply(Object[] objects) {
-            return ImmutableMap.of("CampaignID", objects[0]);
-        }
-    }),
+	GetCampaignParams(new TypeReference<CampaignInfo>() {}, Constants.getFunction("CampaignID")),
 
 	GetCampaignsParams(new TypeReference<List<CampaignInfo>>() {}),
 	GetCampaignsList(new TypeReference<List<CampaignShortInfo>>() {}, Constants.SINGLE_PARAM_CONVERTER),
@@ -40,16 +34,16 @@ public enum MethodName {
 	// Working with banners
 	// ~~~~~
 	
-	ArchiveBanners(int.class),
+	ArchiveBanners(int.class, Constants.getFunction("BannerIDS")),
 	CreateOrUpdateBanners(new TypeReference<List<Long>>() {}),
-	DeleteBanners(int.class),
+	DeleteBanners(int.class, Constants.getFunction("BannerIDS")),
 	GetBanners(new TypeReference<List<BannerInfo>>() {}),
 	GetBannerPhrases(new TypeReference<List<PhraseInfo>>() {}),
 	GetBannerPhrasesFilter(new TypeReference<List<PhraseInfo>>() {}),
-	ModerateBanners(int.class),
-	ResumeBanners(int.class),
-	StopBanners(int.class),
-	UnArchiveBanners(int.class),
+	ModerateBanners(int.class, Constants.SINGLE_PARAM_CONVERTER),
+	ResumeBanners(int.class, Constants.getFunction("BannerIDS")),
+	StopBanners(int.class, Constants.getFunction("BannerIDS")),
+	UnArchiveBanners(int.class, Constants.getFunction("BannerIDS")),
 
 	// Forecast
 	CreateNewForecast(int.class, Constants.SINGLE_PARAM_CONVERTER),

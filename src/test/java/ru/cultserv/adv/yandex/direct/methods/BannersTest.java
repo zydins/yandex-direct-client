@@ -2,8 +2,8 @@ package ru.cultserv.adv.yandex.direct.methods;
 
 import org.junit.Test;
 import ru.cultserv.adv.yandex.direct.filters.BannersFilterParam;
-import ru.cultserv.adv.yandex.direct.methods.impl.BannersImpl;
-import ru.cultserv.adv.yandex.direct.models.BannerInfo;
+import ru.cultserv.adv.yandex.direct.impl.YandexDirectImpl;
+import ru.cultserv.adv.yandex.direct.models.banner.BannerInfo;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignShortInfo;
 import ru.cultserv.adv.yandex.direct.util.AuthTokens;
 import ru.cultserv.adv.yandex.direct.util.FakeBannersDataBuilder;
@@ -16,7 +16,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class BannersTest {
 
-	private Banners banners = new BannersImpl(AuthTokens.fake());
+	private Banners banners = new YandexDirectImpl(AuthTokens.fake()).banners();
 	
 	@Test
 	public void shouldGetBannersWithCampaignIdsFilter() {
