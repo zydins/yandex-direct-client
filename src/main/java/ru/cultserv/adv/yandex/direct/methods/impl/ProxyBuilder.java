@@ -1,13 +1,13 @@
 package ru.cultserv.adv.yandex.direct.methods.impl;
 
 import com.google.common.base.Function;
+import com.google.common.reflect.Reflection;
 import ru.cultserv.adv.yandex.direct.methods.DirectMethod;
 import ru.cultserv.adv.yandex.direct.methods.MethodName;
 import ru.cultserv.adv.yandex.direct.util.requests.YandexDirectMethodCaller;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 
 /**
  * @author Alexandr Kolosov
@@ -46,10 +46,8 @@ public class ProxyBuilder {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T> T create(Class<T> targetInterface, YandexDirectMethodCaller caller) {
-		Class<?>[] interfaces = {targetInterface};
 		String name = targetInterface.getName();
-		return (T) Proxy.newProxyInstance(targetInterface.getClassLoader(), interfaces, new Handler(name, caller));
+		return Reflection.newProxy(targetInterface, new Handler(name, caller));
 	}
 }
