@@ -19,7 +19,7 @@ public interface WordStats {
     int delete(int report_id);
 
     @DirectMethod(MethodName.GetWordstatReport)
-    NewWordstatReportInfo get(int report_id);
+    List<NewWordstatReportInfo> get(int report_id);
 
     @DirectMethod(MethodName.GetWordstatReportList)
     List<WordstatReportStatusInfo> get();
