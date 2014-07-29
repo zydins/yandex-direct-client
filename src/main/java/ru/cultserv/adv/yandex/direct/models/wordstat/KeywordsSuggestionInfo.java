@@ -11,4 +11,9 @@ public class KeywordsSuggestionInfo {
     @JsonProperty("Keywords")
     public String[] keywords;
 
+    public static KeywordsSuggestionInfo of(String ... keywords) {
+        KeywordsSuggestionInfo info = new KeywordsSuggestionInfo();
+        info.keywords = keywords;
+        return info;
+    }
 }

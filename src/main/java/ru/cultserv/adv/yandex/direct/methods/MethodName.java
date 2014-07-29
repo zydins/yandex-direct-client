@@ -61,11 +61,11 @@ public enum MethodName {
 	PingAPI(int.class),
 
     // WordStats
-    CreateNewWordstatReport(int.class),
-    DeleteWordstatReport(int.class),
-    GetWordstatReport(new TypeReference<WordstatReportInfo>() {}),
+    CreateNewWordstatReport(int.class, Constants.SINGLE_PARAM_CONVERTER),
+    DeleteWordstatReport(int.class, Constants.SINGLE_PARAM_CONVERTER),
+    GetWordstatReport(new TypeReference<WordstatReportInfo>() {}, Constants.SINGLE_PARAM_CONVERTER),
     GetWordstatReportList(new TypeReference<List<WordstatReportStatusInfo>>() {}),
-    GetKeywordsSuggestion(new TypeReference<List<String>>() {})
+    GetKeywordsSuggestion(new TypeReference<List<String>>() {}, Constants.SINGLE_PARAM_CONVERTER)
     ;
 
 	private TypeReference<?> return_type;
