@@ -4,6 +4,7 @@ import org.junit.Test;
 import ru.cultserv.adv.util.ApiRequest;
 import ru.cultserv.adv.util.ApiRequestExecutor;
 import ru.cultserv.adv.util.ApiResponse;
+import ru.cultserv.adv.util.AsyncClientFactory;
 import ru.cultserv.adv.yandex.direct.AuthToken;
 import ru.cultserv.adv.yandex.direct.methods.MethodName;
 import ru.cultserv.adv.yandex.direct.util.AuthTokens;
@@ -16,7 +17,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class YandexDirectApiRequestExecutorTest {
 	
-	private ApiRequestExecutor executor = new YandexRequestExecutor();
+	private ApiRequestExecutor executor = new YandexRequestExecutor(AsyncClientFactory.getClient());
 
 	@Test
 	public void shouldExecuteYandexRequest() {

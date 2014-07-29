@@ -1,17 +1,21 @@
 package ru.cultserv.adv.yandex.direct.util.requests;
 
-import java.io.IOException;
-
+import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.Response;
 import ru.cultserv.adv.util.AbstractApiRequestExecutor;
 import ru.cultserv.adv.util.ApiResponse;
 import ru.cultserv.adv.util.Json;
 import ru.cultserv.adv.yandex.direct.models.YandexDirectResponse;
 
-import com.ning.http.client.Response;
+import java.io.IOException;
 
 public class YandexRequestExecutor extends AbstractApiRequestExecutor {
 
-	@Override
+    public YandexRequestExecutor(AsyncHttpClient client) {
+        super(client);
+    }
+
+    @Override
 	protected ApiResponse process(Response response) {
 		YandexDirectResponse api_response = Json.parse(body(response), YandexDirectResponse.class);
 		

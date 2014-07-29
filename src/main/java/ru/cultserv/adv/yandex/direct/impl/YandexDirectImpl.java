@@ -1,15 +1,31 @@
 package ru.cultserv.adv.yandex.direct.impl;
 
+import com.ning.http.client.AsyncHttpClientConfig;
+import ru.cultserv.adv.util.AsyncClientFactory;
 import ru.cultserv.adv.yandex.direct.AuthToken;
 import ru.cultserv.adv.yandex.direct.YandexDirect;
+import ru.cultserv.adv.yandex.direct.keystore.KeyStoreBuilder;
 import ru.cultserv.adv.yandex.direct.methods.*;
 import ru.cultserv.adv.yandex.direct.methods.impl.ProxyBuilder;
 import ru.cultserv.adv.yandex.direct.util.requests.YandexDirectMethodCaller;
 
+import javax.net.ssl.SSLContext;
+
 public class YandexDirectImpl implements YandexDirect {
 
 	private YandexDirectMethodCaller caller;
-	
+
+    public YandexDirectImpl(KeyStoreBuilder.Builder builder) {
+        this(builder.build());
+    }
+
+    public YandexDirectImpl(SSLContext context) {
+        AsyncHttpClientConfig.Builder builder = new AsyncHttpClientConfig.Builder();
+        builder.setSSLContext(context);
+        AsyncHttpClientConfig config = builder.build();
+        this.caller = YandexDirectMethodCaller.prepared(null, AsyncClientFactory.createHttpClient(config));
+    }
+
 	public YandexDirectImpl(AuthToken token) {
 		this.caller = YandexDirectMethodCaller.defaultCaller(token);
 	}

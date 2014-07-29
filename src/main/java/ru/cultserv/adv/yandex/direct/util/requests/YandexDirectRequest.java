@@ -41,7 +41,10 @@ public class YandexDirectRequest implements ApiRequest {
 		
 		public Builder(AuthToken token) {
 			request = new YandexDirectRequest();
-			request.params.setToken(token.value());
+            String value = token.value();
+            if (value != null) {
+                request.params.setToken(value);
+            }
 		}
 
 		public Builder forMethod(String api_method) {

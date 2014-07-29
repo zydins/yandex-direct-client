@@ -12,14 +12,14 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public abstract class AbstractApiRequestExecutor implements ApiRequestExecutor {
-	
-	private static final AsyncHttpClient CLIENT = createHttpClient();
-	
-	private static AsyncHttpClient createHttpClient() {
-		return new AsyncHttpClient();
-	}
 
-	@Override
+    private AsyncHttpClient client;
+
+    protected AbstractApiRequestExecutor(AsyncHttpClient client) {
+        this.client = client;
+    }
+
+    @Override
 	public ApiResponse execute(ApiRequest request) {
 		Future<ApiResponse> future = asFuture(request);
 		try {
@@ -33,7 +33,7 @@ public abstract class AbstractApiRequestExecutor implements ApiRequestExecutor {
 	public Future<ApiResponse> asFuture(ApiRequest request) {
 		Request http_request = convertToHttpRequest(request);
 		try {
-			com.ning.http.client.ListenableFuture<Response> future = CLIENT.executeRequest(http_request);
+			com.ning.http.client.ListenableFuture<Response> future = client.executeRequest(http_request);
 			return Futures.lazyTransform(future, new Function<Response, ApiResponse>() {
 				@Override
 				public ApiResponse apply(Response response) {
