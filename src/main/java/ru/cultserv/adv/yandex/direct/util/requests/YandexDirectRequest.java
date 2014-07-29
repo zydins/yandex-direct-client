@@ -15,7 +15,7 @@ public class YandexDirectRequest implements ApiRequest {
 	private final YandexDirectParams params;
 
 	public YandexDirectRequest() {
-		boolean isSandBox = Integer.getInteger("ru.cultserv.adv.yandex.direct.util.requests.mode", 1) == 1;
+		boolean isSandBox = Integer.getInteger("ru.cultserv.adv.yandex.direct.util.requests.mode", 0) == 1;
 		this.url = isSandBox ? SANDBOX_URL : PRODUCTION_URL;
 		this.params = new YandexDirectParams();
 	}

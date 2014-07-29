@@ -5,6 +5,8 @@ import com.google.common.base.Preconditions;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.GeneralSecurityException;
@@ -123,10 +125,15 @@ public class KeyStoreBuilder {
 
     private static InputStream load(String fileName) {
         Preconditions.checkNotNull(fileName);
-        return KeyStoreBuilder.class.getClassLoader().getResourceAsStream(fileName);
+
+        try {
+            return new FileInputStream(fileName);
+        } catch (FileNotFoundException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
-    public static Builder builder() {
+    public static CertificateResourceBuilder builder() {
         return new Builder();
     }
 }

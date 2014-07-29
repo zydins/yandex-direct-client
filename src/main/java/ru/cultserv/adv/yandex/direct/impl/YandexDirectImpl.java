@@ -23,7 +23,7 @@ public class YandexDirectImpl implements YandexDirect {
         AsyncHttpClientConfig.Builder builder = new AsyncHttpClientConfig.Builder();
         builder.setSSLContext(context);
         AsyncHttpClientConfig config = builder.build();
-        this.caller = YandexDirectMethodCaller.prepared(null, AsyncClientFactory.createHttpClient(config));
+        this.caller = YandexDirectMethodCaller.prepared(new AuthToken(null), AsyncClientFactory.createHttpClient(config));
     }
 
 	public YandexDirectImpl(AuthToken token) {
