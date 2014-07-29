@@ -47,8 +47,10 @@ public abstract class AbstractApiRequestExecutor implements ApiRequestExecutor {
 	
 	private Request convertToHttpRequest(ApiRequest request) {
 		RequestBuilder builder = new RequestBuilder()
-			.setMethod(request.httpMethod())
-			.setUrl(request.url());
+                .setHeader("Content-Type", "application/json; charset=utf-8")
+                .setBodyEncoding("UTF-8")
+                .setMethod(request.httpMethod())
+                .setUrl(request.url());
 		
 		withParams(request.params(), builder);
 		
