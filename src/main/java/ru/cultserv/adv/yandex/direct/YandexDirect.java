@@ -20,4 +20,6 @@ public interface YandexDirect {
 
 	Utils utils();
 
+    WordStats wordstats();
+
 }

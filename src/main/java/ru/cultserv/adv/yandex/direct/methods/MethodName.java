@@ -10,6 +10,8 @@ import ru.cultserv.adv.yandex.direct.models.campain.CampaignInfo;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignShortInfo;
 import ru.cultserv.adv.yandex.direct.models.forecast.Forecast;
 import ru.cultserv.adv.yandex.direct.models.forecast.ForecastStatusInfo;
+import ru.cultserv.adv.yandex.direct.models.wordstat.WordstatReportInfo;
+import ru.cultserv.adv.yandex.direct.models.wordstat.WordstatReportStatusInfo;
 
 import java.util.List;
 
@@ -56,8 +58,15 @@ public enum MethodName {
 	GetRubrics(new TypeReference<List<RubricInfo>>() {}),
 
 	// Util methods
-	PingAPI(int.class)
-	;
+	PingAPI(int.class),
+
+    // WordStats
+    CreateNewWordstatReport(int.class),
+    DeleteWordstatReport(int.class),
+    GetWordstatReport(new TypeReference<WordstatReportInfo>() {}),
+    GetWordstatReportList(new TypeReference<List<WordstatReportStatusInfo>>() {}),
+    GetKeywordsSuggestion(new TypeReference<List<String>>() {})
+    ;
 
 	private TypeReference<?> return_type;
 	private Class<?> return_class;
