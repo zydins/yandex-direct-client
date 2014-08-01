@@ -2,6 +2,7 @@ package ru.cultserv.adv.yandex.direct.methods;
 
 import ru.cultserv.adv.yandex.direct.models.wordstat.KeywordsSuggestionInfo;
 import ru.cultserv.adv.yandex.direct.models.wordstat.NewWordstatReportInfo;
+import ru.cultserv.adv.yandex.direct.models.wordstat.WordstatReportInfo;
 import ru.cultserv.adv.yandex.direct.models.wordstat.WordstatReportStatusInfo;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface WordStats {
     int delete(int report_id);
 
     @DirectMethod(MethodName.GetWordstatReport)
-    List<NewWordstatReportInfo> get(int report_id);
+    List<WordstatReportInfo> get(int report_id);
 
     @DirectMethod(MethodName.GetWordstatReportList)
     List<WordstatReportStatusInfo> get();
