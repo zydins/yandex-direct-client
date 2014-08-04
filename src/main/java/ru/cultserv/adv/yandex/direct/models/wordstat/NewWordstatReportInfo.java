@@ -2,6 +2,8 @@ package ru.cultserv.adv.yandex.direct.models.wordstat;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 /**
  * @author Alexandr Kolosov
  * @since 29.07.2014
@@ -20,6 +22,11 @@ public class NewWordstatReportInfo {
 
         public Builder() {
             this.info = new NewWordstatReportInfo();
+        }
+
+        public Builder phrases(List<String> phrases) {
+            this.info.phrases = phrases.toArray(new String[0]);
+            return this;
         }
 
         public Builder phrases(String ... phrases) {
