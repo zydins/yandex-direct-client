@@ -28,7 +28,7 @@ class Constants {
 	public static final Function<Object[], Object> EMPTY_PARAM_CONVERTER = new Function<Object[], Object>() {
 		@Override
 		public Object apply(Object[] input) {
-			return ((Object[]) input[0]).length == 0 ? null : input;
+			return null;
 		}
 	};
 	
