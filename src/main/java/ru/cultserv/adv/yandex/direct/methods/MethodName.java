@@ -49,9 +49,9 @@ public enum MethodName {
 
 	// Forecast
 	CreateNewForecast(int.class, Constants.SINGLE_PARAM_CONVERTER),
-	DeleteForecastReport(int.class, Constants.SINGLE_PARAM_CONVERTER),
+	DeleteForecastReport(boolean.class, Constants.SINGLE_PARAM_CONVERTER),
 	GetForecast(Forecast.class, Constants.SINGLE_PARAM_CONVERTER),
-	GetForecastList(new TypeReference<List<ForecastStatusInfo>>() {}, Constants.SINGLE_PARAM_CONVERTER),
+	GetForecastList(new TypeReference<List<ForecastStatusInfo>>() {}, Constants.EMPTY_PARAM_CONVERTER),
 
 	// Vocabularies
 	GetRegions(new TypeReference<List<RegionInfo>>() {}),

@@ -11,7 +11,7 @@ public class NewForecastInfo {
 	@JsonProperty("Phrases")
 	String[] phrases;
 
-	@JsonProperty("GeoId")
+	@JsonProperty("GeoID")
 	Integer[] regions;
 
 	public static class Builder {
