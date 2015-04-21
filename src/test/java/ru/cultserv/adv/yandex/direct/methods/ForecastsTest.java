@@ -20,7 +20,7 @@ public class ForecastsTest {
 	@Test
 	public void testForecastCreation() {
 		NewForecastInfo forecastInfo = new NewForecastInfo.Builder()
-				.phrases("test")
+				.phrases("привет мир")
 				.region(213)
 				.build();
 
@@ -30,7 +30,9 @@ public class ForecastsTest {
 		while (tries -- > 0) {
 			LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(10));
 			Forecast forecast = forecasts.get(forecast_id);
-			forecast.toString();
+            if (forecast.common != null) {
+                break;
+            }
 		}
 
 		forecasts.delete(forecast_id);
