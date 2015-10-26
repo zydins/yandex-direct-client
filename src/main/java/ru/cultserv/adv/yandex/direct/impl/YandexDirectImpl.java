@@ -15,10 +15,16 @@ public class YandexDirectImpl implements YandexDirect {
 
 	private YandexDirectMethodCaller caller;
 
+	protected YandexDirectImpl(YandexDirectMethodCaller caller) {
+		this.caller = caller;
+	}
+
+	@Deprecated
     public YandexDirectImpl(KeyStoreBuilder.Builder builder) {
         this(builder.build());
     }
 
+	@Deprecated
     public YandexDirectImpl(SSLContext context) {
         AsyncHttpClientConfig.Builder builder = new AsyncHttpClientConfig.Builder();
         builder.setSSLContext(context);
@@ -26,6 +32,7 @@ public class YandexDirectImpl implements YandexDirect {
         this.caller = YandexDirectMethodCaller.prepared(new AuthToken(null), AsyncClientFactory.createHttpClient(config));
     }
 
+	@Deprecated
 	public YandexDirectImpl(AuthToken token) {
 		this.caller = YandexDirectMethodCaller.defaultCaller(token);
 	}
