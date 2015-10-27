@@ -62,7 +62,7 @@ public class YandexDirectFactory {
         }
     }
 
-    public static YandexDirectBuilder builder() {
+    public static InitialBuilder builder() {
         return new YandexDirectBuilder();
     }
 
