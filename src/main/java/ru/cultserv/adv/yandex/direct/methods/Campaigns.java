@@ -1,6 +1,8 @@
 package ru.cultserv.adv.yandex.direct.methods;
 
 import ru.cultserv.adv.yandex.direct.filters.CampaignsFilterParam;
+import ru.cultserv.adv.yandex.direct.models.campain.BannersStat;
+import ru.cultserv.adv.yandex.direct.models.campain.BannersStatParam;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignInfo;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignShortInfo;
 
@@ -46,5 +48,8 @@ public interface Campaigns {
 	 */
 	@DirectMethod(MethodName.GetCampaignParams)
 	CampaignInfo params(long campaign_id);
+
+	@DirectMethod(MethodName.GetBannersStat)
+	BannersStat bannersStat(BannersStatParam param);
 
 }
