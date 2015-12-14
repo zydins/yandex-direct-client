@@ -6,6 +6,7 @@ import ru.cultserv.adv.yandex.direct.models.PhraseInfo;
 import ru.cultserv.adv.yandex.direct.models.RegionInfo;
 import ru.cultserv.adv.yandex.direct.models.RubricInfo;
 import ru.cultserv.adv.yandex.direct.models.banner.BannerInfo;
+import ru.cultserv.adv.yandex.direct.models.campain.BannersStat;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignInfo;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignShortInfo;
 import ru.cultserv.adv.yandex.direct.models.forecast.Forecast;
@@ -32,6 +33,7 @@ public enum MethodName {
 	ResumeCampaign(int.class),
 	StopCampaign(int.class),
 	UnArchiveCampaign(int.class),
+	GetBannersStat(new TypeReference<BannersStat>() {}, Constants.SINGLE_PARAM_CONVERTER),
 	
 	// Working with banners
 	// ~~~~~
