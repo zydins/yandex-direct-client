@@ -31,7 +31,7 @@ public class BannersStatItem {
      * Примечание. Рекомендуется выполнять группировку по PhraseID на стороне приложения, так как в некоторых случаях
      * ответ метода может содержать в массиве Stat несколько объектов с одинаковым значением PhraseID.
      */
-    @JsonProperty("StartDate")
+    @JsonProperty("PhraseID")
     public Long phrase_id;
 
     /**
@@ -147,7 +147,7 @@ public class BannersStatItem {
     /**
      * Рентабельность инвестиций в рекламу (до двух знаков после запятой).
      */
-    @JsonProperty("StartDate")
+    @JsonProperty("ROI")
     public Float ROI;
 
 }
