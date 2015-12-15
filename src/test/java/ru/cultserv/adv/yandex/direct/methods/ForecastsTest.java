@@ -3,6 +3,7 @@ package ru.cultserv.adv.yandex.direct.methods;
 import org.junit.Test;
 import ru.cultserv.adv.yandex.direct.filters.NewForecastInfo;
 import ru.cultserv.adv.yandex.direct.impl.YandexDirectImpl;
+import ru.cultserv.adv.yandex.direct.models.Currency;
 import ru.cultserv.adv.yandex.direct.models.forecast.Forecast;
 import ru.cultserv.adv.yandex.direct.util.AuthTokens;
 
@@ -22,6 +23,7 @@ public class ForecastsTest {
 		NewForecastInfo forecastInfo = new NewForecastInfo.Builder()
 				.phrases("привет мир")
 				.region(213)
+				.currency(Currency.RUB)
 				.build();
 
 		int forecast_id = forecasts.create(forecastInfo);

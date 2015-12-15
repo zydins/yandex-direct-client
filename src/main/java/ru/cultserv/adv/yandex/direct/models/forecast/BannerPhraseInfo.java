@@ -1,6 +1,7 @@
 package ru.cultserv.adv.yandex.direct.models.forecast;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ru.cultserv.adv.yandex.direct.models.Currency;
 
 /**
  * @author Alexandr Kolosov
@@ -46,4 +47,7 @@ public class BannerPhraseInfo {
 
 	@JsonProperty("PremiumCTR")
 	public float premium_ctr;
+
+	@JsonProperty("Currency")
+	public Currency currency;
 }

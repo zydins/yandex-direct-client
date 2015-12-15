@@ -1,6 +1,7 @@
 package ru.cultserv.adv.yandex.direct.filters;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ru.cultserv.adv.yandex.direct.models.Currency;
 
 /**
  * @author Alexandr Kolosov
@@ -13,6 +14,9 @@ public class NewForecastInfo {
 
 	@JsonProperty("GeoID")
 	Integer[] regions;
+
+	@JsonProperty("Currency")
+	Currency currency;
 
 	public static class Builder {
 
@@ -29,6 +33,11 @@ public class NewForecastInfo {
 
 		public Builder region(Integer ... regions) {
 			this.info.regions = regions;
+			return this;
+		}
+
+		public Builder currency(Currency currency) {
+			this.info.currency = currency;
 			return this;
 		}
 
