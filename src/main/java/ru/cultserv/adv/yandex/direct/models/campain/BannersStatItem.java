@@ -1,8 +1,7 @@
 package ru.cultserv.adv.yandex.direct.models.campain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 /**
  * @author Sergey Zudin
@@ -15,7 +14,7 @@ public class BannersStatItem {
      * Выводится в отчет, если во входном параметре GroupByColumns указано значение «clDate».
      */
     @JsonProperty("StartDate")
-    public Date stat_date;
+    public LocalDate stat_date;
 
     /**
      * Идентификатор объявления.
