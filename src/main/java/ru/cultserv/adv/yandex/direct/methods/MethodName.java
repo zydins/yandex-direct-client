@@ -21,18 +21,18 @@ public enum MethodName {
 	// Working with campaigns
 	// ~~~~~
 	
-	ArchiveCampaign(int.class),
+	ArchiveCampaign(int.class, Constants.SINGLE_PARAM_CONVERTER),
 	CreateOrUpdateCampaign(Long.class),
-	DeleteCampaign(int.class),
+	DeleteCampaign(int.class, Constants.SINGLE_PARAM_CONVERTER),
 	GetCampaignParams(new TypeReference<CampaignInfo>() {}, Constants.getFunction("CampaignID")),
 
 	GetCampaignsParams(new TypeReference<List<CampaignInfo>>() {}),
 	GetCampaignsList(new TypeReference<List<CampaignShortInfo>>() {}, Constants.SINGLE_PARAM_CONVERTER),
 
 	GetCampaignsListFilter(new TypeReference<List<CampaignShortInfo>>() {}, Constants.SINGLE_PARAM_CONVERTER),
-	ResumeCampaign(int.class),
-	StopCampaign(int.class),
-	UnArchiveCampaign(int.class),
+	ResumeCampaign(int.class, Constants.SINGLE_PARAM_CONVERTER),
+	StopCampaign(int.class, Constants.SINGLE_PARAM_CONVERTER),
+	UnArchiveCampaign(int.class, Constants.SINGLE_PARAM_CONVERTER),
 	GetBannersStat(new TypeReference<BannersStat>() {}, Constants.SINGLE_PARAM_CONVERTER),
 	
 	// Working with banners
