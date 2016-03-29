@@ -25,6 +25,6 @@ public class BannersFilterParam {
 	public List<Long> banners_ids;
 
 	@JsonProperty("Currency")
-	Currency currency;
+	public Currency currency;
 
 }
