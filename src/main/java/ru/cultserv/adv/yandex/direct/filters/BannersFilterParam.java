@@ -1,6 +1,7 @@
 package ru.cultserv.adv.yandex.direct.filters;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ru.cultserv.adv.yandex.direct.models.Currency;
 
 import java.util.List;
 
@@ -22,5 +23,8 @@ public class BannersFilterParam {
 	 */
 	@JsonProperty("BannerIDS")
 	public List<Long> banners_ids;
+
+	@JsonProperty("Currency")
+	Currency currency;
 
 }
