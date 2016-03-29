@@ -126,6 +126,9 @@ public class BannerInfo {
 	@JsonProperty("StatusPhrasesModerate")
 	public BannerStatus phrases_status;
 
+	@JsonProperty("StatusShow")
+	public StatusBoolean show_status;
+
 	/**
 	 * Возрастная категория.
 	 *
