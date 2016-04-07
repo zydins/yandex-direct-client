@@ -50,6 +50,6 @@ public interface Campaigns {
 	BannersStat bannersStat(BannersStatParam param);
 
 	@DirectMethod(MethodName.GetSummaryStat)
-	BannersStat summaryStat(SummaryStatParam param);
+	SummaryStat summaryStat(SummaryStatParam param);
 
 }
