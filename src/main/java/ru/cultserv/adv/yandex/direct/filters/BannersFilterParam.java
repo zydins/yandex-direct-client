@@ -2,6 +2,7 @@ package ru.cultserv.adv.yandex.direct.filters;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.cultserv.adv.yandex.direct.models.Currency;
+import ru.cultserv.adv.yandex.direct.models.banner.GetPhrases;
 
 import java.util.List;
 
@@ -26,5 +27,8 @@ public class BannersFilterParam {
 
 	@JsonProperty("Currency")
 	public Currency currency;
+
+	@JsonProperty("GetPhrases")
+	public GetPhrases phrases_param;
 
 }
