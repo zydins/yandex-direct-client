@@ -33,7 +33,7 @@ public enum MethodName {
 	GetCampaignsListFilter(new TypeReference<List<CampaignShortInfo>>() {}, Constants.SINGLE_PARAM_CONVERTER),
 	ResumeCampaign(int.class, Constants.getFunction("CampaignID")),
 	StopCampaign(int.class, Constants.getFunction("CampaignID")),
-	UnArchiveCampaign(int.class, Constants.SINGLE_PARAM_CONVERTER),
+	UnArchiveCampaign(int.class, Constants.getFunction("CampaignID")),
 	GetBannersStat(new TypeReference<BannersStat>() {}, Constants.SINGLE_PARAM_CONVERTER),
 	GetSummaryStat(new TypeReference<List<SummaryStat>>() {}, Constants.SINGLE_PARAM_CONVERTER),
 
