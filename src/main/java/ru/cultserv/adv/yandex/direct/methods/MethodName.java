@@ -41,7 +41,7 @@ public enum MethodName {
 	// ~~~~~
 
 	ArchiveBanners(int.class, Constants.getFunction("BannerIDS")),
-	CreateOrUpdateBanners(new TypeReference<List<Long>>() {}),
+	CreateOrUpdateBanners(new TypeReference<List<Long>>() {}, Constants.SINGLE_PARAM_CONVERTER),
 	DeleteBanners(int.class, Constants.getFunction("BannerIDS")),
 	GetBanners(new TypeReference<List<BannerInfo>>() {}, Constants.SINGLE_PARAM_CONVERTER),
 	GetBannerPhrases(new TypeReference<List<PhraseInfo>>() {}),
