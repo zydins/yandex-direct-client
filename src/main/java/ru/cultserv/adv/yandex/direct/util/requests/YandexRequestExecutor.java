@@ -17,7 +17,7 @@ public class YandexRequestExecutor extends AbstractApiRequestExecutor {
 
     @Override
 	protected ApiResponse process(Response response) {
-		YandexDirectResponse api_response = Json.parse(body(response), YandexDirectResponse.class);
+		YandexDirectResponse api_response = Json.parse(body(response), YandexDirectResponse.class, false);
 		
 		if(api_response.hasError())
 			throw api_response.error();

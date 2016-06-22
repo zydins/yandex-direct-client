@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Map;
 
 public class Json {
 
@@ -47,7 +48,7 @@ public class Json {
 		}
 	}
 	
-	public static <T> T parse(String json, TypeReference<T> tr) {
+	public static <T> T parse(String json, TypeReference<T> tr, boolean flatten) {
 		try {
 			return MAPPER.readValue(json, tr);
 		} catch (IOException e) {
@@ -55,7 +56,7 @@ public class Json {
 		}
 	}
 	
-	public static <T> T parse(String json, Class<T> result_class) {
+	public static <T> T parse(String json, Class<T> result_class, boolean flatten) {
 		try {
 			return mapper().readValue(json, result_class);
 		} catch (IOException e) {
@@ -63,22 +64,28 @@ public class Json {
 		}
 	}
 
-	public static <T> T parse(String json, Type type) {
+	public static <T> T parse(String json, Type type, boolean flatten) {
 		try {
+			json = resolve(json, flatten);
 			return mapper().readValue(json, mapper().constructType(type));
 		} catch (IOException e) {
-//			try {
-//				Map<String, String> map = mapper().readValue(json, new TypeReference<Map<String, String>>() {});
-//				if (map.keySet().size() == 1) {
-//					String key = map.keySet().iterator().next();
-//					String toParse = map.get(key);
-//					return mapper().readValue(toParse, mapper().constructType(type));
-//				} else {
-//					throw new RuntimeException("cannot parse");
-//				}
-//			} catch (IOException e1) {
-				throw new RuntimeException(e);
-//			}
+			throw new RuntimeException(e);
+		}
+	}
+
+	private static String resolve(String json, boolean flatten) {
+		if (!flatten) {
+			return json;
+		}
+		try {
+			Map<String, Object> o = mapper().readValue(json, new TypeReference<Map<String, Object>>() {});
+			if (o.keySet().size() != 1) {
+				throw new IllegalStateException("Wrong number of keys");
+			}
+			String key = o.keySet().iterator().next();
+			return mapper().writeValueAsString(o.get(key));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 

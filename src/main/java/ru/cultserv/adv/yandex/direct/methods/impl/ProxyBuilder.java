@@ -44,7 +44,7 @@ public class ProxyBuilder {
 			}
 
 			if (converter != null) {
-				return caller.call(method, converter.apply(args));
+				return caller.call(method, converter.apply(args), withConverter.flatten());
 			}
 
 			return caller.call(method, args);

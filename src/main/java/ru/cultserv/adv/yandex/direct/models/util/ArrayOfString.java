@@ -13,6 +13,9 @@ public class ArrayOfString {
     @JsonProperty("Items")
     public List<String> items;
 
+    public ArrayOfString() {
+    }
+
     public ArrayOfString(List<String> items) {
         this.items = items;
     }

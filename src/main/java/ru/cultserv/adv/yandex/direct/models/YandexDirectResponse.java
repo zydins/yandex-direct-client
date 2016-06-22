@@ -24,18 +24,33 @@ public class YandexDirectResponse implements ApiResponse {
 	private String error_detail;
 
 	@Override
-	public <T> T as(Class<T> data_class) {
-		return Json.parse(result.toString(), data_class);
+	public <T> T as(Class<T> dataClass) {
+		return as(dataClass, false);
 	}
 
 	@Override
-	public <T> T as(TypeReference<T> data_type_reference) {
-		return Json.parse(result.toString(), data_type_reference);
+	public <T> T as(Class<T> dataClass, boolean flatten) {
+		return Json.parse(result.toString(), dataClass, flatten);
+	}
+
+	@Override
+	public <T> T as(TypeReference<T> typeReference) {
+		return as(typeReference, false);
+	}
+
+	@Override
+	public <T> T as(TypeReference<T> typeReference, boolean flatten) {
+		return Json.parse(result.toString(), typeReference, flatten);
 	}
 
 	@Override
 	public <T> T as(Type type) {
-		return Json.parse(result.toString(), type);
+		return as(type, false);
+	}
+
+	@Override
+	public <T> T as(Type type, boolean flatten) {
+		return Json.parse(result.toString(), type, flatten);
 	}
 
 	@Override

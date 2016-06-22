@@ -1,6 +1,5 @@
 package ru.cultserv.adv.yandex.direct.util.requests;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.ning.http.client.AsyncHttpClient;
 import ru.cultserv.adv.util.ApiRequest;
 import ru.cultserv.adv.util.ApiRequestExecutor;
@@ -27,32 +26,26 @@ public class YandexDirectMethodCaller implements Closeable {
 		return call(method, new String[] {});
 	}
 
-	@SuppressWarnings("unchecked")
 	public <T> T call(Method method, Object param) {
+		return call(method, param, false);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T call(Method method, Object param, boolean flatten) {
 		ApiRequest request = buildCommonRequest(method, param);
 		ApiResponse response = executor.execute(request);
 		T result;
 
 		Type returnType = method.getGenericReturnType();
 		if (returnType instanceof ParameterizedType) {
-			result = (T) response.as(returnType);
+			result = (T) response.as(returnType, flatten);
 		} else if (returnType instanceof Class) {
-			result = (T) response.as(method.getReturnType());
+			result = (T) response.as(method.getReturnType(), flatten);
 		} else {
 			result = null;
 		}
-//		if(returnType != null) {
-//			TypeReference<?> typeReference = buildRef(returnType);
-//			result = (T) response.as(typeReference);
-//		} else {
-//			result = null;
-//		}
 
 		return result;
-	}
-
-	private <T> TypeReference<T> buildRef(Class<T> obj) {
-		return new TypeReference<T>() {};
 	}
 	
 	private ApiRequest buildCommonRequest(Method method, Object param) {

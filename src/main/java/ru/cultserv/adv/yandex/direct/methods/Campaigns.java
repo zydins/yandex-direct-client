@@ -2,22 +2,22 @@ package ru.cultserv.adv.yandex.direct.methods;
 
 import ru.cultserv.adv.yandex.direct.filters.CampaignRequest;
 import ru.cultserv.adv.yandex.direct.models.campain.AddCampaignResult;
-import ru.cultserv.adv.yandex.direct.models.campain.CampaignGetResult;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignInfo;
 
 import java.util.List;
 
 public interface Campaigns {
 
-	@DirectMethod(MethodName.CreateOrUpdateCampaign)
+	@WithConverter(entity = "Campaigns", flatten = true)
 	List<AddCampaignResult> add(List<CampaignInfo> campaigns);
 
-//	@DirectMethod(MethodName.GetCampaignsList)
-	@WithConverter(converter = ParamConverter.SINGLE_PARAM_CONVERTER)
-	CampaignGetResult get(CampaignRequest criteria);
+//	@WithConverter(converter = ParamConverter.SINGLE_PARAM_CONVERTER)
+//	CampaignGetResult get(CampaignRequest criteria);
+
+	@WithConverter(converter = ParamConverter.SINGLE_PARAM_CONVERTER, flatten = true)
+	List<CampaignInfo> get(CampaignRequest criteria);
 
 //	delete();
-
 
 //	resume();
 //
