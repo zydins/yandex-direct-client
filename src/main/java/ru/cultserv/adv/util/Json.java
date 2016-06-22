@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -59,6 +60,25 @@ public class Json {
 			return mapper().readValue(json, result_class);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	public static <T> T parse(String json, Type type) {
+		try {
+			return mapper().readValue(json, mapper().constructType(type));
+		} catch (IOException e) {
+//			try {
+//				Map<String, String> map = mapper().readValue(json, new TypeReference<Map<String, String>>() {});
+//				if (map.keySet().size() == 1) {
+//					String key = map.keySet().iterator().next();
+//					String toParse = map.get(key);
+//					return mapper().readValue(toParse, mapper().constructType(type));
+//				} else {
+//					throw new RuntimeException("cannot parse");
+//				}
+//			} catch (IOException e1) {
+				throw new RuntimeException(e);
+//			}
 		}
 	}
 

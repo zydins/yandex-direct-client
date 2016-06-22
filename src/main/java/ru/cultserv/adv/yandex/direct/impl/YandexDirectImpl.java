@@ -5,7 +5,8 @@ import ru.cultserv.adv.util.AsyncClientFactory;
 import ru.cultserv.adv.yandex.direct.AuthToken;
 import ru.cultserv.adv.yandex.direct.YandexDirect;
 import ru.cultserv.adv.yandex.direct.keystore.KeyStoreBuilder;
-import ru.cultserv.adv.yandex.direct.methods.*;
+import ru.cultserv.adv.yandex.direct.methods.Ads;
+import ru.cultserv.adv.yandex.direct.methods.Campaigns;
 import ru.cultserv.adv.yandex.direct.methods.impl.ProxyBuilder;
 import ru.cultserv.adv.yandex.direct.util.requests.YandexDirectMethodCaller;
 
@@ -41,31 +42,31 @@ public class YandexDirectImpl implements YandexDirect {
 	public Campaigns campaigns() {
 		return create(Campaigns.class);
 	}
-
+//
 	@Override
-	public Banners banners() {
-		return create(Banners.class);
+	public Ads ads() {
+		return create(Ads.class);
 	}
 
-	@Override
-	public Forecasts forecasts() {
-		return create(Forecasts.class);
-	}
-
-	@Override
-	public Vocabularies vocabularies() {
-		return create(Vocabularies.class);
-	}
-
-	@Override
-	public Utils utils() {
-		return create(Utils.class);
-	}
-
-    @Override
-    public WordStats wordstats() {
-        return create(WordStats.class);
-    }
+//	@Override
+//	public Forecasts forecasts() {
+//		return create(Forecasts.class);
+//	}
+//
+//	@Override
+//	public Vocabularies vocabularies() {
+//		return create(Vocabularies.class);
+//	}
+//
+//	@Override
+//	public Utils utils() {
+//		return create(Utils.class);
+//	}
+//
+//    @Override
+//    public WordStats wordstats() {
+//        return create(WordStats.class);
+//    }
 
     private <T> T create(Class<T> targetInterface) {
 		return ProxyBuilder.create(targetInterface, caller);

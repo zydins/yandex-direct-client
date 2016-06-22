@@ -1,14 +1,17 @@
 package ru.cultserv.adv.yandex.direct.util.requests;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.ning.http.client.AsyncHttpClient;
 import ru.cultserv.adv.util.ApiRequest;
 import ru.cultserv.adv.util.ApiRequestExecutor;
 import ru.cultserv.adv.util.ApiResponse;
 import ru.cultserv.adv.util.AsyncClientFactory;
 import ru.cultserv.adv.yandex.direct.AuthToken;
-import ru.cultserv.adv.yandex.direct.methods.MethodName;
 
 import java.io.Closeable;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 public class YandexDirectMethodCaller implements Closeable {
 	
@@ -20,26 +23,39 @@ public class YandexDirectMethodCaller implements Closeable {
 		this.executor = executor;
 	}
 
-	public <T> T call(MethodName method) {
+	public <T> T call(Method method) {
 		return call(method, new String[] {});
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T call(MethodName method, Object param) {
+	public <T> T call(Method method, Object param) {
 		ApiRequest request = buildCommonRequest(method, param);
 		ApiResponse response = executor.execute(request);
 		T result;
 
-		if(method.returnClass() != null) {
-			result = (T) response.as(method.returnClass());
+		Type returnType = method.getGenericReturnType();
+		if (returnType instanceof ParameterizedType) {
+			result = (T) response.as(returnType);
+		} else if (returnType instanceof Class) {
+			result = (T) response.as(method.getReturnType());
 		} else {
-			result = (T) response.as(method.returnType());
+			result = null;
 		}
+//		if(returnType != null) {
+//			TypeReference<?> typeReference = buildRef(returnType);
+//			result = (T) response.as(typeReference);
+//		} else {
+//			result = null;
+//		}
 
 		return result;
 	}
+
+	private <T> TypeReference<T> buildRef(Class<T> obj) {
+		return new TypeReference<T>() {};
+	}
 	
-	private ApiRequest buildCommonRequest(MethodName method, Object param) {
+	private ApiRequest buildCommonRequest(Method method, Object param) {
 		return new YandexDirectRequest.Builder(token)
 			.forMethod(method)
 			.andParam(param)

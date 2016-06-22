@@ -23,5 +23,8 @@ public enum Currency {
 	/**
 	 * Украинская гривна
 	 */
-	UAH
+	UAH,
+
+	YND_FIXED
+
 }

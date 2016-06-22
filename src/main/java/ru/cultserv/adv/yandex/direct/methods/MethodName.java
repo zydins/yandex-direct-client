@@ -74,25 +74,46 @@ public enum MethodName {
 	private TypeReference<?> return_type;
 	private Class<?> return_class;
 	private Function<Object[], Object> converter;
+	private String path;
 
-	private MethodName(TypeReference<?> type) {
-		this(type, null);
+	MethodName(TypeReference<?> type) {
+		this(null, type);
 	}
 
-	private MethodName(TypeReference<?> type, Function<Object[], Object> converter) {
+	MethodName(String path, TypeReference<?> type) {
+		this(path, type, null);
+	}
+
+	MethodName(TypeReference<?> typeReference, Function<Object[], Object> converter) {
+		this(null, typeReference, converter);
+	}
+
+	MethodName(String path, TypeReference<?> type, Function<Object[], Object> converter) {
 		this.return_type = type;
 		this.converter = converter;
-	}
-	
-	private MethodName(Class<?> clazz) {
-		this(clazz, null);
+		this.path = path;
 	}
 
-	private MethodName(Class<?> clazz, Function<Object[], Object> converter) {
+	MethodName(Class<?> clazz) {
+		this(null, clazz);
+	}
+
+	MethodName(String path, Class<?> clazz) {
+		this(path, clazz, null);
+	}
+
+
+	MethodName(Class<?> clazz, Function<Object[], Object> converter) {
+		this(null, clazz, converter);
+	}
+
+
+	MethodName(String path, Class<?> clazz, Function<Object[], Object> converter) {
 		this.return_class = clazz;
 		this.converter = converter;
+		this.path = path;
 	}
-	
+
 	public TypeReference<?> returnType() {
 		return return_type;
 	}
@@ -103,5 +124,9 @@ public enum MethodName {
 
 	public Function<Object[], Object> getConverter() {
 		return converter;
+	}
+
+	public String getPath() {
+		return path;
 	}
 }

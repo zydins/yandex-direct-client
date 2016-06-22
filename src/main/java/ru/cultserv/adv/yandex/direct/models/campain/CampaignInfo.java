@@ -3,136 +3,125 @@ package ru.cultserv.adv.yandex.direct.models.campain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.LocalDate;
 import ru.cultserv.adv.yandex.direct.models.Currency;
-import ru.cultserv.adv.yandex.direct.models.util.StatusBoolean;
+import ru.cultserv.adv.yandex.direct.models.util.ArrayOfString;
 
-import java.util.List;
 
 public class CampaignInfo {
 
-	@JsonProperty("Login")
-	public String login;
+	@JsonProperty("Id")
+	public long id;
 
-	@JsonProperty("CampaignID")
-	public int campaign_id;
+	/*
+	Start fields for creation
+	 */
 
 	@JsonProperty("Name")
 	public String name;
 
-	@JsonProperty("FIO")
-	public String fio;
-
 	@JsonProperty("StartDate")
-	public LocalDate start_date;
+	public LocalDate startDate;
 
-	@JsonProperty("Sum")
-	public float sum;
+	@JsonProperty("DailyBudget")
+	public DailyBudget dailyBidget;
 
-	@JsonProperty("Rest")
-	public float rest;
+	@JsonProperty("EndDate")
+	public LocalDate endDate;
 
-	@JsonProperty("BonusDiscount")
-	public float bonus_discount;
+	@JsonProperty("NegativeKeywords")
+	public ArrayOfString negativeKeywords;
 
-	@JsonProperty("Shows")
-	public int shows;
+	@JsonProperty("BlockedIps")
+	public ArrayOfString blockedIps;
 
-	@JsonProperty("Clicks")
-	public int clicks;
+	@JsonProperty("ExcludedSites")
+	public ArrayOfString excludedSites;
+
+	@JsonProperty("TextCampaign")
+	public TextCampaignParam textCampaign;
+
+	@JsonProperty("MobileAppCampaign")
+	public MobileAppCampaignParam mobileAppCampaign;
+
+	@JsonProperty("DynamicTextCampaign")
+	public DynamicTextCampaignParam dynamicTextCampaign;
+
+	@JsonProperty("ClientInfo")
+	public String clientInfo;
+
+	@JsonProperty("Notification")
+	public Notification notification;
+
+	@JsonProperty("TimeTargeting")
+	public TimeTargetingParam timeTargeting;
+
+	@JsonProperty("TimeZone")
+	public String timezone;
+
+	/*
+	End fields for creation
+	 */
+
+	@JsonProperty("Type")
+	public Type type;
+
+	@JsonProperty("Status")
+	public ModerationStatus moderationStatus;
+
+	@JsonProperty("State")
+	public State state;
+
+	@JsonProperty("StatusPayment")
+	public PaymentStatus paymentStatus;
+
+	@JsonProperty("StatusClarification")
+	public String statusClarification;
+
+	@JsonProperty("SourceId")
+	public Long sourceId;
+
+	@JsonProperty("Statistics")
+	public Stat statistics;
 
 	@JsonProperty("Currency")
 	public Currency currency;
 
-	@JsonProperty("CampaignCurrency")
-	public Currency campaign_currency;
+	//TODO
+	//Funds
+	//RepresentedBy
+	//LimitedBy
 
-	@JsonProperty("SourceCampaignID")
-	public int source_campaign_id;
+	public enum Type {
+		TEXT_CAMPAIGN,
+		MOBILE_APP_CAMPAIGN,
+		DYNAMIC_TEXT_CAMPAIGN
+	}
 
-	@JsonProperty("Strategy")
-	public CampaignStrategy strategy;
+	public enum State {
+		ARCHIVED,
+		CONVERTED,
+		ENDED,
+		OFF,
+		ON,
+		SUSPENDED
+	}
 
-	@JsonProperty("ContextStrategy")
-	public CampaignContextStrategy context_strategy;
+	public enum ModerationStatus {
+		ACCEPTED,
+		DRAFT,
+		MODERATION,
+		REJECTED
+	}
 
-	@JsonProperty("AdditionalMetrikaCounters")
-	public Integer[] additional_metrika_counter;
+	public enum PaymentStatus {
+		DISALLOWED,
+		ALLOWED
+	}
 
-	@JsonProperty("ClickTrackingEnabled")
-	public StatusBoolean click_tracking_enabled;
-
-	@JsonProperty("SmsNotification")
-	public SmsNotificationInfo sms_notification;
-
-	@JsonProperty("EmailNotification")
-	public EmailNotificationInfo email_notification;
-
-	@JsonProperty("StatusBehavior")
-	public String status_behavior;
-
-	@JsonProperty("Status")
-	public String status;
-
-	@JsonProperty("TimeTarget")
-	public TimeTargetInfo time_target;
-
-	@JsonProperty("StatusContextStop")
-	public StatusBoolean status_context_stop;
-
-	@JsonProperty("AutoOptimization")
-	public StatusBoolean auto_optimization;
-
-	@JsonProperty("StatusMetricaControl")
-	public StatusBoolean status_metrica_control;
-
-	@JsonProperty("DisabledDomains")
-	public String disabled_domains;
-
-	@JsonProperty("DisabledIps")
-	public String disabled_ips;
-
-	@JsonProperty("StatusOpenStat")
-	public StatusBoolean status_open_stat;
-
-	@JsonProperty("ConsiderTimeTarget")
-	public StatusBoolean consider_time_target;
-
-	@JsonProperty("ManagerName")
-	public String manager_name;
-
-	@JsonProperty("AgencyName")
-	public String agency_name;
-
-	@JsonProperty("StatusShow")
-	public StatusBoolean status_show;
-
-	@JsonProperty("StatusArchive")
-	public StatusBoolean status_archive;
-
-	@JsonProperty("StatusActivating")
-	public StatusBoolean status_activating;
-
-	@JsonProperty("StatusModerate")
-	public StatusBoolean status_moderate;
-
-	@JsonProperty("IsActive")
-	public StatusBoolean is_active;
-
-	@JsonProperty("MinusKeywords")
-	public List<String> minus_keywords;
-
-	@JsonProperty("AddRelevantPhrases")
-	public StatusBoolean add_relevant_phrases;
-
-	@JsonProperty("RelevantPhrasesBudgetLimit")
-	public int relevant_phrases_budget_limit;
-
-	@JsonProperty("SumAvailableForTransfer")
-	public float sum_available_for_transfer;
-
-	@JsonProperty("DayBudget")
-	public DayBudgetInfo day_budget;
-
-	@JsonProperty("DayBudgetEnabled")
-	public StatusBoolean day_budget_enabled;
+	public static class Stat {
+		@JsonProperty("Clicks")
+		public long clicks;
+		@JsonProperty("Impressions")
+		public long shows;
+	}
 
 }

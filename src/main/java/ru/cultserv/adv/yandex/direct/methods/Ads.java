@@ -8,7 +8,7 @@ import ru.cultserv.adv.yandex.direct.models.banner.CampaignBidsInfo;
 
 import java.util.List;
 
-public interface Banners {
+public interface Ads {
 
 	/**
 	 * Помещает объявления в архив.

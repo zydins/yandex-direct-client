@@ -1,28 +1,35 @@
 package ru.cultserv.adv.yandex.direct;
 
-import ru.cultserv.adv.yandex.direct.methods.*;
+import ru.cultserv.adv.yandex.direct.methods.Ads;
+import ru.cultserv.adv.yandex.direct.methods.Campaigns;
 
 import java.io.Closeable;
 
 public interface YandexDirect extends Closeable {
 
-	/**
-	 * Доступ к методам для работы с рекламными кампаниями
-	 */
 	Campaigns campaigns();
-	
-	/**
-	 * Доступ к методам для работы с объявлениями
-	 */
-	Banners banners();
 
-	Forecasts forecasts();
+	Ads ads();
 
-	Vocabularies vocabularies();
-
-	Utils utils();
-
-    WordStats wordstats();
+//	AdGroups adGroups();
+//
+//	AdExtentions adExtentions();
+//
+//	Bids bids();
+//
+//	BidModifier bidModifier();
+//
+//	Changes changes();
+//
+//	Dictionaries dictionaries();
+//
+//	DynamicTextAdTargets dynamicTextAdTargets();
+//
+//	Keywords keywords();
+//
+//	Sitelinks sitelinks();
+//
+//	VCards vcards();
 
 	@Override
 	void close();

@@ -1,6 +1,5 @@
 package ru.cultserv.adv.util;
 
-import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.Futures;
 import com.ning.http.client.AsyncHttpClient;
@@ -9,6 +8,7 @@ import com.ning.http.client.RequestBuilder;
 import com.ning.http.client.Response;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -37,31 +37,28 @@ public abstract class AbstractApiRequestExecutor implements ApiRequestExecutor {
 		Request http_request = convertToHttpRequest(request);
 		try {
 			com.ning.http.client.ListenableFuture<Response> future = client.executeRequest(http_request);
-			return Futures.lazyTransform(future, new Function<Response, ApiResponse>() {
-				@Override
-				public ApiResponse apply(Response response) {
-					return process(response);
-				}
-			});
+			return Futures.lazyTransform(future, this::process);
 		} catch (IOException e) {
 			return Futures.immediateFailedFuture(new IllegalStateException("illegal request"));
 		}
 	}
 	
 	private Request convertToHttpRequest(ApiRequest request) {
-		RequestBuilder builder = new RequestBuilder()
-                .setHeader("Content-Type", "application/json; charset=utf-8")
-                .setBodyEncoding("UTF-8")
+		Map<String, String> headers = request.params().headers();
+		RequestBuilder builder = new RequestBuilder();
+		headers.keySet().forEach(k -> builder.setHeader(k, headers.get(k)));
+		builder.setHeader("Content-Type", "application/json; charset=utf-8")
+				.setBodyEncoding("UTF-8")
                 .setMethod(request.httpMethod())
                 .setUrl(request.url());
 		
-		withParams(request.params(), builder);
+		withBody(request.params().body(), builder);
 		
 		return builder.build();
 	}
 	
-	protected void withParams(final ApiRequestParams params, final RequestBuilder builder) {
-		builder.setBody(Json.toJson(params).toString());
+	protected void withBody(final Object body, final RequestBuilder builder) {
+		builder.setBody(Json.toJson(body).toString());
 	}
 
 	@Override

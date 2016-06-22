@@ -6,7 +6,6 @@ import ru.cultserv.adv.util.ApiRequestExecutor;
 import ru.cultserv.adv.util.ApiResponse;
 import ru.cultserv.adv.util.AsyncClientFactory;
 import ru.cultserv.adv.yandex.direct.AuthToken;
-import ru.cultserv.adv.yandex.direct.methods.MethodName;
 import ru.cultserv.adv.yandex.direct.util.AuthTokens;
 import ru.cultserv.adv.yandex.direct.util.exceptions.ApiException;
 import ru.cultserv.adv.yandex.direct.util.requests.YandexDirectRequest;
@@ -23,7 +22,7 @@ public class YandexDirectApiRequestExecutorTest {
 	public void shouldExecuteYandexRequest() {
 		ApiRequest request =
 			new YandexDirectRequest.Builder(AuthTokens.fake())
-				.forMethod(MethodName.PingAPI.name())
+//				.forMethod(MethodName.PingAPI)
 				.build();
 
 		ApiResponse response = executor.execute(request);
@@ -36,7 +35,7 @@ public class YandexDirectApiRequestExecutorTest {
 	public void shouldExecuteRequestWithException() {
 		ApiRequest request =
 			new YandexDirectRequest.Builder(new AuthToken(""))
-				.forMethod(MethodName.PingAPI)
+//				.forMethod(MethodName.PingAPI)
 				.build();
 		
 		ApiException exception = null;
@@ -48,7 +47,7 @@ public class YandexDirectApiRequestExecutorTest {
 		}
 		
 		assertNotNull(exception);
-		assertEquals(53, exception.errorCode());
+		assertEquals(53, exception.getErrorCode());
 		
 	}
 

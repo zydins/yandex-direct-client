@@ -2,8 +2,8 @@ package ru.cultserv.adv.yandex.direct.methods.impl;
 
 import com.google.common.base.Function;
 import com.google.common.reflect.Reflection;
-import ru.cultserv.adv.yandex.direct.methods.DirectMethod;
-import ru.cultserv.adv.yandex.direct.methods.MethodName;
+import ru.cultserv.adv.yandex.direct.methods.ParamConverter;
+import ru.cultserv.adv.yandex.direct.methods.WithConverter;
 import ru.cultserv.adv.yandex.direct.util.requests.YandexDirectMethodCaller;
 
 import java.lang.reflect.InvocationHandler;
@@ -31,18 +31,23 @@ public class ProxyBuilder {
 				return name;
 			}
 
-			DirectMethod annotation = method.getAnnotation(DirectMethod.class);
-			if (annotation == null) {
+			WithConverter withConverter = method.getAnnotation(WithConverter.class);
+			if (withConverter == null) {
 				throw new IllegalStateException("no annotation on method " + method.getName());
 			}
 
-			MethodName methodName = annotation.value();
-			Function<Object[], Object> converter = methodName.getConverter();
-			if (converter != null) {
-				return caller.call(methodName, converter.apply(args));
+			Function<Object[], Object> converter;
+			if (!withConverter.entity().isEmpty()) {
+				converter = ParamConverter.createFunction(withConverter.entity());
+			} else {
+				converter = withConverter.converter().getFunction();
 			}
 
-			return caller.call(methodName, args);
+			if (converter != null) {
+				return caller.call(method, converter.apply(args));
+			}
+
+			return caller.call(method, args);
 		}
 	}
 

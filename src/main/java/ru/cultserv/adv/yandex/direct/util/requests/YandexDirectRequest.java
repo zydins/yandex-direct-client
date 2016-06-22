@@ -3,16 +3,17 @@ package ru.cultserv.adv.yandex.direct.util.requests;
 import ru.cultserv.adv.util.ApiRequest;
 import ru.cultserv.adv.util.ApiRequestParams;
 import ru.cultserv.adv.yandex.direct.AuthToken;
-import ru.cultserv.adv.yandex.direct.methods.MethodName;
 import ru.cultserv.adv.yandex.direct.util.params.YandexDirectParams;
+
+import java.lang.reflect.Method;
 
 public class YandexDirectRequest implements ApiRequest {
 	
-	public static final String PRODUCTION_URL = "https://api.direct.yandex.ru/live/v4/json/";
-	public static final String SANDBOX_URL = "https://213.180.204.225/live/v4/json/";
+	public static final String PRODUCTION_URL = "https://api.direct.yandex.com/json/v5/";
+	public static final String SANDBOX_URL = null; //TODO
 
-	private final String url;
 	private final YandexDirectParams params;
+	private String url;
 
 	public YandexDirectRequest() {
 		boolean isSandBox = Integer.getInteger("ru.cultserv.adv.yandex.direct.util.requests.mode", 0) == 1;
@@ -47,17 +48,20 @@ public class YandexDirectRequest implements ApiRequest {
             }
 		}
 
-		public Builder forMethod(String api_method) {
-			request.params.setMethod(api_method);
+//		public Builder forMethod(String api_method) {
+//			request.params.setMethod(api_method);
+//			return this;
+//		}
+		
+		public Builder forMethod(Method method) {
+			String path = method.getDeclaringClass().getSimpleName().toLowerCase();
+			request.url += path;
+			request.params.setMethod(method.getName().toLowerCase());
 			return this;
 		}
-		
-		public Builder forMethod(MethodName api_method) {
-			return forMethod(api_method.name());
-		}
-		
+
 		public Builder andParam(Object param) {
-			request.params.setParam(param);
+			request.params.setParams(param);
 			return this;
 		}
 		
