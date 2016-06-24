@@ -7,12 +7,12 @@ import java.util.List;
 
 /**
  * @author Sergey Zudin
- * @since 16.06.16.
+ * @since 24.06.16.
  */
-public class AddCampaignResult {
+public class CampaignOperationResult {
 
     @JsonProperty("Id")
-    public Long campaignId;
+    public Long id;
     @JsonProperty("Warnings")
     public List<ExceptionNotification> warnings;
     @JsonProperty("Errors")

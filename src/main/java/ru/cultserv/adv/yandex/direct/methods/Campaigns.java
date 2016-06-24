@@ -1,16 +1,15 @@
 package ru.cultserv.adv.yandex.direct.methods;
 
 import ru.cultserv.adv.yandex.direct.filters.CampaignRequest;
-import ru.cultserv.adv.yandex.direct.models.campain.AddCampaignResult;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignInfo;
-import ru.cultserv.adv.yandex.direct.models.campain.UnarchiveResult;
+import ru.cultserv.adv.yandex.direct.models.campain.CampaignOperationResult;
 
 import java.util.List;
 
 public interface Campaigns {
 
 	@WithConverter(entity = "Campaigns", flatten = true)
-	List<AddCampaignResult> add(List<CampaignInfo> campaigns);
+	List<CampaignOperationResult> add(List<CampaignInfo> campaigns);
 
 //	@WithConverter(converter = ParamConverter.SINGLE_PARAM_CONVERTER)
 //	CampaignGetResult get(CampaignRequest criteria);
@@ -18,18 +17,23 @@ public interface Campaigns {
 	@WithConverter(converter = ParamConverter.SINGLE_PARAM_CONVERTER, flatten = true)
 	List<CampaignInfo> get(CampaignRequest criteria);
 
-//	delete();
-
-//	resume();
-//
-//	suspend();
-//
-//	archive();
+	@WithConverter(entity = {"SelectionCriteria", "Ids"}, flatten = true)
+	List<CampaignOperationResult> resume(List<Long> ids);
 
 	@WithConverter(entity = {"SelectionCriteria", "Ids"}, flatten = true)
-	List<UnarchiveResult> unarchive(List<Long> ids);
+	List<CampaignOperationResult> suspend(List<Long> ids);
 
-//	update();
+	@WithConverter(entity = {"SelectionCriteria", "Ids"}, flatten = true)
+	List<CampaignOperationResult> archive(List<Long> ids);
+
+	@WithConverter(entity = {"SelectionCriteria", "Ids"}, flatten = true)
+	List<CampaignOperationResult> unarchive(List<Long> ids);
+
+	@WithConverter(entity = {"SelectionCriteria", "Ids"}, flatten = true)
+	List<CampaignOperationResult> delete(List<Long> ids);
+
+	@WithConverter(entity = "Campaigns", flatten = true)
+	List<CampaignOperationResult> update(List<CampaignInfo> campaigns);
 
 //	@DirectMethod(MethodName.CreateOrUpdateCampaign)
 //	Long create(CampaignInfo campaign);
