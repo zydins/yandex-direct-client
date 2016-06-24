@@ -1,8 +1,8 @@
 package ru.cultserv.adv.yandex.direct.methods;
 
+import ru.cultserv.adv.yandex.direct.filters.AdGroupRequest;
 import ru.cultserv.adv.yandex.direct.models.OperationResult;
 import ru.cultserv.adv.yandex.direct.models.ads.AdGroup;
-import ru.cultserv.adv.yandex.direct.models.ads.AdGroupRequest;
 
 import java.util.List;
 

@@ -39,7 +39,7 @@ public class TextAd {
     @JsonProperty("AdImageModeration")
     public ModerationStatusExtended adImageModeration;
     @JsonProperty("AdExtensions")
-    public List<AdExtension> extentions;
+    public List<AdExtensionShort> extentions;
 
     //TODO
 

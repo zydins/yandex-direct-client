@@ -1,6 +1,7 @@
-package ru.cultserv.adv.yandex.direct.models.ads;
+package ru.cultserv.adv.yandex.direct.filters;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ru.cultserv.adv.yandex.direct.models.ads.AdGroup;
 import ru.cultserv.adv.yandex.direct.models.util.Page;
 
 import java.util.Arrays;

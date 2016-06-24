@@ -1,7 +1,9 @@
-package ru.cultserv.adv.yandex.direct.models.ads;
+package ru.cultserv.adv.yandex.direct.filters;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.cultserv.adv.yandex.direct.models.ModerationStatus;
+import ru.cultserv.adv.yandex.direct.models.ads.AdInfo;
+import ru.cultserv.adv.yandex.direct.models.ads.TextAd;
 import ru.cultserv.adv.yandex.direct.models.util.Page;
 import ru.cultserv.adv.yandex.direct.models.util.StatusBoolean;
 
