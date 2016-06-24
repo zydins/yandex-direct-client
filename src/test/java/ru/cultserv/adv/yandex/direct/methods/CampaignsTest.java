@@ -4,8 +4,9 @@ import org.junit.Test;
 import ru.cultserv.adv.yandex.direct.AuthToken;
 import ru.cultserv.adv.yandex.direct.filters.CampaignRequest;
 import ru.cultserv.adv.yandex.direct.impl.YandexDirectFactory;
-import ru.cultserv.adv.yandex.direct.models.campain.CampaignInfo;
+import ru.cultserv.adv.yandex.direct.models.campain.UnarchiveResult;
 
+import java.util.Collections;
 import java.util.List;
 
 public class CampaignsTest {
@@ -18,8 +19,12 @@ public class CampaignsTest {
 //		criteria.page = new Page(1l);
 //		CampaignGetResult campaignGetResult = campaigns.get(criteria);
 //		System.out.println(campaignGetResult.campaigns);
-		List<CampaignInfo> campaignInfos = campaigns.get(criteria);
-		System.out.println(campaignInfos);
+
+//		List<CampaignInfo> campaignInfos = campaigns.get(criteria);
+//		System.out.println(campaignInfos);
+
+		List<UnarchiveResult> unarchive = campaigns.unarchive(Collections.singletonList(17971081l));
+		System.out.println(unarchive);
 	}
 
 //	@Test

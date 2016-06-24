@@ -22,7 +22,13 @@ public enum ParamConverter {
         return function;
     }
 
-    public static Function<Object[], Object> createFunction(final String fieldName) {
-        return objects -> ImmutableMap.of(fieldName, objects[0]);
+    public static Function<Object[], Object> createFunction(String... fieldNames) {
+        return objects -> {
+            Object o = objects[0];
+            for (int i = fieldNames.length - 1; i >= 0; i--) {
+                o = ImmutableMap.of(fieldNames[i], o);
+            }
+            return o;
+        };
     }
 }

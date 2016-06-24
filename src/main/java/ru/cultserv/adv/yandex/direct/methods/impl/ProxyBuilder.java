@@ -37,7 +37,8 @@ public class ProxyBuilder {
 			}
 
 			Function<Object[], Object> converter;
-			if (!withConverter.entity().isEmpty()) {
+			String[] entity = withConverter.entity();
+			if (!entity[0].isEmpty()) {
 				converter = ParamConverter.createFunction(withConverter.entity());
 			} else {
 				converter = withConverter.converter().getFunction();

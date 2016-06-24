@@ -3,6 +3,7 @@ package ru.cultserv.adv.yandex.direct.methods;
 import ru.cultserv.adv.yandex.direct.filters.CampaignRequest;
 import ru.cultserv.adv.yandex.direct.models.campain.AddCampaignResult;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignInfo;
+import ru.cultserv.adv.yandex.direct.models.campain.UnarchiveResult;
 
 import java.util.List;
 
@@ -24,9 +25,10 @@ public interface Campaigns {
 //	suspend();
 //
 //	archive();
-//
-//	unarchive();
-//
+
+	@WithConverter(entity = {"SelectionCriteria", "Ids"}, flatten = true)
+	List<UnarchiveResult> unarchive(List<Long> ids);
+
 //	update();
 
 //	@DirectMethod(MethodName.CreateOrUpdateCampaign)

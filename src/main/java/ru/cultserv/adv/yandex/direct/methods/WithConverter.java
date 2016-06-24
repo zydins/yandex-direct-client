@@ -15,7 +15,7 @@ import static java.lang.annotation.ElementType.METHOD;
 public @interface WithConverter {
 
     ParamConverter converter() default ParamConverter.EMPTY_PARAM_CONVERTER;
-    String entity() default "";
+    String[] entity() default "";
     boolean flatten() default false;
 
 }
