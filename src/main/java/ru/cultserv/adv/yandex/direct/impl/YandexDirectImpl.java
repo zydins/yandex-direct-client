@@ -5,6 +5,8 @@ import ru.cultserv.adv.util.AsyncClientFactory;
 import ru.cultserv.adv.yandex.direct.AuthToken;
 import ru.cultserv.adv.yandex.direct.YandexDirect;
 import ru.cultserv.adv.yandex.direct.keystore.KeyStoreBuilder;
+import ru.cultserv.adv.yandex.direct.methods.AdExtensions;
+import ru.cultserv.adv.yandex.direct.methods.AdGroups;
 import ru.cultserv.adv.yandex.direct.methods.Ads;
 import ru.cultserv.adv.yandex.direct.methods.Campaigns;
 import ru.cultserv.adv.yandex.direct.methods.impl.ProxyBuilder;
@@ -42,10 +44,20 @@ public class YandexDirectImpl implements YandexDirect {
 	public Campaigns campaigns() {
 		return create(Campaigns.class);
 	}
-//
+
 	@Override
 	public Ads ads() {
 		return create(Ads.class);
+	}
+
+	@Override
+	public AdGroups adGroups() {
+		return create(AdGroups.class);
+	}
+
+	@Override
+	public AdExtensions adExtensions() {
+		return create(AdExtensions.class);
 	}
 
 //	@Override

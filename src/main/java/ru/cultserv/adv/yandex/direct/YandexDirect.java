@@ -1,5 +1,7 @@
 package ru.cultserv.adv.yandex.direct;
 
+import ru.cultserv.adv.yandex.direct.methods.AdExtensions;
+import ru.cultserv.adv.yandex.direct.methods.AdGroups;
 import ru.cultserv.adv.yandex.direct.methods.Ads;
 import ru.cultserv.adv.yandex.direct.methods.Campaigns;
 
@@ -11,10 +13,10 @@ public interface YandexDirect extends Closeable {
 
 	Ads ads();
 
-//	AdGroups adGroups();
-//
-//	AdExtentions adExtentions();
-//
+	AdGroups adGroups();
+
+	AdExtensions adExtensions();
+
 //	Bids bids();
 //
 //	BidModifier bidModifier();
