@@ -1,4 +1,4 @@
-package ru.cultserv.adv.yandex.direct.models.banner;
+package ru.cultserv.adv.yandex.direct.models.ads;
 
 /**
  * @author Sergey Zudin

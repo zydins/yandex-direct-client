@@ -1,7 +1,7 @@
 package ru.cultserv.adv.yandex.direct.models.ads;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import ru.cultserv.adv.yandex.direct.models.util.ArrayOfString;
+import ru.cultserv.adv.yandex.direct.models.util.ArrayOf;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class AdGroup {
     public List<Long> regionIds;
 
     @JsonProperty("NegativeKeywords")
-    public ArrayOfString negativeKeywords;
+    public ArrayOf<String> negativeKeywords;
 
     @JsonProperty("TrackingParams")
     public String trackingParams;

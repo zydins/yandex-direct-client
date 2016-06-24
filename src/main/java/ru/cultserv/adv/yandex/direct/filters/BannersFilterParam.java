@@ -2,7 +2,7 @@ package ru.cultserv.adv.yandex.direct.filters;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.cultserv.adv.yandex.direct.models.Currency;
-import ru.cultserv.adv.yandex.direct.models.banner.GetPhrases;
+import ru.cultserv.adv.yandex.direct.models.ads.GetPhrases;
 
 import java.util.List;
 

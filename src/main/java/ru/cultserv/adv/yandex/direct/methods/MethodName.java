@@ -5,7 +5,7 @@ import com.google.common.base.Function;
 import ru.cultserv.adv.yandex.direct.models.PhraseInfo;
 import ru.cultserv.adv.yandex.direct.models.RegionInfo;
 import ru.cultserv.adv.yandex.direct.models.RubricInfo;
-import ru.cultserv.adv.yandex.direct.models.banner.BannerInfo;
+import ru.cultserv.adv.yandex.direct.models.ads.AdInfo;
 import ru.cultserv.adv.yandex.direct.models.campain.BannersStat;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignInfo;
 import ru.cultserv.adv.yandex.direct.models.campain.CampaignShortInfo;
@@ -43,7 +43,7 @@ public enum MethodName {
 	ArchiveBanners(int.class, Constants.getFunction("BannerIDS")),
 	CreateOrUpdateBanners(new TypeReference<List<Long>>() {}, Constants.SINGLE_PARAM_CONVERTER),
 	DeleteBanners(int.class, Constants.getFunction("BannerIDS")),
-	GetBanners(new TypeReference<List<BannerInfo>>() {}, Constants.SINGLE_PARAM_CONVERTER),
+	GetBanners(new TypeReference<List<AdInfo>>() {}, Constants.SINGLE_PARAM_CONVERTER),
 	GetBannerPhrases(new TypeReference<List<PhraseInfo>>() {}),
 	GetBannerPhrasesFilter(new TypeReference<List<PhraseInfo>>() {}),
 	ModerateBanners(int.class, Constants.SINGLE_PARAM_CONVERTER),

@@ -8,15 +8,15 @@ import java.util.List;
  * @author Sergey Zudin
  * @since 16.06.16.
  */
-public class ArrayOfString {
+public class ArrayOf<T> {
 
     @JsonProperty("Items")
-    public List<String> items;
+    public List<T> items;
 
-    public ArrayOfString() {
+    public ArrayOf() {
     }
 
-    public ArrayOfString(List<String> items) {
+    public ArrayOf(List<T> items) {
         this.items = items;
     }
 }

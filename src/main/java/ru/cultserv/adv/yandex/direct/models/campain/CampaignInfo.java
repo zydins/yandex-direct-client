@@ -3,7 +3,8 @@ package ru.cultserv.adv.yandex.direct.models.campain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.LocalDate;
 import ru.cultserv.adv.yandex.direct.models.Currency;
-import ru.cultserv.adv.yandex.direct.models.util.ArrayOfString;
+import ru.cultserv.adv.yandex.direct.models.ModerationStatus;
+import ru.cultserv.adv.yandex.direct.models.util.ArrayOf;
 
 
 public class CampaignInfo {
@@ -28,13 +29,13 @@ public class CampaignInfo {
 	public LocalDate endDate;
 
 	@JsonProperty("NegativeKeywords")
-	public ArrayOfString negativeKeywords;
+	public ArrayOf<String> negativeKeywords;
 
 	@JsonProperty("BlockedIps")
-	public ArrayOfString blockedIps;
+	public ArrayOf<String> blockedIps;
 
 	@JsonProperty("ExcludedSites")
-	public ArrayOfString excludedSites;
+	public ArrayOf<String> excludedSites;
 
 	@JsonProperty("TextCampaign")
 	public TextCampaignParam textCampaign;
@@ -105,16 +106,34 @@ public class CampaignInfo {
 		SUSPENDED
 	}
 
-	public enum ModerationStatus {
-		ACCEPTED,
-		DRAFT,
-		MODERATION,
-		REJECTED
-	}
-
 	public enum PaymentStatus {
 		DISALLOWED,
 		ALLOWED
+	}
+
+	public enum Field {
+		BlockedIps,
+		ExcludedSites,
+		Currency,
+		DailyBudget,
+		Notification,
+		EndDate,
+		Funds,
+		ClientInfo,
+		Id,
+		Name,
+		NegativeKeywords,
+		RepresentedBy,
+		StartDate,
+		Statistics,
+		State,
+		Status,
+		StatusPayment,
+		StatusClarification,
+		SourceId,
+		TimeTargeting,
+		TimeZone,
+		Type
 	}
 
 	public static class Stat {
