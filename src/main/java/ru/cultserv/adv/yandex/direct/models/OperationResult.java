@@ -1,4 +1,4 @@
-package ru.cultserv.adv.yandex.direct.models.campain;
+package ru.cultserv.adv.yandex.direct.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.cultserv.adv.yandex.direct.models.util.ExceptionNotification;
@@ -9,7 +9,7 @@ import java.util.List;
  * @author Sergey Zudin
  * @since 24.06.16.
  */
-public class CampaignOperationResult {
+public class OperationResult {
 
     @JsonProperty("Id")
     public Long id;
