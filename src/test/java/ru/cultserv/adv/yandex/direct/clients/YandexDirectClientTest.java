@@ -2,7 +2,7 @@
 //
 //import org.junit.Assert;
 //import org.junit.Test;
-//import ru.cultserv.adv.yandex.direct.YandexDirect;
+//import ru.cultserv.adv.yandex.direct.v5.YandexDirect;
 //import ru.cultserv.adv.yandex.direct.impl.YandexDirectImpl;
 //import ru.cultserv.adv.yandex.direct.methods.Campaigns;
 //import ru.cultserv.adv.yandex.direct.methods.Utils;
