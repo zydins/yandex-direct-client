@@ -9,21 +9,25 @@ import com.google.common.base.Objects;
  */
 public class RegionInfo {
 
-	@JsonProperty("RegionID")
-	public int region_id;
+	@JsonProperty("GeoRegionId")
+	public int id;
 
-	@JsonProperty("ParentID")
-	public int parent_id;
+	@JsonProperty("ParentId")
+	public Long parentId;
 
-	@JsonProperty("RegionName")
-	public String region_name;
+	@JsonProperty("GeoRegionName")
+	public String regionName;
+
+	@JsonProperty("GeoRegionType")
+	public String regionType;
 
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this)
-				.add("region_id", region_id)
-				.add("parent_id", parent_id)
-				.add("region_name", region_name)
+				.add("id", id)
+				.add("parentId", parentId)
+				.add("regionName", regionName)
+				.add("regionType", regionType)
 				.toString();
 	}
 }
