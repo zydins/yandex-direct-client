@@ -48,11 +48,6 @@ public class YandexDirectRequest implements ApiRequest {
             }
 		}
 
-//		public Builder forMethod(String api_method) {
-//			request.params.setMethod(api_method);
-//			return this;
-//		}
-		
 		public Builder forMethod(Method method) {
 			String path = method.getDeclaringClass().getSimpleName().toLowerCase();
 			request.url += path;
