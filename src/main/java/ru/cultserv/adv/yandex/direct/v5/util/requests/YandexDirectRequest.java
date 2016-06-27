@@ -54,7 +54,7 @@ public class YandexDirectRequest implements ApiRequest {
 //		}
 		
 		public Builder forMethod(Method method) {
-			String path = method.getDeclaringClass().getSimpleName().toLowerCase();
+			String path = method.getDeclaringClass().getSimpleName();
 			request.url += path;
 			request.params.setMethod(method.getName().toLowerCase());
 			return this;
