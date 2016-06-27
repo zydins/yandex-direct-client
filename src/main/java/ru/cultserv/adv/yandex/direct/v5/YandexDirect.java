@@ -1,9 +1,6 @@
 package ru.cultserv.adv.yandex.direct.v5;
 
-import ru.cultserv.adv.yandex.direct.v5.methods.AdExtensions;
-import ru.cultserv.adv.yandex.direct.v5.methods.AdGroups;
-import ru.cultserv.adv.yandex.direct.v5.methods.Ads;
-import ru.cultserv.adv.yandex.direct.v5.methods.Campaigns;
+import ru.cultserv.adv.yandex.direct.v5.methods.*;
 
 import java.io.Closeable;
 
@@ -17,21 +14,21 @@ public interface YandexDirect extends Closeable {
 
 	AdExtensions adExtensions();
 
-//	Bids bids();
-//
+	Bids bids();
+
 //	BidModifier bidModifier();
 //
 //	Changes changes();
 //
-//	Dictionaries dictionaries();
-//
+	Dictionaries dictionaries();
+
 //	DynamicTextAdTargets dynamicTextAdTargets();
 //
 //	Keywords keywords();
 //
-//	Sitelinks sitelinks();
-//
-//	VCards vcards();
+	Sitelinks sitelinks();
+
+	VCards vcards();
 
 	@Override
 	void close();

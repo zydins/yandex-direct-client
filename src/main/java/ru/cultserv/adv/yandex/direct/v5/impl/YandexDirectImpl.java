@@ -4,10 +4,7 @@ import com.ning.http.client.AsyncHttpClientConfig;
 import ru.cultserv.adv.yandex.direct.v5.AuthToken;
 import ru.cultserv.adv.yandex.direct.v5.YandexDirect;
 import ru.cultserv.adv.yandex.direct.v5.keystore.KeyStoreBuilder;
-import ru.cultserv.adv.yandex.direct.v5.methods.AdExtensions;
-import ru.cultserv.adv.yandex.direct.v5.methods.AdGroups;
-import ru.cultserv.adv.yandex.direct.v5.methods.Ads;
-import ru.cultserv.adv.yandex.direct.v5.methods.Campaigns;
+import ru.cultserv.adv.yandex.direct.v5.methods.*;
 import ru.cultserv.adv.yandex.direct.v5.methods.impl.ProxyBuilder;
 import ru.cultserv.adv.yandex.direct.v5.util.AsyncClientFactory;
 import ru.cultserv.adv.yandex.direct.v5.util.requests.YandexDirectMethodCaller;
@@ -60,25 +57,25 @@ public class YandexDirectImpl implements YandexDirect {
 		return create(AdExtensions.class);
 	}
 
-//	@Override
-//	public Forecasts forecasts() {
-//		return create(Forecasts.class);
-//	}
-//
-//	@Override
-//	public Vocabularies vocabularies() {
-//		return create(Vocabularies.class);
-//	}
-//
-//	@Override
-//	public Utils utils() {
-//		return create(Utils.class);
-//	}
-//
-//    @Override
-//    public WordStats wordstats() {
-//        return create(WordStats.class);
-//    }
+	@Override
+	public Bids bids() {
+		return create(Bids.class);
+	}
+
+	@Override
+	public Dictionaries dictionaries() {
+		return create(Dictionaries.class);
+	}
+
+	@Override
+	public Sitelinks sitelinks() {
+		return create(Sitelinks.class);
+	}
+
+	@Override
+	public VCards vcards() {
+		return create(VCards.class);
+	}
 
     private <T> T create(Class<T> targetInterface) {
 		return ProxyBuilder.create(targetInterface, caller);

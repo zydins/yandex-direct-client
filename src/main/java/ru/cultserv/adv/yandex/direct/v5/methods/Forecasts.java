@@ -10,18 +10,15 @@ import java.util.List;
  * @author Alexandr Kolosov
  * @since 7/3/14
  */
+@Deprecated
 public interface Forecasts {
 
-	@DirectMethod(MethodName.CreateNewForecast)
 	int create(NewForecastInfo info);
 
-	@DirectMethod(MethodName.DeleteForecastReport)
 	boolean delete(int forecast_id);
 
-	@DirectMethod(MethodName.GetForecast)
 	Forecast get(int forecast_id);
 
-	@DirectMethod(MethodName.GetForecastList)
 	List<ForecastStatusInfo> list();
 
 }
