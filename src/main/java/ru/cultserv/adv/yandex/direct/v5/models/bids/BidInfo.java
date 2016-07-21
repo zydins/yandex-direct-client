@@ -1,6 +1,7 @@
 package ru.cultserv.adv.yandex.direct.v5.models.bids;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ru.cultserv.adv.yandex.direct.v5.models.StrategyPriority;
 import ru.cultserv.adv.yandex.direct.v5.models.util.ArrayOf;
 
 import java.util.List;
@@ -44,12 +45,6 @@ public class BidInfo {
     public Long currentSearchPrice;
     @JsonProperty("AuctionBids")
     public List<AuctionBid> auctionBids;
-
-    public enum StrategyPriority {
-        LOW,
-        NORMAL,
-        HIGH
-    }
 
     public enum Field {
         KeywordId,
