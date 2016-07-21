@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Alexandr Kolosov
  * @since 7/3/14
  */
+@Deprecated
 public class ForecastCommonInfo {
 
 	@JsonProperty("Geo")

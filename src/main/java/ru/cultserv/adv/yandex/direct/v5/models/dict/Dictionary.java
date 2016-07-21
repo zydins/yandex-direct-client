@@ -1,7 +1,6 @@
 package ru.cultserv.adv.yandex.direct.v5.models.dict;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import ru.cultserv.adv.yandex.direct.v5.models.RegionInfo;
 
 import java.util.List;
 

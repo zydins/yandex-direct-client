@@ -7,6 +7,7 @@ import org.joda.time.LocalDate;
  * @author sergey
  * @since 07.04.16
  */
+@Deprecated
 public class SummaryStat {
 
     /**

@@ -1,4 +1,4 @@
-package ru.cultserv.adv.yandex.direct.v5.models;
+package ru.cultserv.adv.yandex.direct.v5.models.dict;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
@@ -7,6 +7,7 @@ import com.google.common.base.Objects;
  * @author Alexandr Kolosov
  * @since 7/2/14
  */
+@Deprecated
 public class RubricInfo {
 
 	@JsonProperty("RubricID")

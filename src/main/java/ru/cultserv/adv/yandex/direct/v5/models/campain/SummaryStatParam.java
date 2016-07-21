@@ -11,6 +11,7 @@ import java.util.List;
  * @author sergey
  * @since 07.04.16
  */
+@Deprecated
 public class SummaryStatParam {
 
     /**

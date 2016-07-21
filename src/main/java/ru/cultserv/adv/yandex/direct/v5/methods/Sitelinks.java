@@ -1,6 +1,6 @@
 package ru.cultserv.adv.yandex.direct.v5.methods;
 
-import ru.cultserv.adv.yandex.direct.v5.filters.VCardsRequest;
+import ru.cultserv.adv.yandex.direct.v5.filters.SitelinksRequest;
 import ru.cultserv.adv.yandex.direct.v5.models.OperationResult;
 import ru.cultserv.adv.yandex.direct.v5.models.ads.SitelinksSet;
 
@@ -19,6 +19,6 @@ public interface Sitelinks {
     List<OperationResult> delete(List<Long> ids);
 
     @WithConverter(converter = ParamConverter.SINGLE_PARAM_CONVERTER, flatten = true)
-    List<SitelinksSet> get(VCardsRequest criteria);
+    List<SitelinksSet> get(SitelinksRequest criteria);
 
 }

@@ -11,6 +11,7 @@ import java.util.Set;
  * @author Sergey Zudin
  * @since 18.11.15.
  */
+@Deprecated
 public class BannersStatParam {
 
     /**

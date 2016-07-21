@@ -8,6 +8,7 @@ import java.util.List;
  * @author Alexandr Kolosov
  * @since 7/3/14
  */
+@Deprecated
 public class Forecast {
 
 	@JsonProperty("Phrases")

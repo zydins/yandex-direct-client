@@ -1,5 +1,6 @@
 package ru.cultserv.adv.yandex.direct.v5.models.campain;
 
+@Deprecated
 public enum CampaignStrategyName {
 
 	/**

@@ -7,6 +7,7 @@ import org.joda.time.LocalDate;
  * @author Sergey Zudin
  * @since 18.11.15.
  */
+@Deprecated
 public class BannersStat {
 
     /**

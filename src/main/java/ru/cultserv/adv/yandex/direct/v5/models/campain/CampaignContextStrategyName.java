@@ -6,6 +6,7 @@ package ru.cultserv.adv.yandex.direct.v5.models.campain;
  * Внимание! Автоматические стратегии в Рекламной сети доступны,
  * только если на поиске выключен показ объявлений (стратегия ShowsDisabled).
  */
+@Deprecated
 public enum CampaignContextStrategyName {
 
 	/**

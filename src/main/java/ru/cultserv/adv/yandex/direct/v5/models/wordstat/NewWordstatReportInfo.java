@@ -8,6 +8,7 @@ import java.util.List;
  * @author Alexandr Kolosov
  * @since 29.07.2014
  */
+@Deprecated
 public class NewWordstatReportInfo {
 
     @JsonProperty("Phrases")

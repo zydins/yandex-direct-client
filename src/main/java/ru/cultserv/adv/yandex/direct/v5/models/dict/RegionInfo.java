@@ -1,4 +1,4 @@
-package ru.cultserv.adv.yandex.direct.v5.models;
+package ru.cultserv.adv.yandex.direct.v5.models.dict;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
