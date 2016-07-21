@@ -5,8 +5,6 @@ import ru.cultserv.adv.yandex.direct.v5.util.ApiRequest;
 import ru.cultserv.adv.yandex.direct.v5.util.ApiRequestParams;
 import ru.cultserv.adv.yandex.direct.v5.util.params.YandexDirectParams;
 
-import java.lang.reflect.Method;
-
 public class YandexDirectRequest implements ApiRequest {
 	
 	public static final String PRODUCTION_URL = "https://api.direct.yandex.com/json/v5/";
@@ -48,10 +46,15 @@ public class YandexDirectRequest implements ApiRequest {
             }
 		}
 
-		public Builder forMethod(Method method) {
-			String path = method.getDeclaringClass().getSimpleName().toLowerCase();
-			request.url += path;
-			request.params.setMethod(method.getName());
+		public Builder forService(String service) {
+			request.url += service;
+			return this;
+		}
+
+		public Builder forMethod(String method) {
+//			String path = method.getDeclaringClass().getSimpleName().toLowerCase();
+//			request.url += path;
+			request.params.setMethod(method);
 			return this;
 		}
 

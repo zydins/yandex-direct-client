@@ -5,24 +5,23 @@ import ru.cultserv.adv.yandex.direct.v5.AuthToken;
 import ru.cultserv.adv.yandex.direct.v5.YandexDirect;
 import ru.cultserv.adv.yandex.direct.v5.filters.CampaignRequest;
 import ru.cultserv.adv.yandex.direct.v5.impl.YandexDirectFactory;
-import ru.cultserv.adv.yandex.direct.v5.models.campain.CampaignInfo;
-
-import java.util.List;
+import ru.cultserv.adv.yandex.direct.v5.models.campain.CampaignGetResult;
+import ru.cultserv.adv.yandex.direct.v5.models.util.Page;
 
 public class CampaignsTest {
 
-	public YandexDirect direct = YandexDirectFactory.builder().token(new AuthToken("")).build();
+	public YandexDirect direct = YandexDirectFactory.builder().token(new AuthToken("ARZ529YAAswKhCIZBB8bSgWYUaUDeeWYXQ")).build();
 	private Campaigns campaigns = direct.campaigns();
 
 	@Test
 	public void testGet() {
 		CampaignRequest criteria = new CampaignRequest();
-//		criteria.page = new Page(1l);
-//		CampaignGetResult campaignGetResult = campaigns.get(criteria);
-//		System.out.println(campaignGetResult.campaigns);
+		criteria.page = new Page(1l);
+		CampaignGetResult campaignGetResult = campaigns.fullGet(criteria);
+		System.out.println(campaignGetResult.campaigns);
 
-		List<CampaignInfo> campaignInfos = campaigns.get(criteria);
-		System.out.println(campaignInfos);
+//		List<CampaignInfo> campaignInfos = campaigns.get(criteria);
+//		System.out.println(campaignInfos);
 		System.out.println(direct.apiPoints());
 
 //		List<OperationResult> unarchive = campaigns.unarchive(Collections.singletonList(17971081l));

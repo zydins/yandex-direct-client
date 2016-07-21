@@ -44,8 +44,13 @@ public class ProxyBuilder {
 				converter = withConverter.converter().getFunction();
 			}
 
+			String directName = withConverter.directName();
+			if (directName.isEmpty()) {
+				directName = method.getName();
+			}
+
 			if (converter != null) {
-				return caller.call(method, converter.apply(args), withConverter.flatten());
+				return caller.call(method, converter.apply(args), directName, withConverter.flatten());
 			}
 
 			return caller.call(method, args);

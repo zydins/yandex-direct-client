@@ -32,9 +32,13 @@ public class YandexDirectMethodCaller implements Closeable {
 		return call(method, param, false);
 	}
 
-	@SuppressWarnings("unchecked")
 	public <T> T call(Method method, Object param, boolean flatten) {
-		ApiRequest request = buildCommonRequest(method, param);
+		return call(method, param, method.getName(), flatten);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T call(Method method, Object param, String methodName, boolean flatten) {
+		ApiRequest request = buildCommonRequest(method, param, methodName);
 		ApiResponse response = executor.execute(request);
 		apiPoints = response.apiPoints();
 		T result;
@@ -51,11 +55,12 @@ public class YandexDirectMethodCaller implements Closeable {
 		return result;
 	}
 	
-	private ApiRequest buildCommonRequest(Method method, Object param) {
+	private ApiRequest buildCommonRequest(Method method, Object param, String customName) {
 		return new YandexDirectRequest.Builder(token)
-			.forMethod(method)
-			.andParam(param)
-			.build();
+				.forService(method.getDeclaringClass().getSimpleName().toLowerCase())
+				.forMethod(customName)
+				.andParam(param)
+				.build();
 	}
 
     public static YandexDirectMethodCaller prepared(AuthToken token, AsyncHttpClient client) {

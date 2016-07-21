@@ -16,6 +16,7 @@ public @interface WithConverter {
 
     ParamConverter converter() default ParamConverter.EMPTY_PARAM_CONVERTER;
     String[] entity() default "";
+    String directName() default "";
     boolean flatten() default false;
 
 }
