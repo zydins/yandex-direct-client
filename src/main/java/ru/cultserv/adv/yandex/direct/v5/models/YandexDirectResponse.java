@@ -13,6 +13,9 @@ public class YandexDirectResponse implements ApiResponse {
 
 	@JsonProperty
 	private JsonNode result;
+
+	@JsonProperty
+	private Integer api_points;
 	
 	@JsonProperty
 	private Integer error_code;
@@ -54,6 +57,11 @@ public class YandexDirectResponse implements ApiResponse {
 	}
 
 	@Override
+	public Integer apiPoints() {
+		return api_points;
+	}
+
+	@Override
 	public boolean hasError() {
 		return error_code != null;
 	}
@@ -62,4 +70,7 @@ public class YandexDirectResponse implements ApiResponse {
 		return new ApiException(error_code, error_string, error_detail);
 	}
 
+	public void setApiPoints(Integer api_points) {
+		this.api_points = api_points;
+	}
 }

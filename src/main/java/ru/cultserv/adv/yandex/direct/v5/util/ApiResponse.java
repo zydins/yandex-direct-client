@@ -21,6 +21,8 @@ public interface ApiResponse {
 
 	boolean hasError();
 
+	Integer apiPoints();
+
 	ApiException error();
 
 }

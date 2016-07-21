@@ -8,6 +8,7 @@ import ru.cultserv.adv.yandex.direct.v5.util.ApiResponse;
 import ru.cultserv.adv.yandex.direct.v5.util.Json;
 
 import java.io.IOException;
+import java.util.List;
 
 public class YandexRequestExecutor extends AbstractApiRequestExecutor {
 
@@ -18,7 +19,21 @@ public class YandexRequestExecutor extends AbstractApiRequestExecutor {
     @Override
 	protected ApiResponse process(Response response) {
 		YandexDirectResponse api_response = Json.parse(body(response), YandexDirectResponse.class, false);
-		
+
+		List<String> units = response.getHeaders().get("Units");
+		if (units != null && units.size() == 1) {
+			String[] strings = units.get(0).split("/");
+			if (strings.length == 3) {
+				String string = strings[1];
+				try {
+					int points = Integer.parseInt(string);
+					api_response.setApiPoints(points);
+				} catch (Exception ignored) {
+
+				}
+			}
+		}
+
 		if(api_response.hasError())
 			throw api_response.error();
 		

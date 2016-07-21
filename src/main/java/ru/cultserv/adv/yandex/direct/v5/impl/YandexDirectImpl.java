@@ -6,6 +6,7 @@ import ru.cultserv.adv.yandex.direct.v5.YandexDirect;
 import ru.cultserv.adv.yandex.direct.v5.keystore.KeyStoreBuilder;
 import ru.cultserv.adv.yandex.direct.v5.methods.*;
 import ru.cultserv.adv.yandex.direct.v5.methods.impl.ProxyBuilder;
+import ru.cultserv.adv.yandex.direct.v5.models.bids.BidModifier;
 import ru.cultserv.adv.yandex.direct.v5.util.AsyncClientFactory;
 import ru.cultserv.adv.yandex.direct.v5.util.requests.YandexDirectMethodCaller;
 
@@ -63,8 +64,23 @@ public class YandexDirectImpl implements YandexDirect {
 	}
 
 	@Override
+	public BidModifier bidModifier() {
+		return create(BidModifier.class);
+	}
+
+	@Override
+	public Changes changes() {
+		return create(Changes.class);
+	}
+
+	@Override
 	public Dictionaries dictionaries() {
 		return create(Dictionaries.class);
+	}
+
+	@Override
+	public Keywords keywords() {
+		return create(Keywords.class);
 	}
 
 	@Override
@@ -77,7 +93,12 @@ public class YandexDirectImpl implements YandexDirect {
 		return create(VCards.class);
 	}
 
-    private <T> T create(Class<T> targetInterface) {
+	@Override
+	public Integer apiPoints() {
+		return caller.apiPoints();
+	}
+
+	private <T> T create(Class<T> targetInterface) {
 		return ProxyBuilder.create(targetInterface, caller);
 	}
 

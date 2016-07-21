@@ -17,6 +17,8 @@ public class YandexDirectMethodCaller implements Closeable {
 	private final AuthToken token;
 	private final ApiRequestExecutor executor;
 
+	private Integer apiPoints;
+
 	public YandexDirectMethodCaller(AuthToken token, ApiRequestExecutor executor) {
 		this.token = token;
 		this.executor = executor;
@@ -34,6 +36,7 @@ public class YandexDirectMethodCaller implements Closeable {
 	public <T> T call(Method method, Object param, boolean flatten) {
 		ApiRequest request = buildCommonRequest(method, param);
 		ApiResponse response = executor.execute(request);
+		apiPoints = response.apiPoints();
 		T result;
 
 		Type returnType = method.getGenericReturnType();
@@ -66,5 +69,9 @@ public class YandexDirectMethodCaller implements Closeable {
 	@Override
 	public void close() {
 		executor.close();
+	}
+
+	public Integer apiPoints() {
+		return apiPoints;
 	}
 }
