@@ -58,6 +58,7 @@ public class YandexDirectFactory {
         public FinalBuilder timeout(int millis) {
             builder.setRequestTimeoutInMs(millis);
             builder.setConnectionTimeoutInMs(millis);
+            builder.setIdleConnectionTimeoutInMs(millis);
             return this;
         }
 
