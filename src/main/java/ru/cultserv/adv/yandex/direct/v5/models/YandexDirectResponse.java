@@ -46,6 +46,9 @@ public class YandexDirectResponse implements ApiResponse {
 
 	@Override
 	public <T> T as(TypeReference<T> typeReference, boolean flatten) {
+		if (result == null) {
+			return null;
+		}
 		return Json.parse(result.toString(), typeReference, flatten);
 	}
 
