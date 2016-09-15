@@ -33,6 +33,9 @@ public class YandexDirectResponse implements ApiResponse {
 
 	@Override
 	public <T> T as(Class<T> dataClass, boolean flatten) {
+		if (result == null) {
+			return null;
+		}
 		return Json.parse(result.toString(), dataClass, flatten);
 	}
 
@@ -53,6 +56,9 @@ public class YandexDirectResponse implements ApiResponse {
 
 	@Override
 	public <T> T as(Type type, boolean flatten) {
+		if (result == null) {
+			return null;
+		}
 		return Json.parse(result.toString(), type, flatten);
 	}
 
