@@ -14,7 +14,7 @@ import java.util.List;
 public class BidRequest {
 
     @JsonProperty("SelectionCriteria")
-    public SelectionCriteria criteria;
+    public SelectionCriteria selectionCriteria;
     @JsonProperty("FieldNames")
     public List<BidInfo.Field> fields = Arrays.asList(BidInfo.Field.values());
     @JsonProperty("Page")
