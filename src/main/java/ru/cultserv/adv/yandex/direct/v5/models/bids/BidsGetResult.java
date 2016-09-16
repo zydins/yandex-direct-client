@@ -12,7 +12,7 @@ public class BidsGetResult {
 
     @JsonProperty("LimitedBy")
     public Long limitedBy;
-    @JsonProperty("Campaigns")
-    public List<BidInfo> campaigns;
+    @JsonProperty("Bids")
+    public List<BidInfo> bids;
 
 }
