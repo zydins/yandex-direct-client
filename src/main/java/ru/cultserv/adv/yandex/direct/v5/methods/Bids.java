@@ -4,6 +4,7 @@ import ru.cultserv.adv.yandex.direct.v5.filters.BidRequest;
 import ru.cultserv.adv.yandex.direct.v5.models.bids.AutoBidInfo;
 import ru.cultserv.adv.yandex.direct.v5.models.bids.BidInfo;
 import ru.cultserv.adv.yandex.direct.v5.models.bids.BidSetResult;
+import ru.cultserv.adv.yandex.direct.v5.models.bids.BidsGetResult;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface Bids {
     List<BidInfo> get(BidRequest criteria);
 
     @WithConverter(converter = ParamConverter.SINGLE_PARAM_CONVERTER, directName = "get")
-    List<BidInfo> fullGet(BidRequest criteria);
+    BidsGetResult fullGet(BidRequest criteria);
 
     @WithConverter(entity = "Bids", flatten = true)
     List<BidSetResult> set(List<BidInfo> bids);
