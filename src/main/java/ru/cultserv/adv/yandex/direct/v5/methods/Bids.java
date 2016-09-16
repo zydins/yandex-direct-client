@@ -16,6 +16,9 @@ public interface Bids {
     @WithConverter(converter = ParamConverter.SINGLE_PARAM_CONVERTER, flatten = true)
     List<BidInfo> get(BidRequest criteria);
 
+    @WithConverter(converter = ParamConverter.SINGLE_PARAM_CONVERTER, directName = "get")
+    List<BidInfo> fullGet(BidRequest criteria);
+
     @WithConverter(entity = "Bids", flatten = true)
     List<BidSetResult> set(List<BidInfo> bids);
 
