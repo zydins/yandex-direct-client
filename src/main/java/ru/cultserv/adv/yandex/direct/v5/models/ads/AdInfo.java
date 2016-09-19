@@ -34,7 +34,7 @@ public class AdInfo {
 	Start fields for creation
 	 */
 
-	@JsonProperty("AdGroupID")
+	@JsonProperty("AdGroupId")
 	public Long adGroupId;
 
 	@JsonProperty("TextAd")
