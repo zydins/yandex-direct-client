@@ -35,25 +35,25 @@ public class AdRequest {
         public List<ModerationStatus> moderationStatuses;
         @JsonProperty("Types")
         public List<AdInfo.Type> types;
-        @JsonProperty("Types")
+        @JsonProperty("CampaignIds")
         public List<Long> campaignIds;
-        @JsonProperty("Types")
+        @JsonProperty("AdGroupsIds")
         public List<Long> adGroupsIds;
-        @JsonProperty("Types")
+        @JsonProperty("Mobile")
         public StatusBoolean isMobile;
-        @JsonProperty("Types")
+        @JsonProperty("VCardIds")
         public List<Long> vCardIds;
-        @JsonProperty("Types")
+        @JsonProperty("SitelinkSetIds")
         public List<Long> sitelinkSetIds;
-        @JsonProperty("Types")
+        @JsonProperty("AdImageHashes")
         public List<String> imageHashes;
-        @JsonProperty("Types")
+        @JsonProperty("VCardModerationStatuses")
         public ModerationStatus vCardModeration;
-        @JsonProperty("Types")
+        @JsonProperty("SitelinksModerationStatuses")
         public ModerationStatus sitelinksModeration;
-        @JsonProperty("Types")
+        @JsonProperty("AdImageModerationStatuses")
         public ModerationStatus adImageModeration;
-        @JsonProperty("Types")
+        @JsonProperty("AdExtensionIds")
         public List<Long> extensionIds;
     }
 
