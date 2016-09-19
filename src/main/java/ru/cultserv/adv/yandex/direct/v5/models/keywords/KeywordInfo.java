@@ -44,6 +44,9 @@ public class KeywordInfo {
     End fields for creation
     */
 
+    @JsonProperty("CampaignId")
+    public long campaignId;
+
     @JsonProperty("State")
     public State state;
 
