@@ -45,7 +45,7 @@ public class KeywordInfo {
     */
 
     @JsonProperty("CampaignId")
-    public long campaignId;
+    public Long campaignId;
 
     @JsonProperty("State")
     public State state;
