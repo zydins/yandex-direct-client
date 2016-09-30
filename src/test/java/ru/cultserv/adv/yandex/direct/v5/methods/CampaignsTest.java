@@ -10,7 +10,10 @@ import ru.cultserv.adv.yandex.direct.v5.models.util.Page;
 
 public class CampaignsTest {
 
-	public YandexDirect direct = YandexDirectFactory.builder().token(new AuthToken("ARZ529YAAswKhCIZBB8bSgWYUaUDeeWYXQ")).build();
+	public YandexDirect direct = YandexDirectFactory.builder()
+			.token(new AuthToken("FGYRLDAXBn8WLKOPWtdnukWyYk-imcq3yk78Lig"))
+			.client("directClient")
+			.build();
 	private Campaigns campaigns = direct.campaigns();
 
 	@Test

@@ -15,12 +15,18 @@ import java.lang.reflect.Type;
 public class YandexDirectMethodCaller implements Closeable {
 	
 	private final AuthToken token;
+	private final String clientLogin;
 	private final ApiRequestExecutor executor;
 
 	private Integer apiPoints;
 
 	public YandexDirectMethodCaller(AuthToken token, ApiRequestExecutor executor) {
+		this(token, null, executor);
+	}
+
+	public YandexDirectMethodCaller(AuthToken token, String clientLogin, ApiRequestExecutor executor) {
 		this.token = token;
+		this.clientLogin = clientLogin;
 		this.executor = executor;
 	}
 
@@ -56,16 +62,22 @@ public class YandexDirectMethodCaller implements Closeable {
 	}
 	
 	private ApiRequest buildCommonRequest(Method method, Object param, String customName) {
-		return new YandexDirectRequest.Builder(token)
+		YandexDirectRequest.Builder builder = new YandexDirectRequest.Builder(token)
 				.forService(method.getDeclaringClass().getSimpleName().toLowerCase())
-				.forMethod(customName)
-				.andParam(param)
-				.build();
+				.forMethod(customName);
+		if (clientLogin != null) {
+			builder.forClient(clientLogin);
+		}
+		return builder.andParam(param).build();
 	}
 
     public static YandexDirectMethodCaller prepared(AuthToken token, AsyncHttpClient client) {
-        return new YandexDirectMethodCaller(token, new YandexRequestExecutor(client));
+        return prepared(token, null, client);
     }
+
+	public static YandexDirectMethodCaller prepared(AuthToken token, String clientLogin, AsyncHttpClient client) {
+		return new YandexDirectMethodCaller(token, clientLogin, new YandexRequestExecutor(client));
+	}
 
 	public static YandexDirectMethodCaller defaultCaller(AuthToken token) {
 		return prepared(token, AsyncClientFactory.getClient());

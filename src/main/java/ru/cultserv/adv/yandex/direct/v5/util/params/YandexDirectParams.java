@@ -1,7 +1,6 @@
 package ru.cultserv.adv.yandex.direct.v5.util.params;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.collect.ImmutableMap;
 import ru.cultserv.adv.yandex.direct.v5.util.ApiRequestParams;
 
 import java.util.HashMap;
@@ -16,6 +15,8 @@ public class YandexDirectParams implements ApiRequestParams {
 	private Object params;
 	
 	private String token;
+
+	private String clientLogin = null;
 	
 	private String locale = "ru";
 
@@ -31,9 +32,20 @@ public class YandexDirectParams implements ApiRequestParams {
 		this.token = token;
 	}
 
+	public void setClientLogin(String clientLogin) {
+		this.clientLogin = clientLogin;
+	}
+
 	@Override
 	public Map<String, String> headers() {
-		return ImmutableMap.of("Authorization", "Bearer " + token, "Accept-Language", locale);
+		Map<String, String> headers = new HashMap<>();
+		headers.put("Authorization", "Bearer " + token);
+		headers.put("Accept-Language", locale);
+		if (clientLogin != null) {
+			headers.put("Client-Login", clientLogin);
+			headers.put("Use-Operator-Units", "true");
+		}
+		return headers;
 	}
 
 	@Override

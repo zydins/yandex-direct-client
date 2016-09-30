@@ -27,6 +27,7 @@ public class YandexDirectFactory {
 
     public interface FinalBuilder {
         FinalBuilder timeout(int millis);
+        FinalBuilder client(String login);
         YandexDirect build();
     }
 
@@ -34,6 +35,7 @@ public class YandexDirectFactory {
 
         private AsyncHttpClientConfig.Builder builder = new AsyncHttpClientConfig.Builder();
         private AuthToken token;
+        private String clientLogin = null;
 
         @Override
         public ProxyBuilder sslContext(SSLContext context) {
@@ -63,11 +65,22 @@ public class YandexDirectFactory {
             return this;
         }
 
+        /**
+         * Вызов данного параметра подразумевает, что данный объект будет использоваться как агентский аккаунт
+         * Он будет тратить свои баллы на вызов методов под видом аккаунта, логин которого передается в качестве
+         * параметра.
+         */
+        @Override
+        public FinalBuilder client(String login) {
+            clientLogin = login;
+            return this;
+        }
+
         @Override
         public YandexDirect build() {
             AsyncHttpClientConfig config = builder.build();
             AsyncHttpClient httpClient = AsyncClientFactory.createHttpClient(config);
-            YandexDirectMethodCaller methodCaller = YandexDirectMethodCaller.prepared(token, httpClient);
+            YandexDirectMethodCaller methodCaller = YandexDirectMethodCaller.prepared(token, clientLogin, httpClient);
             return new YandexDirectImpl(methodCaller);
         }
     }
