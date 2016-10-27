@@ -180,6 +180,23 @@ public class VCard {
 	}
 
 	public enum Field {
-		
+		Id,
+		Country,
+		City,
+		Street,
+		House,
+		Building,
+		Apartment,
+		CompanyName,
+		ExtraMessage,
+		ContactPerson,
+		ContactEmail,
+		MetroStationId,
+		CampaignId,
+		Ogrn,
+		WorkTime,
+		InstantMessenger,
+		Phone,
+		PointOnMap
 	}
 }
