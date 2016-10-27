@@ -58,6 +58,7 @@ public class Json {
 	
 	public static <T> T parse(String json, Class<T> result_class, boolean flatten) {
 		try {
+			json = resolve(json, flatten);
 			return mapper().readValue(json, result_class);
 		} catch (IOException e) {
 			throw new RuntimeException(e);

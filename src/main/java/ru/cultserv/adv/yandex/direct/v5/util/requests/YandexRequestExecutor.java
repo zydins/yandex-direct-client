@@ -18,7 +18,13 @@ public class YandexRequestExecutor extends AbstractApiRequestExecutor {
 
     @Override
 	protected ApiResponse process(Response response) {
-		YandexDirectResponse api_response = Json.parse(body(response), YandexDirectResponse.class, false);
+		String body = body(response);
+		YandexDirectResponse api_response;
+		if (body.contains("error")) {
+			api_response = Json.parse(body, YandexDirectResponse.class, true);
+		} else {
+			api_response = Json.parse(body, YandexDirectResponse.class, false);
+		}
 
 		List<String> units = response.getHeaders().get("Units");
 		if (units != null && units.size() == 1) {
