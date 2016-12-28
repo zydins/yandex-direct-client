@@ -2,6 +2,7 @@ package ru.cultserv.adv.yandex.direct.v5.methods;
 
 import ru.cultserv.adv.yandex.direct.v5.filters.KeywordRequest;
 import ru.cultserv.adv.yandex.direct.v5.models.OperationResult;
+import ru.cultserv.adv.yandex.direct.v5.models.keywords.KeywordGetResult;
 import ru.cultserv.adv.yandex.direct.v5.models.keywords.KeywordInfo;
 
 import java.util.List;
@@ -14,6 +15,9 @@ public interface Keywords {
 
     @WithConverter(entity = "Keywords", flatten = true)
     List<OperationResult> add(List<KeywordInfo> keywords);
+
+    @WithConverter(converter = ParamConverter.SINGLE_PARAM_CONVERTER, directName = "get")
+    KeywordGetResult fullGet(KeywordRequest criteria);
 
     @WithConverter(converter = ParamConverter.SINGLE_PARAM_CONVERTER, flatten = true)
     List<KeywordInfo> get(KeywordRequest criteria);
