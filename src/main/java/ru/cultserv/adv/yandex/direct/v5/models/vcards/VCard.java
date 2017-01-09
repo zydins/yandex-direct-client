@@ -174,8 +174,8 @@ public class VCard {
 		/**
 		 * Добавочный телефонный номер для соединения через офисную АТС.
 		 */
-		@JsonProperty("Extention")
-		public String extention;
+		@JsonProperty("Extension")
+		public String extension;
 
 	}
 
