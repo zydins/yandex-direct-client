@@ -2,6 +2,7 @@ package ru.cultserv.adv.yandex.direct.v5.models.keywords;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.cultserv.adv.yandex.direct.v5.models.ModerationStatus;
+import ru.cultserv.adv.yandex.direct.v5.models.ServingStatus;
 import ru.cultserv.adv.yandex.direct.v5.models.StrategyPriority;
 
 import java.util.List;
@@ -52,6 +53,9 @@ public class KeywordInfo {
 
     @JsonProperty("Status")
     public ModerationStatus status;
+
+    @JsonProperty("ServingStatus")
+    public ServingStatus servingStatus;
 
     @JsonProperty("Productivity")
     public Productivity productivity;
