@@ -20,7 +20,7 @@ public class YandexRequestExecutor extends AbstractApiRequestExecutor {
 	protected ApiResponse process(Response response) {
 		String body = body(response);
 		YandexDirectResponse api_response;
-		if (body.contains("error")) {
+		if (body.contains("error") && !body.contains("errors-text")) { //FIXME
 			api_response = Json.parse(body, YandexDirectResponse.class, true);
 		} else {
 			api_response = Json.parse(body, YandexDirectResponse.class, false);
