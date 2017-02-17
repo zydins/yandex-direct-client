@@ -71,6 +71,7 @@ public class KeywordInfo {
         Keyword,
         State,
         Status,
+        ServingStatus,
         AdGroupId,
         CampaignId,
         Bid,
