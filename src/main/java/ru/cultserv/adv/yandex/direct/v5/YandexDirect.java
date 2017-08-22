@@ -1,7 +1,9 @@
 package ru.cultserv.adv.yandex.direct.v5;
 
 import ru.cultserv.adv.yandex.direct.v5.methods.*;
+import ru.cultserv.adv.yandex.direct.v5.models.Unit;
 import ru.cultserv.adv.yandex.direct.v5.models.bids.BidModifier;
+import ru.cultserv.adv.yandex.direct.v5.util.ApiResponseCallback;
 
 import java.io.Closeable;
 
@@ -31,7 +33,11 @@ public interface YandexDirect extends Closeable {
 
 	VCards vcards();
 
-	Integer apiPoints();
+	Unit apiPoints();
+
+	void addCallback(final ApiResponseCallback callback);
+
+	void removeCallback(final ApiResponseCallback callback);
 
 	@Override
 	void close();

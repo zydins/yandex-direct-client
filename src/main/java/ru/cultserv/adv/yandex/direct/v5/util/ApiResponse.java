@@ -1,6 +1,7 @@
 package ru.cultserv.adv.yandex.direct.v5.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import ru.cultserv.adv.yandex.direct.v5.models.Unit;
 import ru.cultserv.adv.yandex.direct.v5.util.exceptions.ApiException;
 
 import java.lang.reflect.Type;
@@ -21,7 +22,7 @@ public interface ApiResponse {
 
 	boolean hasError();
 
-	Integer apiPoints();
+	Unit apiPoints();
 
 	ApiException error();
 

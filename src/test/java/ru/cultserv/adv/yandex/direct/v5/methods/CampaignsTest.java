@@ -1,5 +1,6 @@
 package ru.cultserv.adv.yandex.direct.v5.methods;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.cultserv.adv.yandex.direct.v5.AuthToken;
 import ru.cultserv.adv.yandex.direct.v5.YandexDirect;
@@ -16,7 +17,7 @@ public class CampaignsTest {
 			.build();
 	private Campaigns campaigns = direct.campaigns();
 
-	@Test
+	@Test @Ignore
 	public void testGet() {
 		CampaignRequest criteria = new CampaignRequest();
 		criteria.page = new Page(1l);

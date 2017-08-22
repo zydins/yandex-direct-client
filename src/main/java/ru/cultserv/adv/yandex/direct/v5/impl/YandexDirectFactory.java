@@ -27,7 +27,7 @@ public class YandexDirectFactory {
 
     public interface FinalBuilder {
         FinalBuilder timeout(int millis);
-        FinalBuilder client(String login);
+        FinalBuilder client(String clientLogin);
         YandexDirect build();
     }
 

@@ -1,9 +1,6 @@
+*.iml
+.idea/
+*/target/
+*.log
+out/
 target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.next
-release.properties
-.DS_Store
-.classpath
-.project
-.settings/

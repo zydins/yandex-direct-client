@@ -27,9 +27,17 @@ public class YandexDirectParams implements ApiRequestParams {
 	public void setMethod(String api_method_name) {
 		this.method = api_method_name;
 	}
-	
+
+	public String getMethod() {
+		return method;
+	}
+
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getClientLogin() {
+		return clientLogin;
 	}
 
 	public void setClientLogin(String clientLogin) {

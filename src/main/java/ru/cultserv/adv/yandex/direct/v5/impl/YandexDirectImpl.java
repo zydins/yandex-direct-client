@@ -4,7 +4,9 @@ import ru.cultserv.adv.yandex.direct.v5.AuthToken;
 import ru.cultserv.adv.yandex.direct.v5.YandexDirect;
 import ru.cultserv.adv.yandex.direct.v5.methods.*;
 import ru.cultserv.adv.yandex.direct.v5.methods.impl.ProxyBuilder;
+import ru.cultserv.adv.yandex.direct.v5.models.Unit;
 import ru.cultserv.adv.yandex.direct.v5.models.bids.BidModifier;
+import ru.cultserv.adv.yandex.direct.v5.util.ApiResponseCallback;
 import ru.cultserv.adv.yandex.direct.v5.util.requests.YandexDirectMethodCaller;
 
 public class YandexDirectImpl implements YandexDirect {
@@ -76,8 +78,18 @@ public class YandexDirectImpl implements YandexDirect {
 	}
 
 	@Override
-	public Integer apiPoints() {
+	public Unit apiPoints() {
 		return caller.apiPoints();
+	}
+
+	@Override
+	public void addCallback(final ApiResponseCallback callback) {
+		caller.addCallback(callback);
+	}
+
+	@Override
+	public void removeCallback(final ApiResponseCallback callback) {
+		caller.removeCallback(callback);
 	}
 
 	private <T> T create(Class<T> targetInterface) {

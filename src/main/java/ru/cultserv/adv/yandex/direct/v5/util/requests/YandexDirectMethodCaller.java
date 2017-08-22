@@ -2,23 +2,24 @@ package ru.cultserv.adv.yandex.direct.v5.util.requests;
 
 import com.ning.http.client.AsyncHttpClient;
 import ru.cultserv.adv.yandex.direct.v5.AuthToken;
-import ru.cultserv.adv.yandex.direct.v5.util.ApiRequest;
-import ru.cultserv.adv.yandex.direct.v5.util.ApiRequestExecutor;
-import ru.cultserv.adv.yandex.direct.v5.util.ApiResponse;
-import ru.cultserv.adv.yandex.direct.v5.util.AsyncClientFactory;
+import ru.cultserv.adv.yandex.direct.v5.models.Unit;
+import ru.cultserv.adv.yandex.direct.v5.util.*;
 
 import java.io.Closeable;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class YandexDirectMethodCaller implements Closeable {
 	
 	private final AuthToken token;
 	private final String clientLogin;
 	private final ApiRequestExecutor executor;
+	private final List<ApiResponseCallback> callbacks = new CopyOnWriteArrayList<>();
 
-	private Integer apiPoints;
+	private Unit apiPoints;
 
 	public YandexDirectMethodCaller(AuthToken token, ApiRequestExecutor executor) {
 		this(token, null, executor);
@@ -46,7 +47,11 @@ public class YandexDirectMethodCaller implements Closeable {
 	public <T> T call(Method method, Object param, String methodName, boolean flatten) {
 		ApiRequest request = buildCommonRequest(method, param, methodName);
 		ApiResponse response = executor.execute(request);
+
 		apiPoints = response.apiPoints();
+
+		fireCallback(request, response);
+
 		T result;
 
 		Type returnType = method.getGenericReturnType();
@@ -63,7 +68,7 @@ public class YandexDirectMethodCaller implements Closeable {
 	
 	private ApiRequest buildCommonRequest(Method method, Object param, String customName) {
 		YandexDirectRequest.Builder builder = new YandexDirectRequest.Builder(token)
-				.forService(method.getDeclaringClass().getSimpleName().toLowerCase())
+				.forService(method.getDeclaringClass().getSimpleName())
 				.forMethod(customName);
 		if (clientLogin != null) {
 			builder.forClient(clientLogin);
@@ -88,7 +93,25 @@ public class YandexDirectMethodCaller implements Closeable {
 		executor.close();
 	}
 
-	public Integer apiPoints() {
+	public Unit apiPoints() {
 		return apiPoints;
+	}
+
+	private void fireCallback(final ApiRequest request, final ApiResponse response) {
+		callbacks.forEach(c -> {
+			try {
+				c.callback(request, response);
+			} catch (Throwable t) {
+				//empty
+			}
+		});
+	}
+
+	public void addCallback(final ApiResponseCallback callback) {
+		callbacks.add(callback);
+	}
+
+	public void removeCallback(final ApiResponseCallback callback) {
+		callbacks.remove(callback);
 	}
 }
