@@ -7,7 +7,6 @@ import com.ning.http.client.Request;
 import com.ning.http.client.RequestBuilder;
 import com.ning.http.client.Response;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -38,7 +37,7 @@ public abstract class AbstractApiRequestExecutor implements ApiRequestExecutor {
 		try {
 			com.ning.http.client.ListenableFuture<Response> future = client.executeRequest(http_request);
 			return Futures.lazyTransform(future, this::process);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			return Futures.immediateFailedFuture(new IllegalStateException("illegal request"));
 		}
 	}

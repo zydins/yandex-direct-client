@@ -1,7 +1,7 @@
 package ru.cultserv.adv.yandex.direct.v5.models.dict;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * @author Alexandr Kolosov
@@ -23,7 +23,7 @@ public class RegionInfo {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 				.add("id", id)
 				.add("parentId", parentId)
 				.add("regionName", regionName)
