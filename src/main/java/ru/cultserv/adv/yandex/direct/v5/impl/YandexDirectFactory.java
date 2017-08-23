@@ -58,6 +58,7 @@ public class YandexDirectFactory {
 
         @Override
         public FinalBuilder timeout(int millis) {
+            builder.setReadTimeout(millis);
             builder.setRequestTimeout(millis);
             builder.setConnectTimeout(millis);
             builder.setPooledConnectionIdleTimeout(millis);
