@@ -4,7 +4,7 @@
   <groupId>ru.cultserv.adv</groupId>
   <artifactId>yandex-direct-client</artifactId>
   <packaging>jar</packaging>
-  <version>1.5.12-SNAPSHOT</version>
+  <version>1.5.13-SNAPSHOT</version>
   <name>yandex-direct-client</name>
   <url>http://maven.apache.org</url>
 
@@ -12,9 +12,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-
-
-	<dependencies>
+  <dependencies>
     <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-core</artifactId>
