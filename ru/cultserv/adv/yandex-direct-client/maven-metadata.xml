@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>ru.cultserv.adv</groupId>
+  <artifactId>yandex-direct-client</artifactId>
+  <versioning>
+    <versions>
+      <version>1.5.13-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20171219101116</lastUpdated>
+  </versioning>
+</metadata>
