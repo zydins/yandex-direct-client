@@ -20,6 +20,11 @@ public class YandexDirectParams implements ApiRequestParams {
 	
 	private String locale = "ru";
 
+	private String processingMode = null;
+	private Boolean skipReportHeader = null;
+	private Boolean skipColumnHeader = null;
+	private Boolean skipReportSummary = null;
+
 	public void setParams(Object params) {
 		this.params = params;
 	}
@@ -44,6 +49,38 @@ public class YandexDirectParams implements ApiRequestParams {
 		this.clientLogin = clientLogin;
 	}
 
+	public String getProcessingMode() {
+		return processingMode;
+	}
+
+	public void setProcessingMode(String processingMode) {
+		this.processingMode = processingMode;
+	}
+
+	public Boolean getSkipReportHeader() {
+		return skipReportHeader;
+	}
+
+	public void setSkipReportHeader(Boolean skipReportHeader) {
+		this.skipReportHeader = skipReportHeader;
+	}
+
+	public Boolean getSkipColumnHeader() {
+		return skipColumnHeader;
+	}
+
+	public void setSkipColumnHeader(Boolean skipColumnHeader) {
+		this.skipColumnHeader = skipColumnHeader;
+	}
+
+	public Boolean getSkipReportSummary() {
+		return skipReportSummary;
+	}
+
+	public void setSkipReportSummary(Boolean skipReportSummary) {
+		this.skipReportSummary = skipReportSummary;
+	}
+
 	@Override
 	public Map<String, String> headers() {
 		Map<String, String> headers = new HashMap<>();
@@ -52,6 +89,18 @@ public class YandexDirectParams implements ApiRequestParams {
 		if (clientLogin != null) {
 			headers.put("Client-Login", clientLogin);
 			headers.put("Use-Operator-Units", "true");
+		}
+		if (processingMode != null) {
+			headers.put("processingMode", processingMode);
+		}
+		if (skipColumnHeader != null) {
+			headers.put("skipColumnHeader", skipColumnHeader.toString());
+		}
+		if (skipReportHeader != null) {
+			headers.put("skipReportHeader", skipReportHeader.toString());
+		}
+		if (skipReportSummary != null) {
+			headers.put("skipReportSummary", skipReportSummary.toString());
 		}
 		return headers;
 	}

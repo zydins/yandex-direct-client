@@ -8,12 +8,21 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+import ru.cultserv.adv.yandex.direct.v5.models.util.Format;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Json {
 
@@ -26,6 +35,7 @@ public class Json {
 		mapper.registerModule(new JodaModule());
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		mapper.setDateFormat(df);
+		mapper.registerModule(new JavaTimeModule());
 		mapper.disable(SerializationFeature.WRITE_EMPTY_JSON_ARRAYS);
 		mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 
@@ -90,4 +100,31 @@ public class Json {
 		}
 	}
 
+	public static String convertFrom(String body, Format format) {
+		try {
+			if (format == Format.TSV) {
+//				int i = body.indexOf('\n');
+//				String name = body.substring(0, i);
+//				body = body.substring(i, body.length());
+//				i = body.lastIndexOf('\n');
+//				body = body.substring(0, i);
+				CSVParser parser = new CSVParser(new StringReader(body),
+						CSVFormat.newFormat('\t').withRecordSeparator('\n').withQuote('"').withIgnoreEmptyLines(false)
+								.withFirstRecordAsHeader());
+				List<Map<String, String>> maps = parser.getRecords().stream()
+						.map(CSVRecord::toMap)
+						.collect(Collectors.toList());
+				Map<String, Object> result = new HashMap<>();
+//				result.put("Name", name);
+				result.put("Entries", maps);
+				Map<String, Object> toWrite = new HashMap<>();
+				toWrite.put("result", result);
+				return mapper().writeValueAsString(toWrite);
+			} else {
+				throw new IllegalArgumentException("Not supported format " + format.name());
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

@@ -1,6 +1,7 @@
 package ru.cultserv.adv.yandex.direct.v5.util.requests;
 
 import ru.cultserv.adv.yandex.direct.v5.AuthToken;
+import ru.cultserv.adv.yandex.direct.v5.models.util.Format;
 import ru.cultserv.adv.yandex.direct.v5.util.ApiRequest;
 import ru.cultserv.adv.yandex.direct.v5.util.params.YandexDirectParams;
 
@@ -12,6 +13,7 @@ public class YandexDirectRequest implements ApiRequest {
 	private final YandexDirectParams params;
 	private String url;
 	private String service;
+	private Format returnFormat = Format.JSON;
 
 	public YandexDirectRequest() {
 		boolean isSandBox = Integer.getInteger("ru.cultserv.adv.yandex.direct.util.requests.mode", 0) == 1;
@@ -32,6 +34,11 @@ public class YandexDirectRequest implements ApiRequest {
 	@Override
 	public YandexDirectParams params() {
 		return params;
+	}
+
+	@Override
+	public Format returnFormat() {
+		return returnFormat;
 	}
 
 	public String getService() {
@@ -63,6 +70,16 @@ public class YandexDirectRequest implements ApiRequest {
 
 		public Builder forClient(String clientLogin) {
 			request.params.setClientLogin(clientLogin);
+			return this;
+		}
+
+		public Builder forFormat(Format returnFormat) {
+			request.returnFormat = returnFormat;
+			if (returnFormat == Format.TSV) {
+				request.params.setProcessingMode("online");
+				request.params.setSkipReportHeader(true);
+				request.params.setSkipReportSummary(true);
+			}
 			return this;
 		}
 

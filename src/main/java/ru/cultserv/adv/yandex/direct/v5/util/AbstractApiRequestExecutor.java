@@ -6,6 +6,7 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Request;
 import com.ning.http.client.RequestBuilder;
 import com.ning.http.client.Response;
+import ru.cultserv.adv.yandex.direct.v5.models.util.Format;
 
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -36,7 +37,7 @@ public abstract class AbstractApiRequestExecutor implements ApiRequestExecutor {
 		Request http_request = convertToHttpRequest(request);
 		try {
 			com.ning.http.client.ListenableFuture<Response> future = client.executeRequest(http_request);
-			return Futures.lazyTransform(future, this::process);
+			return Futures.lazyTransform(future, o -> process(o, request.returnFormat()));
 		} catch (Exception e) {
 			return Futures.immediateFailedFuture(new IllegalStateException("illegal request"));
 		}
@@ -65,6 +66,6 @@ public abstract class AbstractApiRequestExecutor implements ApiRequestExecutor {
 		client.close();
 	}
 
-	protected abstract ApiResponse process(Response response);
+	protected abstract ApiResponse process(Response response, Format format);
 
 }

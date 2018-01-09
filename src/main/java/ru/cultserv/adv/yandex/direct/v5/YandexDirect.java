@@ -33,6 +33,8 @@ public interface YandexDirect extends Closeable {
 
 	VCards vcards();
 
+	Reports reports();
+
 	Unit apiPoints();
 
 	void addCallback(final ApiResponseCallback callback);

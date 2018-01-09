@@ -78,6 +78,11 @@ public class YandexDirectImpl implements YandexDirect {
 	}
 
 	@Override
+	public Reports reports() {
+		return create(Reports.class);
+	}
+
+	@Override
 	public Unit apiPoints() {
 		return caller.apiPoints();
 	}

@@ -3,6 +3,7 @@ package ru.cultserv.adv.yandex.direct.v5.util.requests;
 import com.ning.http.client.AsyncHttpClient;
 import ru.cultserv.adv.yandex.direct.v5.AuthToken;
 import ru.cultserv.adv.yandex.direct.v5.models.Unit;
+import ru.cultserv.adv.yandex.direct.v5.models.util.Format;
 import ru.cultserv.adv.yandex.direct.v5.util.*;
 
 import java.io.Closeable;
@@ -43,9 +44,13 @@ public class YandexDirectMethodCaller implements Closeable {
 		return call(method, param, method.getName(), flatten);
 	}
 
-	@SuppressWarnings("unchecked")
 	public <T> T call(Method method, Object param, String methodName, boolean flatten) {
-		ApiRequest request = buildCommonRequest(method, param, methodName);
+		return call(method, param, methodName, Format.JSON, flatten);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T call(Method method, Object param, String methodName, Format format, boolean flatten) {
+		ApiRequest request = buildCommonRequest(method, param, methodName, format);
 		ApiResponse response = executor.execute(request);
 
 		apiPoints = response.apiPoints();
@@ -66,13 +71,15 @@ public class YandexDirectMethodCaller implements Closeable {
 		return result;
 	}
 	
-	private ApiRequest buildCommonRequest(Method method, Object param, String customName) {
+	private ApiRequest buildCommonRequest(Method method, Object param, String customName, Format format) {
 		YandexDirectRequest.Builder builder = new YandexDirectRequest.Builder(token)
 				.forService(method.getDeclaringClass().getSimpleName())
+				.forFormat(format)
 				.forMethod(customName);
 		if (clientLogin != null) {
 			builder.forClient(clientLogin);
 		}
+
 		return builder.andParam(param).build();
 	}
 

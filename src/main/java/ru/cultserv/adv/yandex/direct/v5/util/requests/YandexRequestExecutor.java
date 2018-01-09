@@ -4,6 +4,7 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 import ru.cultserv.adv.yandex.direct.v5.models.Unit;
 import ru.cultserv.adv.yandex.direct.v5.models.YandexDirectResponse;
+import ru.cultserv.adv.yandex.direct.v5.models.util.Format;
 import ru.cultserv.adv.yandex.direct.v5.util.AbstractApiRequestExecutor;
 import ru.cultserv.adv.yandex.direct.v5.util.ApiResponse;
 import ru.cultserv.adv.yandex.direct.v5.util.Json;
@@ -19,12 +20,15 @@ public class YandexRequestExecutor extends AbstractApiRequestExecutor {
     }
 
     @Override
-	protected ApiResponse process(Response response) {
+	protected ApiResponse process(Response response, Format format) {
 		String body = body(response);
 		YandexDirectResponse api_response;
 		if (body.contains("error") && !body.contains("errors-text")) { //FIXME
 			api_response = Json.parse(body, YandexDirectResponse.class, true);
 		} else {
+			if (format != Format.JSON) {
+				body = Json.convertFrom(body, format);
+			}
 			api_response = Json.parse(body, YandexDirectResponse.class, false);
 		}
 		extractUnits(response).ifPresent(api_response::setApiPoints);

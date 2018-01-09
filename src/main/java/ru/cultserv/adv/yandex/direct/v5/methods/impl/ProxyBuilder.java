@@ -50,7 +50,7 @@ public class ProxyBuilder {
 			}
 
 			if (converter != null) {
-				return caller.call(method, converter.apply(args), directName, withConverter.flatten());
+				return caller.call(method, converter.apply(args), directName, withConverter.conversionFrom(), withConverter.flatten());
 			}
 
 			return caller.call(method, args);

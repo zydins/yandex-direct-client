@@ -1,5 +1,7 @@
 package ru.cultserv.adv.yandex.direct.v5.methods;
 
+import ru.cultserv.adv.yandex.direct.v5.models.util.Format;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -17,6 +19,7 @@ public @interface WithConverter {
     ParamConverter converter() default ParamConverter.EMPTY_PARAM_CONVERTER;
     String[] entity() default "";
     String directName() default "";
+    Format conversionFrom() default Format.JSON;
     boolean flatten() default false;
 
 }
