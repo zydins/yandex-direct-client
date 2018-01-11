@@ -76,7 +76,7 @@ public class YandexDirectRequest implements ApiRequest {
 		public Builder forFormat(Format returnFormat) {
 			request.returnFormat = returnFormat;
 			if (returnFormat == Format.TSV) {
-				request.params.setProcessingMode("online");
+//				request.params.setProcessingMode("online");
 				request.params.setSkipReportHeader(true);
 				request.params.setSkipReportSummary(true);
 			}

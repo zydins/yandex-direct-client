@@ -9,6 +9,8 @@ import ru.cultserv.adv.yandex.direct.v5.models.bids.BidModifier;
 import ru.cultserv.adv.yandex.direct.v5.util.ApiResponseCallback;
 import ru.cultserv.adv.yandex.direct.v5.util.requests.YandexDirectMethodCaller;
 
+import java.util.List;
+
 public class YandexDirectImpl implements YandexDirect {
 
 	private YandexDirectMethodCaller caller;
@@ -85,6 +87,16 @@ public class YandexDirectImpl implements YandexDirect {
 	@Override
 	public Unit apiPoints() {
 		return caller.apiPoints();
+	}
+
+	@Override
+	public int responseCode() {
+		return caller.responseCode();
+	}
+
+	@Override
+	public List<String> getHeader(String name) {
+		return caller.getHeader(name);
 	}
 
 	@Override

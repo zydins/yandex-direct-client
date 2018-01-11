@@ -28,6 +28,7 @@ public class YandexDirectResponse implements ApiResponse {
 	private String error_detail;
 
 	private FluentCaseInsensitiveStringsMap headers;
+	private int response_code;
 
 	@Override
 	public <T> T as(Class<T> dataClass) {
@@ -68,12 +69,22 @@ public class YandexDirectResponse implements ApiResponse {
 		return Json.parse(result.toString(), type, flatten);
 	}
 
-	public FluentCaseInsensitiveStringsMap getHeaders() {
+	@Override
+	public FluentCaseInsensitiveStringsMap headers() {
 		return headers;
 	}
 
 	public void setHeaders(final FluentCaseInsensitiveStringsMap headers) {
 		this.headers = headers;
+	}
+
+	public void setResponseCode(int response_code) {
+		this.response_code = response_code;
+	}
+
+	@Override
+	public int responseCode() {
+		return response_code;
 	}
 
 	@Override

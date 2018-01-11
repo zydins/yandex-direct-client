@@ -1,6 +1,7 @@
 package ru.cultserv.adv.yandex.direct.v5.util.requests;
 
 import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.FluentCaseInsensitiveStringsMap;
 import ru.cultserv.adv.yandex.direct.v5.AuthToken;
 import ru.cultserv.adv.yandex.direct.v5.models.Unit;
 import ru.cultserv.adv.yandex.direct.v5.models.util.Format;
@@ -21,6 +22,9 @@ public class YandexDirectMethodCaller implements Closeable {
 	private final List<ApiResponseCallback> callbacks = new CopyOnWriteArrayList<>();
 
 	private Unit apiPoints;
+	private int responseCode;
+	public FluentCaseInsensitiveStringsMap headers;
+
 
 	public YandexDirectMethodCaller(AuthToken token, ApiRequestExecutor executor) {
 		this(token, null, executor);
@@ -54,6 +58,8 @@ public class YandexDirectMethodCaller implements Closeable {
 		ApiResponse response = executor.execute(request);
 
 		apiPoints = response.apiPoints();
+		responseCode = response.responseCode();
+		headers = response.headers();
 
 		fireCallback(request, response);
 
@@ -102,6 +108,14 @@ public class YandexDirectMethodCaller implements Closeable {
 
 	public Unit apiPoints() {
 		return apiPoints;
+	}
+
+	public int responseCode() {
+		return responseCode;
+	}
+
+	public List<String> getHeader(String name) {
+		return headers.get(name);
 	}
 
 	private void fireCallback(final ApiRequest request, final ApiResponse response) {

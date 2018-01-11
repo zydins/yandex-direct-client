@@ -6,6 +6,7 @@ import ru.cultserv.adv.yandex.direct.v5.models.bids.BidModifier;
 import ru.cultserv.adv.yandex.direct.v5.util.ApiResponseCallback;
 
 import java.io.Closeable;
+import java.util.List;
 
 public interface YandexDirect extends Closeable {
 
@@ -36,6 +37,10 @@ public interface YandexDirect extends Closeable {
 	Reports reports();
 
 	Unit apiPoints();
+
+	int responseCode();
+
+	List<String> getHeader(String name);
 
 	void addCallback(final ApiResponseCallback callback);
 

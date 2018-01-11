@@ -1,6 +1,7 @@
 package ru.cultserv.adv.yandex.direct.v5.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.ning.http.client.FluentCaseInsensitiveStringsMap;
 import ru.cultserv.adv.yandex.direct.v5.models.Unit;
 import ru.cultserv.adv.yandex.direct.v5.util.exceptions.ApiException;
 
@@ -23,6 +24,10 @@ public interface ApiResponse {
 	boolean hasError();
 
 	Unit apiPoints();
+
+	int responseCode();
+
+	FluentCaseInsensitiveStringsMap headers();
 
 	ApiException error();
 

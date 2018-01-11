@@ -1,6 +1,5 @@
 package ru.cultserv.adv.yandex.direct.v5.methods;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import ru.cultserv.adv.yandex.direct.v5.AuthToken;
 import ru.cultserv.adv.yandex.direct.v5.YandexDirect;
@@ -14,18 +13,18 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.LockSupport;
 
 /**
  * @author Sergey Zudin
  * @since 09.01.18.
  */
-@Ignore
 public class ReportTest {
 
     public YandexDirect direct = YandexDirectFactory.builder()
-            .token(new AuthToken("token"))
+            .token(new AuthToken("your-token"))
             .build();
-
     private Reports reports = direct.reports();
 
     @Test
@@ -35,7 +34,23 @@ public class ReportTest {
                         ReportField.CampaignId, Operator.IN, Arrays.asList("1", "2", "3", "4")))),
                 "test" + System.currentTimeMillis());
         request.fields = Arrays.asList(ReportField.Date, ReportField.CampaignId, ReportField.AdId, ReportField.Clicks, ReportField.Impressions, ReportField.Cost);
-        List<Report.ReportEntry> entries = reports.get(request);
+        List<Report.ReportEntry> entries;
+        while (true) {
+            entries = reports.get(request);
+            if (entries == null) {
+                if (direct.responseCode() == 201 || direct.responseCode() == 202) {
+                    int retryIn = 5;
+                    List<String> header = direct.getHeader("retryIn");
+                    if (header != null && !header.isEmpty()) {
+                        int secondsToUpdate = Integer.parseInt(header.get(0));
+                        retryIn = Math.min(secondsToUpdate, 30);
+                    }
+                    LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(retryIn));
+                }
+            } else {
+                break;
+            }
+        }
         System.out.println(entries);
     }
 

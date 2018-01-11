@@ -32,6 +32,7 @@ public class YandexRequestExecutor extends AbstractApiRequestExecutor {
 			api_response = Json.parse(body, YandexDirectResponse.class, false);
 		}
 		extractUnits(response).ifPresent(api_response::setApiPoints);
+		api_response.setResponseCode(response.getStatusCode());
 
 		api_response.setHeaders(response.getHeaders());
 
