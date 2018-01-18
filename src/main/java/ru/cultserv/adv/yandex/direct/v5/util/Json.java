@@ -26,10 +26,10 @@ import java.util.stream.Collectors;
 
 public class Json {
 
-	private static final ObjectMapper MAPPER = createMapper();
-	private static final ObjectMapper WRITE_MAPPER = new ObjectMapper();
+	private static final ObjectMapper MAPPER = createMapper(true);
+	private static final ObjectMapper WRITE_MAPPER = createMapper(false);
 
-	private static ObjectMapper createMapper() {
+	private static ObjectMapper createMapper(boolean withEmptyArrays) {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -37,7 +37,9 @@ public class Json {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		mapper.setDateFormat(df);
 		mapper.registerModule(new JavaTimeModule());
-		mapper.disable(SerializationFeature.WRITE_EMPTY_JSON_ARRAYS);
+		if (withEmptyArrays) {
+			mapper.disable(SerializationFeature.WRITE_EMPTY_JSON_ARRAYS);
+		}
 		mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 
 		return mapper;
