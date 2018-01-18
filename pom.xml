@@ -4,7 +4,7 @@
   <groupId>ru.cultserv.adv</groupId>
   <artifactId>yandex-direct-client5</artifactId>
   <packaging>jar</packaging>
-  <version>1.2.2-SNAPSHOT</version>
+  <version>1.2.3-SNAPSHOT</version>
   <name>yandex-direct-client5</name>
   <url>http://maven.apache.org</url>
 

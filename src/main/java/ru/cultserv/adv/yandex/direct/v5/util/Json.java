@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 public class Json {
 
 	private static final ObjectMapper MAPPER = createMapper();
+	private static final ObjectMapper WRITE_MAPPER = new ObjectMapper();
 
 	private static ObjectMapper createMapper() {
 		ObjectMapper mapper = new ObjectMapper();
@@ -119,7 +120,7 @@ public class Json {
 				result.put("Entries", maps);
 				Map<String, Object> toWrite = new HashMap<>();
 				toWrite.put("result", result);
-				return mapper().writeValueAsString(toWrite);
+				return WRITE_MAPPER.writeValueAsString(toWrite);
 			} else {
 				throw new IllegalArgumentException("Not supported format " + format.name());
 			}
