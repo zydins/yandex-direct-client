@@ -74,7 +74,7 @@ public class YandexRequestExecutor extends AbstractApiRequestExecutor {
 	
 	private String body(Response response) {
 		try {
-			return response.getResponseBody();
+			return response.getResponseBody("utf-8");
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

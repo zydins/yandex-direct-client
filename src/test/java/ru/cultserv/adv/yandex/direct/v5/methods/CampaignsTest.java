@@ -6,8 +6,13 @@ import ru.cultserv.adv.yandex.direct.v5.AuthToken;
 import ru.cultserv.adv.yandex.direct.v5.YandexDirect;
 import ru.cultserv.adv.yandex.direct.v5.filters.CampaignRequest;
 import ru.cultserv.adv.yandex.direct.v5.impl.YandexDirectFactory;
+import ru.cultserv.adv.yandex.direct.v5.models.OperationResult;
 import ru.cultserv.adv.yandex.direct.v5.models.campain.CampaignGetResult;
 import ru.cultserv.adv.yandex.direct.v5.models.util.Page;
+import ru.cultserv.adv.yandex.direct.v5.models.vcards.VCard;
+
+import java.util.Collections;
+import java.util.List;
 
 public class CampaignsTest {
 
@@ -30,6 +35,19 @@ public class CampaignsTest {
 
 //		List<OperationResult> unarchive = campaigns.unarchive(Collections.singletonList(17971081l));
 //		System.out.println(unarchive);
+	}
+
+	@Test @Ignore
+	public void testContacts() {
+		try {
+			VCard vCard = new VCard();
+			vCard.campaignId = 1234l;
+			vCard.country = "Россия";
+			List<OperationResult> add = direct.vcards().add(Collections.singletonList(vCard));
+			System.out.println(add);
+		} catch (Throwable t) {
+			System.out.println(t);
+		}
 	}
 
 //	@Test
